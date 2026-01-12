@@ -5,9 +5,9 @@
 
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Linux%20%7C%20macOS-lightgrey.svg)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Zheng-Bote/rw_gh-docs?logo=GitHub)](https://github.com/Zheng-Bote/rw_gh-docs/releases)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Zheng-Bote/gha_ghpages?logo=GitHub)](https://github.com/Zheng-Bote/gha_ghpages/releases)
 <br/>
-[Report Issue](https://github.com/Zheng-Bote/rw_gh-docs/issues) · [Request Feature](https://github.com/Zheng-Bote/rw_gh-docs/pulls)
+[Report Issue](https://github.com/Zheng-Bote/gha_ghpages/issues) · [Request Feature](https://github.com/Zheng-Bote/gha_ghpages/pulls)
 
 </div>
 
@@ -15,12 +15,13 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
 - [Description](#description)
   - [✨ Features](#-features)
-- [⚙️ Build Instructions](#-build-instructions)
-  - [🛠 Dependencies & Prerequisites](#-dependencies--prerequisites)
+- [⚙️ Build Instructions](#️-build-instructions)
+  - [🛠 Dependencies \& Prerequisites](#-dependencies--prerequisites)
   - [📦 Installation](#-installation)
     - [macOS (Homebrew)](#macos-homebrew)
     - [Linux (Debian/Ubuntu)](#linux-debianubuntu)
@@ -37,8 +38,8 @@
   - [Component Diagram](#component-diagram)
   - [🔄 Workflow](#-workflow)
     - [Process Flow](#process-flow)
-- [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
+- [🤝 Contributing](#-contributing)
 - [👤 Author](#-author)
   - [Code Contributors](#code-contributors)
 
@@ -286,6 +287,12 @@ flowchart TD
 
 ([back to top](#top))
 
+# 📄 License
+
+Distributed under the MIT License. See LICENSE for more information.
+
+Copyright (c) 2026 ZHENG Robert
+
 # 🤝 Contributing
 
 Contributions are welcome! Please fork the repository and create a pull request.
@@ -296,19 +303,13 @@ Contributions are welcome! Please fork the repository and create a pull request.
 4. Push to the Branch (git push origin feature/AmazingFeature)
 5. Open a Pull Request
 
-# 📄 License
-
-Distributed under the MIT License. See LICENSE for more information.
-
-Copyright (c) 2026 ZHENG Robert
-
 # 👤 Author
 
 [![Zheng Robert - Core Development](https://img.shields.io/badge/Github-Zheng_Robert-black?logo=github)](https://www.github.com/Zheng-Bote)
 
 ## Code Contributors
 
-![Contributors](https://img.shields.io/github/contributors/Zheng-Bote/rw_gh-docs?color=dark-green)
+![Contributors](https://img.shields.io/github/contributors/Zheng-Bote/gha_ghpages?color=dark-green)
 
 ---
 
