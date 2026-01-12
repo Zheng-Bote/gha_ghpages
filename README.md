@@ -2,7 +2,7 @@
 
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 ![Platform](https://img.shields.io/badge/platform-Github_Action-lightgrey.svg)
-[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Zheng-Bote/gh_docs_bot?logo=GitHub)](https://github.com/Zheng-Bote/gh_docs_bot/releases)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Zheng-Bote/gha_ghpages?logo=GitHub)](https://github.com/Zheng-Bote/gha_ghpages/releases)
 
 **gh_docs_bot** is a high-performance, custom C++ Static Site Generator (SSG) packaged as a reusable GitHub Action. It is designed to automatically build and deploy static documentation websites from Markdown files directly within your GitHub workflows.
 
