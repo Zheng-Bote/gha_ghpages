@@ -30,6 +30,20 @@ body {
   grid-template-rows: 80px auto 1fr auto;
 }
 
+a:link,
+a:active,
+a:visited {
+  color: var(--ob-white);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+  text-decoration-style: solid;
+  /* text-decoration-thickness: 0.1em; */
+  text-decoration-color: var(--tron-cyan);
+  font-weight: bold;
+}
+
 header,
 footer {
   display: flex;

@@ -6,11 +6,13 @@ This action allows you to build and generate a static website from your Markdown
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
-- [Inputs](#inputs)
-- [Example Workflow](#example-workflow)
-- [Prerequisites](#prerequisites)
+- [How To Use GH Docs Bot Action](#how-to-use-gh-docs-bot-action)
+  - [Inputs](#inputs)
+  - [Example Workflow](#example-workflow)
+  - [Prerequisites](#prerequisites)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -49,7 +51,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build and Generate Site
-        uses: ./ # Or uses: your-username/repo-name@v1 if using from another repo
+        uses: Zheng-Bote/gha_ghpages@main # or @v1.0.0
         with:
           template: "theme/template.html"
           output: "public"
