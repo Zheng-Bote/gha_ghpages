@@ -4,6 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>GHP | index</title>
+
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
+    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;500&display=swap"
       rel="stylesheet"
@@ -13,6 +17,7 @@
   <body>
     <header>
       <div class="header_left">
+        <img src="assets/img/favicon.svg" alt="Logo" />
         <h1>GHP</h1>
       </div>
       <div class="header_middle">
@@ -98,7 +103,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Build and Generate Site
-        uses: ./ # Or uses: your-username/repo-name@v1 if using from another repo
+        uses: Zheng-Bote/gha_ghpages@main # or @v1.0.0
         with:
           template: &quot;theme/template.html&quot;
           output: &quot;public&quot;
