@@ -10,10 +10,8 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 **Table of Contents**
 
-- [Github Action for GitHub Pages - gh\_docs\_bot](#github-action-for-github-pages---gh_docs_bot)
 - [Description](#description)
   - [🚀 Features](#-features)
   - [📦 Usage](#-usage)
