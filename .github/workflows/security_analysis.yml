@@ -63,6 +63,6 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add docs/sbom.json docs/atom.json
+          git add ./docs/sbom.json ./docs/atom.json
           git commit -m "Security: Update SBOM and Atom slice [skip ci]" || echo "No changes to commit"
           git push
