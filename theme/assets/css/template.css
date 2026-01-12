@@ -148,8 +148,7 @@ main {
   grid-area: main;
   margin: 15px;
   padding: 25px;
-  /* background: oklch(1 0 0 / 0.02); */
-  background: oklch(0.5067 0 299 / 80%);
+  background: oklch(1 0 0 / 0.05);
   backdrop-filter: var(--glass-blur);
   border: var(--border-glow);
   border-radius: var(--border-radius);
