@@ -20,12 +20,12 @@
 
 - [Description](#description)
   - [Features](#features)
-- [⚙️ Build Instructions](#️-build-instructions)
-  - [🛠 Dependencies \& Prerequisites](#-dependencies--prerequisites)
+- [Build Instructions](#build-instructions)
+  - [Dependencies \& Prerequisites](#dependencies--prerequisites)
   - [Installation](#installation)
     - [macOS (Homebrew)](#macos-homebrew)
     - [Linux (Debian/Ubuntu)](#linux-debianubuntu)
-  - [🏗 Compilation](#-compilation)
+  - [Compilation](#compilation)
     - [Linux (GCC)](#linux-gcc)
     - [macOS (Clang)](#macos-clang)
 - [Usage](#usage)
@@ -40,7 +40,7 @@
     - [Process Flow](#process-flow)
 - [License](#license)
 - [Contributing](#contributing)
-- [👤 Author](#-author)
+- [Author](#author)
   - [Code Contributors](#code-contributors)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -67,9 +67,9 @@ A lightweight, high-performance Static Site Generator that converts a directory 
 - **Asset Management**: Recursively copies assets (CSS, images) from your template folder to the output.
 - **Performance**: Built with native C++23 std::filesystem and standard algorithms.
 
-# ⚙️ Build Instructions
+# Build Instructions
 
-## 🛠 Dependencies & Prerequisites
+## Dependencies & Prerequisites
 
 To build this project, you need a C++23 compatible compiler and the following libraries:
 
@@ -94,7 +94,7 @@ sudo apt update && sudo apt install -y libmd4c-dev nlohmann-json3-dev
 # Inja is header-only, often included or needs manual download
 ```
 
-## 🏗 Compilation
+## Compilation
 
 ### Linux (GCC)
 
@@ -303,7 +303,7 @@ Contributions are welcome! Please fork the repository and create a pull request.
 4. Push to the Branch (git push origin feature/AmazingFeature)
 5. Open a Pull Request
 
-# 👤 Author
+# Author
 
 [![Zheng Robert - Core Development](https://img.shields.io/badge/Github-Zheng_Robert-black?logo=github)](https://www.github.com/Zheng-Bote)
 
