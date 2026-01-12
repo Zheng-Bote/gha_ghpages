@@ -1,6 +1,8 @@
 # Github Action for GitHub Pages - gh_docs_bot
 
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
+![Platform](https://img.shields.io/badge/platform-Github_Action-lightgrey.svg)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Zheng-Bote/gh_docs_bot?logo=GitHub)](https://github.com/Zheng-Bote/gh_docs_bot/releases)
 
 **gh_docs_bot** is a high-performance, custom C++ Static Site Generator (SSG) packaged as a reusable GitHub Action. It is designed to automatically build and deploy static documentation websites from Markdown files directly within your GitHub workflows.
 
@@ -8,8 +10,10 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
+- [Github Action for GitHub Pages - gh\_docs\_bot](#github-action-for-github-pages---gh_docs_bot)
 - [Description](#description)
   - [🚀 Features](#-features)
   - [📦 Usage](#-usage)
@@ -58,7 +62,7 @@ Add the following step to your `.github/workflows/deploy.yml`:
 
 ## 📚 Documentation
 
-For a comprehensive guide on how to configure inputs, set up your repository structure, and a full workflow example, please read our **[How-To Guide](docs/howtos/index.md)**.
+For a comprehensive guide on how to configure inputs, set up your repository structure, and a full workflow example, please read our **[How-To Guide](docs/howtos/index.md)** or the **[GitHub Pages: Documentation](https://zheng-bote.github.io/gha_ghpages/)**.
 
 ## 🛠 Prerequisites
 
