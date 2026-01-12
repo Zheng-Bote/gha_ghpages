@@ -6,13 +6,11 @@ This action allows you to build and generate a static website from your Markdown
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 **Table of Contents**
 
-- [How To Use GH Docs Bot Action](#how-to-use-gh-docs-bot-action)
-  - [Inputs](#inputs)
-  - [Example Workflow](#example-workflow)
-  - [Prerequisites](#prerequisites)
+- [Inputs](#inputs)
+- [Example Workflow](#example-workflow)
+- [Prerequisites](#prerequisites)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
