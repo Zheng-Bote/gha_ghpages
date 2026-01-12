@@ -10,14 +10,15 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
+- [Github Action for GitHub Pages - gh\_docs\_bot](#github-action-for-github-pages---gh_docs_bot)
 - [Description](#description)
   - [🚀 Features](#-features)
   - [📦 Usage](#-usage)
     - [Quick Start](#quick-start)
   - [📚 Documentation](#-documentation)
-  - [🛠 Prerequisites](#-prerequisites)
 - [📄 License](#-license)
 - [🤝 Contributing](#-contributing)
 - [👤 Author](#-author)
@@ -61,14 +62,6 @@ Add the following step to your `.github/workflows/deploy.yml`:
 ## 📚 Documentation
 
 For a comprehensive guide on how to configure inputs, set up your repository structure, and a full workflow example, please read our **[How-To Guide](docs/howtos/index.md)** or the **[GitHub Pages: Documentation](https://zheng-bote.github.io/gha_ghpages/)**.
-
-## 🛠 Prerequisites
-
-If you are running this locally or contributing, ensure you have:
-
-- Clang 21+
-- CMake & Ninja
-- `libcurl`, `nlohmann-json`
 
 ---
 
