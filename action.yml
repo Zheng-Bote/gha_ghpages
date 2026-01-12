@@ -1,0 +1,52 @@
+name: "GH Docs Bot Builder"
+description: "Builds and runs the custom C++ Static Site Generator."
+author: "Robert Zheng"
+inputs:
+  template:
+    description: "Path to HTML template file"
+    required: false
+    default: "theme/template.html"
+  output:
+    description: "Output directory for generated HTML"
+    required: false
+    default: "public"
+  docs:
+    description: "Directory containing markdown documentation"
+    required: false
+    default: "docs"
+runs:
+  using: "composite"
+  steps:
+    - name: Install System Dependencies
+      shell: bash
+      run: |
+        sudo apt-get update || true
+        sudo apt-get install -y nlohmann-json3-dev wget lsb-release software-properties-common gnupg pkg-config cmake ninja-build libcurl4-openssl-dev
+
+    - name: Install LLVM 21
+      shell: bash
+      run: |
+        wget https://apt.llvm.org/llvm.sh
+        chmod +x llvm.sh
+        sudo ./llvm.sh 21 all
+
+    - name: Configure CMake
+      shell: bash
+      run: |
+        cmake -S . -B build -G Ninja -DCMAKE_CXX_COMPILER=clang++-21
+
+    - name: Build SSG
+      shell: bash
+      run: |
+        cmake --build build --target gh_docs_bot
+
+    - name: Create Configuration
+      shell: bash
+      run: |
+        echo "template=${{ inputs.template }}" > config.cfg
+        echo "output=${{ inputs.output }}" >> config.cfg
+
+    - name: Run Generator
+      shell: bash
+      run: |
+        ./build/gh_docs_bot config.cfg ${{ inputs.docs }}
