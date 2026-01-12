@@ -60,24 +60,24 @@
 <p><strong>Table of Contents</strong></p>
 <ul>
 <li><a href="#description">Description</a><ul>
-<li><a href="#-features">✨ Features</a></li>
+<li><a href="#features">Features</a></li>
 </ul>
 </li>
-<li><a href="#-build-instructions">⚙️ Build Instructions</a><ul>
-<li><a href="#-dependencies--prerequisites">🛠 Dependencies &amp; Prerequisites</a></li>
-<li><a href="#-installation">📦 Installation</a><ul>
+<li><a href="#build-instructions">Build Instructions</a><ul>
+<li><a href="#dependencies--prerequisites">Dependencies &amp; Prerequisites</a></li>
+<li><a href="#installation">Installation</a><ul>
 <li><a href="#macos-homebrew">macOS (Homebrew)</a></li>
 <li><a href="#linux-debianubuntu">Linux (Debian/Ubuntu)</a></li>
 </ul>
 </li>
-<li><a href="#-compilation">🏗 Compilation</a><ul>
+<li><a href="#compilation">Compilation</a><ul>
 <li><a href="#linux-gcc">Linux (GCC)</a></li>
 <li><a href="#macos-clang">macOS (Clang)</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#-usage">🚀 Usage</a><ul>
+<li><a href="#usage">Usage</a><ul>
 <li><a href="#1-project-structure">1. Project Structure</a></li>
 <li><a href="#2-configuration">2. Configuration</a></li>
 <li><a href="#3-creating-the-template">3. Creating the Template</a></li>
@@ -85,17 +85,17 @@
 <li><a href="#5-result">5. Result</a></li>
 </ul>
 </li>
-<li><a href="#-architecture">🏗 Architecture</a><ul>
+<li><a href="#architecture">Architecture</a><ul>
 <li><a href="#component-diagram">Component Diagram</a></li>
-<li><a href="#-workflow">🔄 Workflow</a><ul>
+<li><a href="#workflow">Workflow</a><ul>
 <li><a href="#process-flow">Process Flow</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#-license">📄 License</a></li>
-<li><a href="#-contributing">🤝 Contributing</a></li>
-<li><a href="#-author">👤 Author</a><ul>
+<li><a href="#license">License</a></li>
+<li><a href="#contributing">Contributing</a></li>
+<li><a href="#author">Author</a><ul>
 <li><a href="#code-contributors">Code Contributors</a></li>
 </ul>
 </li>
@@ -107,7 +107,7 @@
 <img src="https://img.shields.io/badge/platform-Linux%20%7C%20macOS-lightgrey.svg" alt="Platform">
 <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></p>
 <p>A lightweight, high-performance Static Site Generator that converts a directory of Markdown files into a static HTML website. It features recursive directory scanning, automatic navigation generation, modern templating and automated asset management.</p>
-<h2>✨ Features</h2>
+<h2>Features</h2>
 <ul>
 <li><strong>Recursive Directory Scanning</strong>: Automatically maps your folder structure to a nested navigation tree.</li>
 <li><strong>Markdown Support</strong>: Fast parsing of .md files (CommonMark/GFM) using md4c.</li>
@@ -121,8 +121,8 @@
 <li><strong>Asset Management</strong>: Recursively copies assets (CSS, images) from your template folder to the output.</li>
 <li><strong>Performance</strong>: Built with native C++23 std::filesystem and standard algorithms.</li>
 </ul>
-<h1>⚙️ Build Instructions</h1>
-<h2>🛠 Dependencies &amp; Prerequisites</h2>
+<h1>Build Instructions</h1>
+<h2>Dependencies &amp; Prerequisites</h2>
 <p>To build this project, you need a C++23 compatible compiler and the following libraries:</p>
 <ul>
 <li>Compiler: GCC 13+ or Clang 16+</li>
@@ -130,7 +130,7 @@
 <li><a href="https://github.com/nlohmann/json">nlohmann/json</a> (JSON for Inja context)</li>
 <li><a href="https://github.com/pantor/inja">inja</a> (Templating)</li>
 </ul>
-<h2>📦 Installation</h2>
+<h2>Installation</h2>
 <h3>macOS (Homebrew)</h3>
 <pre><code class="language-bash">brew install md4c nlohmann-json inja
 # Inja is header-only, often included or needs manual download if not in brew
@@ -139,14 +139,14 @@
 <pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y libmd4c-dev nlohmann-json3-dev
 # Inja is header-only, often included or needs manual download
 </code></pre>
-<h2>🏗 Compilation</h2>
+<h2>Compilation</h2>
 <h3>Linux (GCC)</h3>
 <pre><code class="language-bash">g++ -std=c++23 -o ssg src/main5.cpp -lmd4c-html -lmd4c
 </code></pre>
 <h3>macOS (Clang)</h3>
 <pre><code class="language-bash">clang++ -std=c++23 -o ssg main.cpp -I/opt/homebrew/include -L/opt/homebrew/lib -lmd4c-html -lmd4c
 </code></pre>
-<h1>🚀 Usage</h1>
+<h1>Usage</h1>
 <h2>1. Project Structure</h2>
 <pre><code class="language-bash">/MyWebsite
 ├── ssg                 # The compiled executable
@@ -213,7 +213,7 @@ output=/fullpath/to/dist
 </ul>
 <hr>
 <p>(<a href="#top">back to top</a>)</p>
-<h1>🏗 Architecture</h1>
+<h1>Architecture</h1>
 <p>The application is structured into several modular components:</p>
 <ol>
 <li><strong>Configuration Parser</strong>: Reads settings (template path, output directory) from a simple key-value config file.</li>
@@ -248,7 +248,7 @@ output=/fullpath/to/dist
     App ..&gt; TemplateEngine : uses
     App ..&gt; md4c : converts MD
 </code></pre>
-<h2>🔄 Workflow</h2>
+<h2>Workflow</h2>
 <p>The generation process follows a linear pipeline:</p>
 <ol>
 <li><strong>Initialization</strong>: Parse command-line arguments to get the config file and input directory.</li>
@@ -299,10 +299,10 @@ output=/fullpath/to/dist
 </code></pre>
 <hr>
 <p>(<a href="#top">back to top</a>)</p>
-<h1>📄 License</h1>
+<h1>License</h1>
 <p>Distributed under the MIT License. See LICENSE for more information.</p>
 <p>Copyright (c) 2026 ZHENG Robert</p>
-<h1>🤝 Contributing</h1>
+<h1>Contributing</h1>
 <p>Contributions are welcome! Please fork the repository and create a pull request.</p>
 <ol>
 <li>Fork the Project</li>
@@ -311,7 +311,7 @@ output=/fullpath/to/dist
 <li>Push to the Branch (git push origin feature/AmazingFeature)</li>
 <li>Open a Pull Request</li>
 </ol>
-<h1>👤 Author</h1>
+<h1>Author</h1>
 <p><a href="https://www.github.com/Zheng-Bote"><img src="https://img.shields.io/badge/Github-Zheng_Robert-black?logo=github" alt="Zheng Robert - Core Development"></a></p>
 <h2>Code Contributors</h2>
 <p><img src="https://img.shields.io/github/contributors/Zheng-Bote/gha_ghpages?color=dark-green" alt="Contributors"></p>
