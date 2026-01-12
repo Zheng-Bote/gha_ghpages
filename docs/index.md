@@ -15,30 +15,31 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
 - [Description](#description)
-  - [✨ Features](#-features)
-- [⚙️ Build Instructions](#-build-instructions)
-  - [🛠 Dependencies & Prerequisites](#-dependencies--prerequisites)
-  - [📦 Installation](#-installation)
+  - [Features](#features)
+- [⚙️ Build Instructions](#️-build-instructions)
+  - [🛠 Dependencies \& Prerequisites](#-dependencies--prerequisites)
+  - [Installation](#installation)
     - [macOS (Homebrew)](#macos-homebrew)
     - [Linux (Debian/Ubuntu)](#linux-debianubuntu)
   - [🏗 Compilation](#-compilation)
     - [Linux (GCC)](#linux-gcc)
     - [macOS (Clang)](#macos-clang)
-- [🚀 Usage](#-usage)
+- [Usage](#usage)
   - [1. Project Structure](#1-project-structure)
   - [2. Configuration](#2-configuration)
   - [3. Creating the Template](#3-creating-the-template)
   - [4. Running](#4-running)
   - [5. Result](#5-result)
-- [🏗 Architecture](#-architecture)
+- [Architecture](#architecture)
   - [Component Diagram](#component-diagram)
-  - [🔄 Workflow](#-workflow)
+  - [Workflow](#workflow)
     - [Process Flow](#process-flow)
-- [📄 License](#-license)
-- [🤝 Contributing](#-contributing)
+- [License](#license)
+- [Contributing](#contributing)
 - [👤 Author](#-author)
   - [Code Contributors](#code-contributors)
 
@@ -54,7 +55,7 @@
 
 A lightweight, high-performance Static Site Generator that converts a directory of Markdown files into a static HTML website. It features recursive directory scanning, automatic navigation generation, modern templating and automated asset management.
 
-## ✨ Features
+## Features
 
 - **Recursive Directory Scanning**: Automatically maps your folder structure to a nested navigation tree.
 - **Markdown Support**: Fast parsing of .md files (CommonMark/GFM) using md4c.
@@ -77,7 +78,7 @@ To build this project, you need a C++23 compatible compiler and the following li
 - [nlohmann/json](https://github.com/nlohmann/json) (JSON for Inja context)
 - [inja](https://github.com/pantor/inja) (Templating)
 
-## 📦 Installation
+## Installation
 
 ### macOS (Homebrew)
 
@@ -107,7 +108,7 @@ g++ -std=c++23 -o ssg src/main5.cpp -lmd4c-html -lmd4c
 clang++ -std=c++23 -o ssg main.cpp -I/opt/homebrew/include -L/opt/homebrew/lib -lmd4c-html -lmd4c
 ```
 
-# 🚀 Usage
+# Usage
 
 ## 1. Project Structure
 
@@ -194,7 +195,7 @@ The tool will:
 
 ([back to top](#top))
 
-# 🏗 Architecture
+# Architecture
 
 The application is structured into several modular components:
 
@@ -233,7 +234,7 @@ classDiagram
     App ..> md4c : converts MD
 ```
 
-## 🔄 Workflow
+## Workflow
 
 The generation process follows a linear pipeline:
 
@@ -286,13 +287,13 @@ flowchart TD
 
 ([back to top](#top))
 
-# 📄 License
+# License
 
 Distributed under the MIT License. See LICENSE for more information.
 
 Copyright (c) 2026 ZHENG Robert
 
-# 🤝 Contributing
+# Contributing
 
 Contributions are welcome! Please fork the repository and create a pull request.
 
