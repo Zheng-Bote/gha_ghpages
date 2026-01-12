@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" id="html">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>index</title>
+
+    <link rel="stylesheet" href="../assets/css/template.css" />
+  </head>
+  <body>
+    <nav><ul class="nav-list">
+  <li><a href="../index.html">index</a></li>
+  <li><a href="../howtos/index.html" class="active">howtos</a></li>
+</ul>
+</nav>
+    <main><h1>How To Use GH Docs Bot Action</h1>
+<p>This action allows you to build and generate a static website from your Markdown documentation using the custom C++ Static Site Generator (SSG). It encapsulates the entire build process, including dependency installation (LLVM 21, etc.), CMake configuration, and execution.</p>
+<hr>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<p><strong>Table of Contents</strong></p>
+<ul>
+<li><a href="#inputs">Inputs</a></li>
+<li><a href="#example-workflow">Example Workflow</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<hr>
+<h2>Inputs</h2>
+<table>
+<thead>
+<tr>
+<th align="left">Input</th>
+<th align="left">Description</th>
+<th align="left">Default</th>
+<th align="left">Required</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>template</code></td>
+<td align="left">Path to the HTML template file to use for the site.</td>
+<td align="left"><code>theme/template.html</code></td>
+<td align="left">No</td>
+</tr>
+<tr>
+<td align="left"><code>output</code></td>
+<td align="left">Directory where the generated HTML files will be placed.</td>
+<td align="left"><code>public</code></td>
+<td align="left">No</td>
+</tr>
+<tr>
+<td align="left"><code>docs</code></td>
+<td align="left">Directory containing your source Markdown files.</td>
+<td align="left"><code>docs</code></td>
+<td align="left">No</td>
+</tr>
+</tbody>
+</table>
+<h2>Example Workflow</h2>
+<p>Here is a complete example of how to use this action in your own <code>.github/workflows/deploy-docs.yml</code> file. This example builds the site and then deploys it to GitHub Pages.</p>
+<pre><code class="language-yaml">name: Deploy Documentation
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-24.04
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build and Generate Site
+        uses: ./ # Or uses: your-username/repo-name@v1 if using from another repo
+        with:
+          template: &quot;theme/template.html&quot;
+          output: &quot;public&quot;
+          docs: &quot;docs&quot;
+
+      - name: Deploy to gh-pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: public
+</code></pre>
+<h2>Prerequisites</h2>
+<p>Ensure your repository has the following structure:</p>
+<ul>
+<li><code>docs/</code>: A directory containing your Markdown files.</li>
+<li><code>theme/template.html</code>: An HTML template file (consistent with <code>inja</code> templates).</li>
+<li><code>CMakeLists.txt</code> &amp; <code>src/</code>: If you are building the generator from source code in the same repo (as this action compiles it).</li>
+</ul>
+</main>
+    <footer>&copy; 2026 ZHENG Robert</footer>
+  </body>
+</html>

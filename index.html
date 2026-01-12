@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" id="html">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>index</title>
+
+    <link rel="stylesheet" href="assets/css/template.css" />
+  </head>
+  <body>
+    <nav><ul class="nav-list">
+  <li><a href="index.html" class="active">index</a></li>
+  <li><a href="howtos/index.html">howtos</a></li>
+</ul>
+</nav>
+    <main><div id="top" align="center">
+<h1>Static Site Generator (SSG)</h1>
+<p>A modern, high-performance Static Site Generator. It converts a recursive directory of Markdown files into a fully navigable, static HTML website using modern templating and automated asset management.</p>
+<p><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License">
+<img src="https://img.shields.io/badge/platform-Linux%20%7C%20macOS-lightgrey.svg" alt="Platform">
+<a href="https://github.com/Zheng-Bote/rw_gh-docs/releases"><img src="https://img.shields.io/github/v/release/Zheng-Bote/rw_gh-docs?logo=GitHub" alt="GitHub release (latest by date)"></a>
+<br/>
+<a href="https://github.com/Zheng-Bote/rw_gh-docs/issues">Report Issue</a> · <a href="https://github.com/Zheng-Bote/rw_gh-docs/pulls">Request Feature</a></p>
+</div>
+<hr>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<p><strong>Table of Contents</strong></p>
+<ul>
+<li><a href="#description">Description</a><ul>
+<li><a href="#-features">✨ Features</a></li>
+</ul>
+</li>
+<li><a href="#-build-instructions">⚙️ Build Instructions</a><ul>
+<li><a href="#-dependencies--prerequisites">🛠 Dependencies &amp; Prerequisites</a></li>
+<li><a href="#-installation">📦 Installation</a><ul>
+<li><a href="#macos-homebrew">macOS (Homebrew)</a></li>
+<li><a href="#linux-debianubuntu">Linux (Debian/Ubuntu)</a></li>
+</ul>
+</li>
+<li><a href="#-compilation">🏗 Compilation</a><ul>
+<li><a href="#linux-gcc">Linux (GCC)</a></li>
+<li><a href="#macos-clang">macOS (Clang)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#-usage">🚀 Usage</a><ul>
+<li><a href="#1-project-structure">1. Project Structure</a></li>
+<li><a href="#2-configuration">2. Configuration</a></li>
+<li><a href="#3-creating-the-template">3. Creating the Template</a></li>
+<li><a href="#4-running">4. Running</a></li>
+<li><a href="#5-result">5. Result</a></li>
+</ul>
+</li>
+<li><a href="#-architecture">🏗 Architecture</a><ul>
+<li><a href="#component-diagram">Component Diagram</a></li>
+<li><a href="#-workflow">🔄 Workflow</a><ul>
+<li><a href="#process-flow">Process Flow</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#-contributing">🤝 Contributing</a></li>
+<li><a href="#-license">📄 License</a></li>
+<li><a href="#-author">👤 Author</a><ul>
+<li><a href="#code-contributors">Code Contributors</a></li>
+</ul>
+</li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<hr>
+<h1>Description</h1>
+<p><img src="https://img.shields.io/badge/C++-23-blue?logo=cplusplus" alt="CXX">
+<img src="https://img.shields.io/badge/platform-Linux%20%7C%20macOS-lightgrey.svg" alt="Platform">
+<img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></p>
+<p>A lightweight, high-performance Static Site Generator that converts a directory of Markdown files into a static HTML website. It features recursive directory scanning, automatic navigation generation, modern templating and automated asset management.</p>
+<h2>✨ Features</h2>
+<ul>
+<li><strong>Recursive Directory Scanning</strong>: Automatically maps your folder structure to a nested navigation tree.</li>
+<li><strong>Markdown Support</strong>: Fast parsing of .md files (CommonMark/GFM) using md4c.</li>
+<li><strong>Modern Templating</strong>: HTML generation using the Inja template engine (Jinja-like syntax) and nlohmann/json.</li>
+<li><strong>Context-Aware Navigation</strong>:<ul>
+<li>Auto-generates hierarchical HTML lists (<code>&lt;ul&gt;, &lt;li&gt;</code>).</li>
+<li>Smart relative paths (../../) for assets and links.</li>
+<li>Active State: Automatically highlights the current page and parent folders in the navigation.</li>
+</ul>
+</li>
+<li><strong>Asset Management</strong>: Recursively copies assets (CSS, images) from your template folder to the output.</li>
+<li><strong>Performance</strong>: Built with native C++23 std::filesystem and standard algorithms.</li>
+</ul>
+<h1>⚙️ Build Instructions</h1>
+<h2>🛠 Dependencies &amp; Prerequisites</h2>
+<p>To build this project, you need a C++23 compatible compiler and the following libraries:</p>
+<ul>
+<li>Compiler: GCC 13+ or Clang 16+</li>
+<li><a href="https://github.com/mity/md4c">md4c</a> (Markdown to HTML)</li>
+<li><a href="https://github.com/nlohmann/json">nlohmann/json</a> (JSON for Inja context)</li>
+<li><a href="https://github.com/pantor/inja">inja</a> (Templating)</li>
+</ul>
+<h2>📦 Installation</h2>
+<h3>macOS (Homebrew)</h3>
+<pre><code class="language-bash">brew install md4c nlohmann-json inja
+# Inja is header-only, often included or needs manual download if not in brew
+</code></pre>
+<h3>Linux (Debian/Ubuntu)</h3>
+<pre><code class="language-bash">sudo apt update &amp;&amp; sudo apt install -y libmd4c-dev nlohmann-json3-dev
+# Inja is header-only, often included or needs manual download
+</code></pre>
+<h2>🏗 Compilation</h2>
+<h3>Linux (GCC)</h3>
+<pre><code class="language-bash">g++ -std=c++23 -o ssg src/main5.cpp -lmd4c-html -lmd4c
+</code></pre>
+<h3>macOS (Clang)</h3>
+<pre><code class="language-bash">clang++ -std=c++23 -o ssg main.cpp -I/opt/homebrew/include -L/opt/homebrew/lib -lmd4c-html -lmd4c
+</code></pre>
+<h1>🚀 Usage</h1>
+<h2>1. Project Structure</h2>
+<pre><code class="language-bash">/MyWebsite
+├── ssg                 # The compiled executable
+├── config.cfg          # Configuration file
+├── input/              # Your Markdown content
+│   ├── index.md
+│   ├── Security/
+│   |   └── security.md
+│   ├── Usage/
+│   |   └── usage.md
+│   |   └── howtos.md
+│   └── Architecture/
+│       └── frontend.md
+│       └── backend.md
+│       └── database.md
+│       └── network.md
+└── theme/              # Your design
+    ├── template.html   # The Master HTML Template
+    └── assets/         # CSS, Images, Fonts
+        └── css/
+        |   └── style.css
+        └── js/
+        |   └── script.js
+        └── images/
+            └── logo.png
+</code></pre>
+<h2>2. Configuration</h2>
+<p>Create a file named config.cfg with the following content (Example):</p>
+<pre><code class="language-ini">template=/fullpath/to/theme/template.html
+output=/fullpath/to/dist
+</code></pre>
+<h2>3. Creating the Template</h2>
+<p>Create a file named template.html with the following content (Example):</p>
+<pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot; data-theme=&quot;light&quot; id=&quot;html&quot;&gt;
+  &lt;head&gt;
+    &lt;meta charset=&quot;utf-8&quot; /&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;
+
+    &lt;title&gt;{{ title }}&lt;/title&gt;
+
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;{{ base_path }}assets/css/style.css&quot; /&gt;
+    &lt;script src=&quot;{{ base_path }}assets/js/script.js&quot;&gt;&lt;/script&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;nav&gt;{{ navigation }}&lt;/nav&gt;
+    &lt;main&gt;{{ content }}&lt;/main&gt;
+    &lt;footer&gt;&amp;copy; 2026 ZHENG Robert&lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+<p><strong>Asset Logic</strong></p>
+<p>If your template folder contains an assets subdirectory, it will be automatically copied to the output folder. Ensure your HTML template references assets using <code>{{ base_path }}assets/...</code> to ensure links work from deep subdirectories.</p>
+<h2>4. Running</h2>
+<pre><code class="language-bash">./ssg &lt;path_to_config&gt; &lt;input_folder&gt;
+</code></pre>
+<h2>5. Result</h2>
+<p>The tool will:</p>
+<ul>
+<li>Clean/Create the dist (output) folder.</li>
+<li>Copy theme/assets to dist/assets.</li>
+<li>Process all .md files in input/.</li>
+<li>Generate .html files in dist (output folder) maintaining the folder structure.</li>
+</ul>
+<hr>
+<p>(<a href="#top">back to top</a>)</p>
+<h1>🏗 Architecture</h1>
+<p>The application is structured into several modular components:</p>
+<ol>
+<li><strong>Configuration Parser</strong>: Reads settings (template path, output directory) from a simple key-value config file.</li>
+<li><strong>Tree Builder</strong>: Recursively scans the input directory to build a memory representation (<code>DirNode</code>) of the file structure.</li>
+<li><strong>Asset Manager</strong>: Handles the synchronization of static assets (CSS, JS, images) from the template directory to the output directory.</li>
+<li><strong>Markdown Engine</strong>: Wraps <code>md4c</code> to convert Markdown content into raw HTML.</li>
+<li><strong>Template Engine</strong>: Uses <code>inja</code> to inject content, navigation, and metadata into a master HTML template.</li>
+</ol>
+<h2>Component Diagram</h2>
+<pre><code class="language-mermaid">classDiagram
+    class Config {
+        +path templatePath
+        +path outputDir
+    }
+    class DirNode {
+        +string dirName
+        +path relativePath
+        +vector~path~ files
+        +vector~DirNode~ subdirs
+    }
+    class App {
+        +main()
+        +processFiles()
+        +buildTree()
+    }
+    class TemplateEngine {
+        +render(template, data)
+    }
+
+    App --&gt; Config : uses
+    App --&gt; DirNode : builds
+    App ..&gt; TemplateEngine : uses
+    App ..&gt; md4c : converts MD
+</code></pre>
+<h2>🔄 Workflow</h2>
+<p>The generation process follows a linear pipeline:</p>
+<ol>
+<li><strong>Initialization</strong>: Parse command-line arguments to get the config file and input directory.</li>
+<li><strong>Configuration</strong>: Read <code>template</code> and <code>output</code> paths from the config file.</li>
+<li><strong>Scanning</strong>: Traverse the input directory to build the <code>DirNode</code> tree structure.</li>
+<li><strong>Preparation</strong>:<ul>
+<li>Clean/Create the output directory.</li>
+<li>Copy assets from the template's <code>assets/</code> folder to <code>output/assets/</code>.</li>
+<li>Load and parse the Inja template.</li>
+</ul>
+</li>
+<li><strong>Processing (Recursive)</strong>:<ul>
+<li>Create corresponding output subdirectories.</li>
+<li><strong>For each file</strong>:<ul>
+<li>Generate the <strong>Navigation HTML</strong> (sidebar) based on the current location in the tree.</li>
+<li>Read and render the <strong>Markdown</strong> content to HTML.</li>
+<li>Prepare the <strong>Data Context</strong> (JSON) with <code>content</code>, <code>navigation</code>, <code>title</code>, and <code>base_path</code>.</li>
+<li><strong>Render</strong> the final HTML using the Inja template.</li>
+<li>Write the result to the output directory.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<p><strong>Asset Logic</strong></p>
+<p>If your template folder contains an assets subdirectory, it will be automatically copied to the output folder. Ensure your HTML template references assets using {{ base_path }}assets/... to ensure links work from deep subdirectories.</p>
+<h3>Process Flow</h3>
+<pre><code class="language-mermaid">flowchart TD
+    Start([Start]) --&gt; ParseConfig[Parse Config File]
+    ParseConfig --&gt; BuildTree[Build Directory Tree]
+    BuildTree --&gt; CleanOutput[Clean/Create Output Dir]
+    CleanOutput --&gt; CopyAssets[Copy Assets]
+    CopyAssets --&gt; LoadTemplate[Load Inja Template]
+    LoadTemplate --&gt; ProcessDir{Process Directory}
+
+    ProcessDir --&gt;|For each File| GenNav[Generate Navigation]
+    GenNav --&gt; ReadMD[Read Markdown]
+    ReadMD --&gt; RenderMD[Render Markdown to HTML]
+    RenderMD --&gt; ApplyTemplate[Apply Inja Template]
+    ApplyTemplate --&gt; WriteFile[Write HTML File]
+
+    WriteFile --&gt; NextFile{More Files?}
+    NextFile --&gt;|Yes| GenNav
+    NextFile --&gt;|No| CheckSubdirs{Subdirectories?}
+
+    CheckSubdirs --&gt;|Yes| ProcessDir
+    CheckSubdirs --&gt;|No| End([End])
+</code></pre>
+<hr>
+<p>(<a href="#top">back to top</a>)</p>
+<h1>🤝 Contributing</h1>
+<p>Contributions are welcome! Please fork the repository and create a pull request.</p>
+<ol>
+<li>Fork the Project</li>
+<li>Create your Feature Branch (git checkout -b feature/AmazingFeature)</li>
+<li>Commit your Changes (git commit -m 'Add some AmazingFeature')</li>
+<li>Push to the Branch (git push origin feature/AmazingFeature)</li>
+<li>Open a Pull Request</li>
+</ol>
+<h1>📄 License</h1>
+<p>Distributed under the MIT License. See LICENSE for more information.</p>
+<p>Copyright (c) 2026 ZHENG Robert</p>
+<h1>👤 Author</h1>
+<p><a href="https://www.github.com/Zheng-Bote"><img src="https://img.shields.io/badge/Github-Zheng_Robert-black?logo=github" alt="Zheng Robert - Core Development"></a></p>
+<h2>Code Contributors</h2>
+<p><img src="https://img.shields.io/github/contributors/Zheng-Bote/rw_gh-docs?color=dark-green" alt="Contributors"></p>
+<hr>
+<p>(<a href="#top">back to top</a>)</p>
+<p>:vulcan_salute:</p>
+</main>
+    <footer>&copy; 2026 ZHENG Robert</footer>
+  </body>
+</html>
