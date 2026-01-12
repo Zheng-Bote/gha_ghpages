@@ -33,7 +33,7 @@ runs:
     - name: Configure CMake
       shell: bash
       run: |
-        cmake -S . -B build -G Ninja -DCMAKE_CXX_COMPILER=clang++-21
+        cmake -S "${{ github.action_path }}" -B build -G Ninja -DCMAKE_CXX_COMPILER=clang++-21
 
     - name: Build SSG
       shell: bash
