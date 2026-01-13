@@ -25,7 +25,8 @@ jobs:
       - name: Build and Generate Site
         uses: ./
         with:
-          template: "theme/template.html"
+          template: "theme/desktop/template.html"
+          assets: "theme/blue/assets"
           output: "public"
           docs: "docs"
 

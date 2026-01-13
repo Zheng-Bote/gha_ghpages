@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.23)
 # cmake --build build -j$(nproc)  --target gh_docs_bot
 
 project(gh_docs_bot
-    VERSION 1.0.0
+    VERSION 1.7.0
     DESCRIPTION "Sorts your downloads automatically."
     HOMEPAGE_URL "https://github.com/Zheng-Bote/gh-docs-bot"
     LANGUAGES CXX)
@@ -51,8 +51,9 @@ FetchContent_MakeAvailable(md4c)
 
 # New SSG5 target
 add_executable(${PROJECT_NAME}
-    src/main5.cpp
+    src/main.cpp
 )
+
 
 # Include directories (local include for inja.hpp, and md4c headers)
 target_include_directories(${PROJECT_NAME} PRIVATE 

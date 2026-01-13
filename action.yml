@@ -44,6 +44,7 @@ runs:
       shell: bash
       run: |
         echo "template=${{ inputs.template }}" > config.cfg
+        echo "assets=${{ inputs.assets }}" >> config.cfg
         echo "output=${{ inputs.output }}" >> config.cfg
 
     - name: Run Generator

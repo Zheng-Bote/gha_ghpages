@@ -10,13 +10,16 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
+- [Github Action for GitHub Pages - gh_docs_bot](#github-action-for-github-pages---gh_docs_bot)
 - [Description](#description)
   - [🚀 Features](#-features)
   - [📦 Usage](#-usage)
     - [Quick Start](#quick-start)
   - [📚 Documentation](#-documentation)
+    - [Screenshoots](#screenshoots)
 - [📄 License](#-license)
 - [🤝 Contributing](#-contributing)
 - [👤 Author](#-author)
@@ -52,14 +55,25 @@ Add the following step to your `.github/workflows/deploy.yml`:
 - name: Build and Generate Site
   uses: Zheng-Bote/gha_ghpages@main
   with:
-    template: "theme/template.html" # Path to your HTML template
+    template: "theme/desktop/template.html" # Path to your HTML template
+    assets: "theme/tron/assets" # Path to your assets
     output: "public" # Output directory
-    docs: "docs" # Directory with Markdown files
+    docs: "docs" # Directory with Markdown (*.md) and/or HTM (*.htm) files
 ```
+
+> \[!TIP]
+> _see themes folder for examples_
 
 ## 📚 Documentation
 
 For a comprehensive guide on how to configure inputs, set up your repository structure, and a full workflow example, please read our **[How-To Guide](docs/howtos/index.md)** or the **[GitHub Pages: Documentation](https://zheng-bote.github.io/gha_ghpages/)**.
+
+### Screenshoots
+
+![Themes](theme/tron/assets/img/themes.png)
+
+> \[!NOTE]
+> _see more screenshoots in_ [GitHub Pages: Documentation](https://zheng-bote.github.io/gha_ghpages/)
 
 ---
 

@@ -2,25 +2,13 @@
  * SPDX-License-Identifier: MIT
  * Author: Robert Zheng
  * Copyright (c) 2026 ZHENG Robert
- * Version: 1.0.0
- * Description: Static Site Generator (Version 5 with Asset Management)
+ * Version: 1.6.0
+ * Description: Static Site Generator (Version 10 - Hide Root Files in Nav)
  */
 
 /**
- * @file main5.cpp
- * @brief Static Site Generator (Version 5 with Asset Management)
- *
- * This version extends Version 4 by adding asset management capabilities.
- * It automatically copies an 'assets' folder from the template directory
- * to the output directory, ensuring that themes are self-contained.
- *
- * Dependencies:
- * - md4c (Markdown processing)
- * - nlohmann/json (JSON data for Inja)
- * - pantor/inja (Template engine)
- *
  * Compile:
- * g++ -std=c++23 -o ssg main5.cpp -lmd4c-html -lmd4c
+ * g++ -std=c++23 -o ssg main11.cpp -lmd4c-html -lmd4c
  */
 
 #include <algorithm>
@@ -36,6 +24,8 @@
 #include <inja.hpp>
 #include <md4c-html.h>
 #include <nlohmann/json.hpp>
+
+// User config header
 #include <rz_config.hpp>
 
 namespace fs = std::filesystem;
@@ -43,18 +33,12 @@ using json = nlohmann::json;
 
 // --- Structures ---
 
-/**
- * @brief Configuration structure.
- */
 struct Config {
-  fs::path templatePath; ///< Path to the Inja template file.
-  fs::path outputDir =
-      "output_site"; ///< Directory where the site is generated.
+  fs::path templatePath;
+  fs::path outputDir = "output_site";
+  fs::path assetsPath;
 };
 
-/**
- * @brief Directory node structure.
- */
 struct DirNode {
   fs::path relativePath;        ///< Path relative to root.
   std::string dirName;          ///< Name of the directory.
@@ -64,11 +48,6 @@ struct DirNode {
 
 // --- Helpers ---
 
-/**
- * @brief Reads the contents of a file.
- * @param path Path to the file.
- * @return File content.
- */
 std::string readFile(const fs::path &path) {
   std::ifstream in(path, std::ios::in | std::ios::binary);
   if (!in)
@@ -79,11 +58,6 @@ std::string readFile(const fs::path &path) {
   return content;
 }
 
-/**
- * @brief Writes content to a file.
- * @param path Path to the file.
- * @param content Content to write.
- */
 void writeFile(const fs::path &path, std::string_view content) {
   std::ofstream out(path, std::ios::out | std::ios::binary);
   if (!out)
@@ -92,62 +66,37 @@ void writeFile(const fs::path &path, std::string_view content) {
   out << content;
 }
 
-// --- NEW: Copy Assets ---
+// --- Asset Management ---
 
-/**
- * @brief Copies the 'assets' folder from the template directory to the output
- * directory.
- * @param templatePath Path to the template file.
- * @param outputRoot Path to the output directory.
- */
-void copyAssets(const fs::path &templatePath, const fs::path &outputRoot) {
-  // The folder where the template is located (e.g. "my_theme/")
-  fs::path templateDir = templatePath.parent_path();
-
-  // The expected assets folder (e.g. "my_theme/assets")
-  fs::path sourceAssets = templateDir / "assets";
-
-  // Target: "output/assets"
+void copyAssets(const fs::path &sourceAssets, const fs::path &outputRoot) {
   fs::path destAssets = outputRoot / "assets";
 
   if (fs::exists(sourceAssets) && fs::is_directory(sourceAssets)) {
-    std::cout << "Found assets folder: " << sourceAssets.string() << std::endl;
-
+    std::cout << "Copying assets from: " << sourceAssets.string() << std::endl;
     try {
-      // Create directories
       fs::create_directories(destAssets);
-
-      // Recursively copy and overwrite existing
       fs::copy(sourceAssets, destAssets,
                fs::copy_options::recursive |
                    fs::copy_options::overwrite_existing);
-
-      std::cout << "Assets successfully copied to: " << destAssets.string()
-                << std::endl;
+      std::cout << "Assets successfully copied." << std::endl;
     } catch (const fs::filesystem_error &e) {
       std::cerr << "Error copying assets: " << e.what() << std::endl;
     }
   } else {
-    std::cout << "No assets folder found at: " << sourceAssets.string()
-              << " (skipping copy)" << std::endl;
+    if (!sourceAssets.empty()) {
+      std::cerr << "Warning: Assets path configured but not found: "
+                << sourceAssets.string() << std::endl;
+    }
   }
 }
 
 // --- Markdown Logic ---
 
-/**
- * @brief MD4C callback.
- */
 void md_process_output(const MD_CHAR *text, MD_SIZE size, void *userdata) {
   std::string *out = static_cast<std::string *>(userdata);
   out->append(text, size);
 }
 
-/**
- * @brief Renders Markdown to HTML.
- * @param mdContent Markdown string.
- * @return HTML string.
- */
 std::string renderMarkdown(const std::string &mdContent) {
   std::string htmlOutput;
   int ret = md_html(mdContent.c_str(), static_cast<MD_SIZE>(mdContent.size()),
@@ -157,11 +106,8 @@ std::string renderMarkdown(const std::string &mdContent) {
   return htmlOutput;
 }
 
-/**
- * @brief Parses the configuration file.
- * @param configPath Path to config file.
- * @return Config object.
- */
+// --- Config Parser ---
+
 Config parseConfig(const fs::path &configPath) {
   Config cfg;
   std::ifstream file(configPath);
@@ -174,35 +120,50 @@ Config parseConfig(const fs::path &configPath) {
       std::string key = line.substr(0, delimiterPos);
       std::string value = line.substr(delimiterPos + 1);
 
+      if (!value.empty() && value.back() == '\r')
+        value.pop_back();
+
       if (key == "template")
         cfg.templatePath = value;
       else if (key == "output")
         cfg.outputDir = value;
+      else if (key == "assets")
+        cfg.assetsPath = value;
     }
   }
   return cfg;
 }
 
-// --- Logic: Build Tree (MD only) ---
+// --- Logic: Build Tree ---
 
-/**
- * @brief Builds the directory tree, filtering for .md files.
- * @param currentPath Current scanning path.
- * @param rootPath Root input path.
- * @return DirNode structure.
- */
+bool isSupportedFile(const fs::path &p) {
+  std::string ext = p.extension().string();
+  return (ext == ".md" || ext == ".htm");
+}
+
 DirNode buildTree(const fs::path &currentPath, const fs::path &rootPath) {
   DirNode node;
   node.dirName = currentPath.filename().string();
+
   node.relativePath = fs::relative(currentPath, rootPath);
   if (node.relativePath == ".")
     node.relativePath = "";
 
   for (const auto &entry : fs::directory_iterator(currentPath)) {
+    std::string name = entry.path().filename().string();
+
+    // Skip hidden files/folders
+    if (name.starts_with("."))
+      continue;
+
     if (entry.is_directory()) {
+      // Skip assets folder in nav tree
+      if (name == "assets")
+        continue;
+
       node.subdirs.push_back(buildTree(entry.path(), rootPath));
     } else if (entry.is_regular_file()) {
-      if (entry.path().extension() == ".md") {
+      if (isSupportedFile(entry.path())) {
         node.files.push_back(entry.path().filename());
       }
     }
@@ -212,11 +173,6 @@ DirNode buildTree(const fs::path &currentPath, const fs::path &rootPath) {
   return node;
 }
 
-/**
- * @brief Generates back references (../) for relative paths.
- * @param currentRelPath Current relative path.
- * @return String with "../" sequences.
- */
 std::string getBackPrefix(const fs::path &currentRelPath) {
   std::string prefix = "";
   for (const auto &_ : currentRelPath) {
@@ -225,15 +181,13 @@ std::string getBackPrefix(const fs::path &currentRelPath) {
   return prefix;
 }
 
-/**
- * @brief Converts filename extension from .md to .html.
- * @param sourceFile Source filename.
- * @return Target filename.
- */
 fs::path getTargetFilename(const fs::path &sourceFile) {
   fs::path p = sourceFile;
-  if (p.extension() == ".md")
+  std::string ext = p.extension().string();
+
+  if (ext == ".md" || ext == ".htm") {
     p.replace_extension(".html");
+  }
   return p;
 }
 
@@ -241,61 +195,46 @@ fs::path getTargetFilename(const fs::path &sourceFile) {
 
 /**
  * @brief Generates Navigation HTML.
- * @param currentNode Current node.
- * @param html Output HTML string.
- * @param urlPrefix URL prefix.
- * @param activeTargetFile Active file for highlighting.
+ * New logic: If isRoot is true, files in that node are NOT rendered.
  */
 void generateNavHtml(const DirNode &currentNode, std::string &html,
                      const std::string &urlPrefix,
-                     const fs::path &activeTargetFile) {
+                     const fs::path &activeTargetFile,
+                     bool isRoot) { // <--- Added Parameter
 
   html += "<ul class=\"nav-list\">\n";
 
-  for (const auto &file : currentNode.files) {
-    std::string nameNoExt = file.stem().string();
-    fs::path targetFile = getTargetFilename(file);
-    fs::path fullLinkPath = currentNode.relativePath / targetFile;
-    std::string href = urlPrefix + fullLinkPath.generic_string();
+  // 1. Files (ONLY if not root)
+  if (!isRoot) {
+    for (const auto &file : currentNode.files) {
+      std::string nameNoExt = file.stem().string();
+      fs::path targetFile = getTargetFilename(file);
+      fs::path fullLinkPath = currentNode.relativePath / targetFile;
 
-    std::string classAttr =
-        (fullLinkPath == activeTargetFile) ? " class=\"active\"" : "";
+      std::string href = urlPrefix + fullLinkPath.generic_string();
 
-    html += std::format("  <li><a href=\"{}\"{}>{}</a></li>\n", href, classAttr,
-                        nameNoExt);
-  }
-
-  for (const auto &sub : currentNode.subdirs) {
-    size_t fileCount = sub.files.size();
-    if (fileCount == 1) {
-      fs::path targetFile = getTargetFilename(sub.files[0]);
-      fs::path linkPath = sub.relativePath / targetFile;
-      std::string href = urlPrefix + linkPath.generic_string();
       std::string classAttr =
-          (linkPath == activeTargetFile) ? " class=\"active\"" : "";
+          (fullLinkPath == activeTargetFile) ? " class=\"active\"" : "";
 
       html += std::format("  <li><a href=\"{}\"{}>{}</a></li>\n", href,
-                          classAttr, sub.dirName);
-    } else {
-      html += std::format("  <li><strong>{}</strong>\n", sub.dirName);
-      generateNavHtml(sub, html, urlPrefix, activeTargetFile);
-      html += "  </li>\n";
+                          classAttr, nameNoExt);
     }
+  }
+
+  // 2. Subdirectories (Always rendered)
+  for (const auto &sub : currentNode.subdirs) {
+    html += std::format("  <li><strong>{}</strong>\n", sub.dirName);
+
+    // Recursive call: subfolders are never "root", so pass false
+    generateNavHtml(sub, html, urlPrefix, activeTargetFile, false);
+
+    html += "  </li>\n";
   }
   html += "</ul>\n";
 }
 
-// --- Processing with Inja ---
+// --- Processing ---
 
-/**
- * @brief Processes files using Inja templates.
- * @param currentNode Current node.
- * @param rootNode Root node.
- * @param inputRoot Input root.
- * @param cfg Config.
- * @param env Inja environment.
- * @param tmpl Parsed Inja template.
- */
 void processFiles(const DirNode &currentNode, const DirNode &rootNode,
                   const fs::path &inputRoot, const Config &cfg,
                   inja::Environment &env, const inja::Template &tmpl) {
@@ -311,16 +250,24 @@ void processFiles(const DirNode &currentNode, const DirNode &rootNode,
     fs::path currentActiveFile = currentNode.relativePath / targetFilename;
 
     std::string navHtml;
-    generateNavHtml(rootNode, navHtml, backPrefix, currentActiveFile);
+    // Pass 'true' because rootNode represents the root directory
+    generateNavHtml(rootNode, navHtml, backPrefix, currentActiveFile, true);
 
     std::string rawContent = readFile(inputPath);
-    std::string htmlContent = renderMarkdown(rawContent);
+    std::string contentToInject;
+    std::string ext = file.extension().string();
+
+    if (ext == ".md") {
+      contentToInject = renderMarkdown(rawContent);
+    } else if (ext == ".htm") {
+      contentToInject = rawContent;
+    }
 
     json data;
     data["base_path"] = backPrefix;
     data["title"] = file.stem().string();
     data["navigation"] = navHtml;
-    data["content"] = htmlContent;
+    data["content"] = contentToInject;
 
     try {
       std::string finalResult = env.render(tmpl, data);
@@ -344,9 +291,8 @@ void printUsage(char *argv[]) {
             << std::endl;
 }
 
-/**
- * @brief Main entry point.
- */
+// --- Main ---
+
 int main(int argc, char *argv[]) {
   if (argc < 3) {
     printUsage(argv);
@@ -364,22 +310,22 @@ int main(int argc, char *argv[]) {
     if (!fs::exists(cfg.templatePath))
       throw std::runtime_error("Template file does not exist.");
 
-    std::cout << "Scanning structure (.md only)..." << std::endl;
+    std::cout << "Scanning structure (.md & .htm only)..." << std::endl;
     DirNode rootNode = buildTree(inputDir, inputDir);
 
     if (fs::exists(cfg.outputDir))
       fs::remove_all(cfg.outputDir);
     fs::create_directories(cfg.outputDir);
 
-    // --- NEW: Copy Assets ---
-    // Copies assets from the folder where template.html is located
-    copyAssets(cfg.templatePath, cfg.outputDir);
+    if (!cfg.assetsPath.empty()) {
+      copyAssets(cfg.assetsPath, cfg.outputDir);
+    }
 
     std::cout << "Loading template..." << std::endl;
     inja::Environment env;
     inja::Template tmpl = env.parse_template(cfg.templatePath.string());
 
-    std::cout << "Generating pages with Inja..." << std::endl;
+    std::cout << "Generating pages..." << std::endl;
     processFiles(rootNode, rootNode, inputDir, cfg, env, tmpl);
 
     std::cout << "Done! Output in: " << cfg.outputDir.string() << std::endl;
