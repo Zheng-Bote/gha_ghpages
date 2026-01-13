@@ -62,37 +62,7 @@ The GHP Static Site Generator is a high-performance console application designed
 
 The system operates on a linear Pipeline Pattern. It takes three primary inputs (Configuration, Content, Template) and produces a directory of static HTML files.
 
-```mermaid
-graph LR
-    subgraph Inputs
-        A[Config File *.cfg]
-        B[Content Folder]
-        C[Template HTML]
-        D[Assets Folder]
-    end
-
-    subgraph Core [GHP Generator C++]
-        E[Config Parser]
-        F[Tree Builder]
-        G[Asset Manager]
-        H[Template Engine]
-        I[Content Processor]
-    end
-
-    subgraph Output
-        J[Static Website /dist]
-    end
-
-    A --> E
-    B --> F
-    D --> G
-    C --> H
-    F --> I
-    H --> I
-    I --> J
-```
-
-![Pipeline](theme/blue/assets/img/high-level-architecture_pipeline-pattern.png)
+![Pipeline](/theme/blue/assets/img/high-level-architecture_pipeline-pattern.png)
 
 ## Core Workflow
 
@@ -100,38 +70,7 @@ The main() function orchestrates the lifecycle of the generation process.
 
 Execution Flow Diagram
 
-```mermaid
-flowchart TD
-    Start([Start Application]) --> Args{Check Args}
-    Args -- Invalid --> Error[Print Usage]
-    Args -- Valid --> ParseCfg[Parse Config File]
-
-    ParseCfg --> ScanFS[Build Directory Tree]
-    ScanFS --> Clean[Clean Output Directory]
-    Clean --> CopyAssets[Copy Assets Folder]
-
-    CopyAssets --> LoadTmpl[Load & Parse Inja Template]
-    LoadTmpl --> Process[Process Files Recursively]
-
-    subgraph "Processing Loop (Recursive)"
-        Process --> GenNav[Generate Navigation HTML]
-        GenNav --> ReadFile[Read Content File]
-
-        ReadFile --> TypeCheck{File Type?}
-        TypeCheck -- .md --> RenderMD[Parse Markdown to HTML]
-        TypeCheck -- .htm --> RawHTM[Read Raw HTML]
-
-        RenderMD --> Context[Build JSON Context]
-        RawHTM --> Context
-
-        Context --> RenderTmpl[Render Template]
-        RenderTmpl --> WriteFile[Write .html to Disk]
-    end
-
-    WriteFile --> End([End])
-```
-
-![Execution Flow](theme/blue/assets/img/high-level-architecture_execution-flow.png)
+![Execution Flow](/theme/blue/assets/img/high-level-architecture_execution-flow.png)
 
 ## Component Design
 
