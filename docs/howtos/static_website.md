@@ -6,10 +6,8 @@ The gh_docs_bot is a custom C++ Static Site Generator (SSG) that allows you to b
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 **Table of Contents**
 
-- [How To Use gh_docs_bot manually](#how-to-use-gh_docs_bot-manually)
 - [Usage](#usage)
   - [Inputs](#inputs)
 
