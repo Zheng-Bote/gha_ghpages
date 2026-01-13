@@ -33,6 +33,7 @@
 
   --border-radius: 8px;
   --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --universal-padding: 1rem;
 }
 
 *,
@@ -309,6 +310,29 @@ main p {
   line-height: 1.6;
   color: var(--font-color);
   margin-bottom: 1rem;
+}
+
+/* --- coding --- */
+code,
+kbd,
+pre,
+samp {
+  font-family: Menlo, Consolas, monospace;
+  margin: 0 20px 0 20px;
+}
+
+code {
+  background: #333333; /* Dunkelgrau */
+  color: #00ff41; /* Matrix-Grün (alternativ: 'lime' oder '#4caf50') */
+  text-wrap: pretty;
+  padding: var(--universal-padding);
+  width: fit-content;
+  max-width: 100%;
+
+  /* Ergänzungen für den "Rechteck"-Look */
+  display: inline-block; /* Stellt sicher, dass es ein Block/Rechteck bildet */
+  border-radius: 4px; /* Optional: Leicht abgerundete Ecken */
+  border: 1px solid #444; /* Optional: Subtiler Rand zur Abgrenzung */
 }
 
 /* --- BLUE THEME CARD GRID --- */

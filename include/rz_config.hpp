@@ -21,9 +21,9 @@ constexpr std::string_view PROJECT_DESCRIPTION = "Sorts your downloads automatic
 
 constexpr std::string_view EXECUTABLE_NAME = "gh_docs_bot";
 
-constexpr std::string_view VERSION = "1.7.0";
+constexpr std::string_view VERSION = "1.8.0";
 constexpr std::int32_t PROJECT_VERSION_MAJOR { 1 };
-constexpr std::int32_t PROJECT_VERSION_MINOR { 7 };
+constexpr std::int32_t PROJECT_VERSION_MINOR { 8 };
 constexpr std::int32_t PROJECT_VERSION_PATCH { 0 };
 
 constexpr std::string_view PROJECT_HOMEPAGE_URL = "https://github.com/Zheng-Bote/gh-docs-bot";

@@ -2,13 +2,14 @@
  * SPDX-License-Identifier: MIT
  * Author: Robert Zheng
  * Copyright (c) 2026 ZHENG Robert
- * Version: 1.6.0
- * Description: Static Site Generator (Version 10 - Hide Root Files in Nav)
+ * Version: 1.8.0
+ * Description: Static Site Generator (Version 11 - Fix: Render HTM Fragments
+ * with Inja)
  */
 
 /**
  * Compile:
- * g++ -std=c++23 -o ssg main11.cpp -lmd4c-html -lmd4c
+ * g++ -std=c++23 -o ssg main12.cpp -lmd4c-html -lmd4c
  */
 
 #include <algorithm>
@@ -152,15 +153,12 @@ DirNode buildTree(const fs::path &currentPath, const fs::path &rootPath) {
   for (const auto &entry : fs::directory_iterator(currentPath)) {
     std::string name = entry.path().filename().string();
 
-    // Skip hidden files/folders
     if (name.starts_with("."))
       continue;
 
     if (entry.is_directory()) {
-      // Skip assets folder in nav tree
       if (name == "assets")
         continue;
-
       node.subdirs.push_back(buildTree(entry.path(), rootPath));
     } else if (entry.is_regular_file()) {
       if (isSupportedFile(entry.path())) {
@@ -184,7 +182,6 @@ std::string getBackPrefix(const fs::path &currentRelPath) {
 fs::path getTargetFilename(const fs::path &sourceFile) {
   fs::path p = sourceFile;
   std::string ext = p.extension().string();
-
   if (ext == ".md" || ext == ".htm") {
     p.replace_extension(".html");
   }
@@ -193,18 +190,12 @@ fs::path getTargetFilename(const fs::path &sourceFile) {
 
 // --- Navigation Generator ---
 
-/**
- * @brief Generates Navigation HTML.
- * New logic: If isRoot is true, files in that node are NOT rendered.
- */
 void generateNavHtml(const DirNode &currentNode, std::string &html,
                      const std::string &urlPrefix,
-                     const fs::path &activeTargetFile,
-                     bool isRoot) { // <--- Added Parameter
+                     const fs::path &activeTargetFile, bool isRoot) {
 
   html += "<ul class=\"nav-list\">\n";
 
-  // 1. Files (ONLY if not root)
   if (!isRoot) {
     for (const auto &file : currentNode.files) {
       std::string nameNoExt = file.stem().string();
@@ -212,7 +203,6 @@ void generateNavHtml(const DirNode &currentNode, std::string &html,
       fs::path fullLinkPath = currentNode.relativePath / targetFile;
 
       std::string href = urlPrefix + fullLinkPath.generic_string();
-
       std::string classAttr =
           (fullLinkPath == activeTargetFile) ? " class=\"active\"" : "";
 
@@ -221,19 +211,15 @@ void generateNavHtml(const DirNode &currentNode, std::string &html,
     }
   }
 
-  // 2. Subdirectories (Always rendered)
   for (const auto &sub : currentNode.subdirs) {
     html += std::format("  <li><strong>{}</strong>\n", sub.dirName);
-
-    // Recursive call: subfolders are never "root", so pass false
     generateNavHtml(sub, html, urlPrefix, activeTargetFile, false);
-
     html += "  </li>\n";
   }
   html += "</ul>\n";
 }
 
-// --- Processing ---
+// --- Processing (FIXED) ---
 
 void processFiles(const DirNode &currentNode, const DirNode &rootNode,
                   const fs::path &inputRoot, const Config &cfg,
@@ -250,23 +236,34 @@ void processFiles(const DirNode &currentNode, const DirNode &rootNode,
     fs::path currentActiveFile = currentNode.relativePath / targetFilename;
 
     std::string navHtml;
-    // Pass 'true' because rootNode represents the root directory
+    // Navigation generieren
     generateNavHtml(rootNode, navHtml, backPrefix, currentActiveFile, true);
 
     std::string rawContent = readFile(inputPath);
     std::string contentToInject;
     std::string ext = file.extension().string();
 
-    if (ext == ".md") {
-      contentToInject = renderMarkdown(rawContent);
-    } else if (ext == ".htm") {
-      contentToInject = rawContent;
-    }
-
+    // 1. Daten-Kontext VORHER erstellen (wichtig für HTM Fragmente)
     json data;
     data["base_path"] = backPrefix;
     data["title"] = file.stem().string();
     data["navigation"] = navHtml;
+
+    // 2. Content verarbeiten
+    if (ext == ".md") {
+      contentToInject = renderMarkdown(rawContent);
+    } else if (ext == ".htm") {
+      // FIX: .htm Inhalt auch durch Inja rendern lassen
+      try {
+        contentToInject = env.render(rawContent, data);
+      } catch (const std::exception &e) {
+        std::cerr << "Warning: Failed to render fragment " << file.string()
+                  << ": " << e.what() << std::endl;
+        contentToInject = rawContent; // Fallback auf Raw, falls Syntax-Fehler
+      }
+    }
+
+    // 3. Content in das Daten-Objekt packen für das Haupt-Template
     data["content"] = contentToInject;
 
     try {

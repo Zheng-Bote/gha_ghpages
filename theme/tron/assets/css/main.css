@@ -9,6 +9,7 @@
   --border-glow: 1px solid var(--tron-glow);
   --glass-blur: blur(12px);
   --border-radius: 12px;
+  --universal-padding: 1rem;
 }
 
 @starting-style {
@@ -253,6 +254,29 @@ main h3 {
   color: var(--ob-white);
   border-bottom: 1px solid var(--tron-glow);
   padding-bottom: 5px;
+}
+
+/* --- coding --- */
+code,
+kbd,
+pre,
+samp {
+  font-family: Menlo, Consolas, monospace;
+  margin: 0 20px 0 20px;
+}
+
+code {
+  background: #333333; /* Dunkelgrau */
+  color: #00ff41; /* Matrix-Grün (alternativ: 'lime' oder '#4caf50') */
+  text-wrap: pretty;
+  padding: var(--universal-padding);
+  width: fit-content;
+  max-width: 100%;
+
+  /* Ergänzungen für den "Rechteck"-Look */
+  display: inline-block; /* Stellt sicher, dass es ein Block/Rechteck bildet */
+  border-radius: 4px; /* Optional: Leicht abgerundete Ecken */
+  border: 1px solid #444; /* Optional: Subtiler Rand zur Abgrenzung */
 }
 
 /* --- TRON THEME CARD GRID --- */
