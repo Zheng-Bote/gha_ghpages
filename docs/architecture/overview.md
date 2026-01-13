@@ -6,30 +6,32 @@ comprehensive architecture documentation for the GHP Static Site Generator (v1.x
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
-- [Architecture Overview](#architecture-overview)
-- [System Overview](#system-overview)
-  - [Key Features](#key-features)
-- [High-Level Architecture](#high-level-architecture)
-- [Core Workflow](#core-workflow)
-- [Component Design](#component-design)
-  - [Data Structures](#data-structures)
-  - [Key Logic Units](#key-logic-units)
-    - [Tree Builder (buildTree)](#tree-builder-buildtree)
-    - [Navigation Generator (generateNavHtml)](#navigation-generator-generatenavhtml)
-    - [Content Processor](#content-processor)
-    - [Template Injection (Inja)](#template-injection-inja)
-- [File System Structure](#file-system-structure)
-  - [Input Structure (Example)](#input-structure-example)
-  - [Design Structure (Example)](#design-structure-example)
-  - [Output Structure (Example)](#output-structure-example)
-- [Dependencies & Libraries](#dependencies--libraries)
-- [Configuration Reference](#configuration-reference)
-- [Build & Deployment](#build--deployment)
-  - [Compilation](#compilation)
-  - [Execution](#execution)
-    - [Inputs](#inputs)
+- [GHP Static Site Generator - Architecture \& Design](#ghp-static-site-generator---architecture--design)
+  - [Architecture Overview](#architecture-overview)
+  - [System Overview](#system-overview)
+    - [Key Features](#key-features)
+  - [High-Level Architecture](#high-level-architecture)
+  - [Core Workflow](#core-workflow)
+  - [Component Design](#component-design)
+    - [Data Structures](#data-structures)
+    - [Key Logic Units](#key-logic-units)
+      - [Tree Builder (buildTree)](#tree-builder-buildtree)
+      - [Navigation Generator (generateNavHtml)](#navigation-generator-generatenavhtml)
+      - [Content Processor](#content-processor)
+      - [Template Injection (Inja)](#template-injection-inja)
+  - [File System Structure](#file-system-structure)
+    - [Input Structure (Example)](#input-structure-example)
+    - [Design Structure (Example)](#design-structure-example)
+    - [Output Structure (Example)](#output-structure-example)
+  - [Dependencies \& Libraries](#dependencies--libraries)
+  - [Configuration Reference](#configuration-reference)
+  - [Build \& Deployment](#build--deployment)
+    - [Compilation](#compilation)
+    - [Execution](#execution)
+      - [Inputs](#inputs)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -71,7 +73,7 @@ graph LR
         D[Assets Folder]
     end
 
-    subgraph Core Engine "GHP Generator (C++)"
+    subgraph Core [GHP Generator C++]
         E[Config Parser]
         F[Tree Builder]
         G[Asset Manager]
@@ -91,6 +93,8 @@ graph LR
     H --> I
     I --> J
 ```
+
+![Pipeline](theme/blue/assets/img/high-level-architecture_pipeline-pattern.png)
 
 ## Core Workflow
 
@@ -128,6 +132,8 @@ flowchart TD
 
     WriteFile --> End([End])
 ```
+
+![Execution Flow](theme/blue/assets/img/high-level-architecture_execution-flow.png)
 
 ## Component Design
 
