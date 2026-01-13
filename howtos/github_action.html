@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GHP | index</title>
+    <title>GHP | github_action</title>
 
     <link
       rel="shortcut icon"
@@ -20,12 +20,16 @@
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/css/template.css" />
+    <link rel="stylesheet" href="../assets/css/main.css" />
   </head>
   <body>
     <header>
       <div class="header_left">
-        <img src="../assets/img/favicon.svg" alt="Logo" />
+        <img
+          src="../assets/img/favicon.svg"
+          alt="Logo"
+          loading="eager"
+        />
         <h1>GHP</h1>
       </div>
       <div class="header_middle">
@@ -39,8 +43,23 @@
 
     <aside class="aside">
       <nav class="nav"><ul class="nav-list">
-  <li><a href="../index.html">index</a></li>
-  <li><a href="../howtos/index.html" class="active">howtos</a></li>
+  <li><strong>architecture</strong>
+<ul class="nav-list">
+  <li><a href="../architecture/overview.html">overview</a></li>
+  <li><a href="../architecture/overview_md.html">overview_md</a></li>
+</ul>
+  </li>
+  <li><strong>howtos</strong>
+<ul class="nav-list">
+  <li><a href="../howtos/github_action.html" class="active">github_action</a></li>
+  <li><a href="../howtos/static_website.html">static_website</a></li>
+</ul>
+  </li>
+  <li><strong>screenshots</strong>
+<ul class="nav-list">
+  <li><a href="../screenshots/themes.html">themes</a></li>
+</ul>
+  </li>
 </ul>
 </nav>
     </aside>
@@ -72,7 +91,13 @@
 <tr>
 <td align="left"><code>template</code></td>
 <td align="left">Path to the HTML template file to use for the site.</td>
-<td align="left"><code>theme/template.html</code></td>
+<td align="left"><code>theme/desktop/template.html</code></td>
+<td align="left">No</td>
+</tr>
+<tr>
+<td align="left"><code>assets</code></td>
+<td align="left">Path to the assets directory to use for the site.</td>
+<td align="left"><code>theme/blue/assets</code></td>
 <td align="left">No</td>
 </tr>
 <tr>
@@ -137,5 +162,7 @@ jobs:
       <div class="footer-section_center">&copy; 2026 ZHENG ROBERT</div>
       <div class="footer-section_right">CLEARANCE_LEVEL: 5</div>
     </footer>
+
+    <script src="../assets/js/main.js" defer></script>
   </body>
 </html>

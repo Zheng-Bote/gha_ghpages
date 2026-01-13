@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>GHP | overview_md</title>
+
+    <link
+      rel="shortcut icon"
+      href="../assets/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="../assets/img/favicon.svg"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../assets/css/main.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header_left">
+        <img
+          src="../assets/img/favicon.svg"
+          alt="Logo"
+          loading="eager"
+        />
+        <h1>GHP</h1>
+      </div>
+      <div class="header_middle">
+        <span>System Status: Active</span>
+      </div>
+      <div class="header_right">
+        <button class="tron-btn">Login</button>
+        <button class="tron-btn" style="margin-left: 10px">Sync</button>
+      </div>
+    </header>
+
+    <aside class="aside">
+      <nav class="nav"><ul class="nav-list">
+  <li><strong>architecture</strong>
+<ul class="nav-list">
+  <li><a href="../architecture/overview.html">overview</a></li>
+  <li><a href="../architecture/overview_md.html" class="active">overview_md</a></li>
+</ul>
+  </li>
+  <li><strong>howtos</strong>
+<ul class="nav-list">
+  <li><a href="../howtos/github_action.html">github_action</a></li>
+  <li><a href="../howtos/static_website.html">static_website</a></li>
+</ul>
+  </li>
+  <li><strong>screenshots</strong>
+<ul class="nav-list">
+  <li><a href="../screenshots/themes.html">themes</a></li>
+</ul>
+  </li>
+</ul>
+</nav>
+    </aside>
+
+    <main class="main"><h1>GHP Static Site Generator - Architecture &amp; Design</h1>
+<p>comprehensive architecture documentation for the GHP Static Site Generator (v1.x.x). It includes high-level concepts, data flow, internal components, and diagrams using Mermaid syntax (standard for GitHub Markdown).</p>
+<hr>
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+<p><strong>Table of Contents</strong></p>
+<ul>
+<li><a href="#architecture-overview">Architecture Overview</a></li>
+<li><a href="#system-overview">System Overview</a><ul>
+<li><a href="#key-features">Key Features</a></li>
+</ul>
+</li>
+<li><a href="#high-level-architecture">High-Level Architecture</a></li>
+<li><a href="#core-workflow">Core Workflow</a></li>
+<li><a href="#component-design">Component Design</a><ul>
+<li><a href="#data-structures">Data Structures</a></li>
+<li><a href="#key-logic-units">Key Logic Units</a><ul>
+<li><a href="#tree-builder-buildtree">Tree Builder (buildTree)</a></li>
+<li><a href="#navigation-generator-generatenavhtml">Navigation Generator (generateNavHtml)</a></li>
+<li><a href="#content-processor">Content Processor</a></li>
+<li><a href="#template-injection-inja">Template Injection (Inja)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#file-system-structure">File System Structure</a><ul>
+<li><a href="#input-structure-example">Input Structure (Example)</a></li>
+<li><a href="#design-structure-example">Design Structure (Example)</a></li>
+<li><a href="#output-structure-example">Output Structure (Example)</a></li>
+</ul>
+</li>
+<li><a href="#dependencies--libraries">Dependencies &amp; Libraries</a></li>
+<li><a href="#configuration-reference">Configuration Reference</a></li>
+<li><a href="#build--deployment">Build &amp; Deployment</a><ul>
+<li><a href="#compilation">Compilation</a></li>
+<li><a href="#execution">Execution</a><ul>
+<li><a href="#inputs">Inputs</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<hr>
+<h2>Architecture Overview</h2>
+<ul>
+<li>Version: 1.x.x</li>
+<li>Language: C++23</li>
+<li>License: MIT</li>
+<li>command line tool</li>
+<li>Platform: Linux, macOS</li>
+</ul>
+<h2>System Overview</h2>
+<p>The GHP Static Site Generator is a high-performance console application designed to convert a recursive directory structure of content files into a fully navigational static HTML website. It supports Markdown (.md) for content authoring and raw HTML fragments (.htm) for custom layouts, wrapping them into a customizable Inja template.</p>
+<h3>Key Features</h3>
+<ul>
+<li><strong>Recursive Scanning</strong>: Maps arbitrary folder depths.</li>
+<li><strong>Hybrid Parsing</strong>:<ul>
+<li>*.md files are parsed to HTML via md4c.</li>
+<li>*.htm files are injected as raw content fragments.</li>
+</ul>
+</li>
+<li><strong>Automated Navigation</strong>: Generates a recursive Side-Nav HTML structure based on the file system.</li>
+<li><strong>Root Isolation</strong>: Files in the root directory are generated but excluded from the navigation tree to keep the menu clean.</li>
+<li><strong>Asset Management</strong>: Automatically copies theme assets (CSS, JS, Images) from a configured source.</li>
+<li><strong>Templating</strong>: Uses Inja for variable substitution (Title, Navigation, Content, Base Path).</li>
+</ul>
+<h2>High-Level Architecture</h2>
+<p>The system operates on a linear Pipeline Pattern. It takes three primary inputs (Configuration, Content, Template) and produces a directory of static HTML files.</p>
+<p><img src="/theme/blue/assets/img/high-level-architecture_pipeline-pattern.png" alt="Pipeline"></p>
+<h2>Core Workflow</h2>
+<p>The main() function orchestrates the lifecycle of the generation process.</p>
+<p>Execution Flow Diagram</p>
+<p><img src="/theme/blue/assets/img/high-level-architecture_execution-flow.png" alt="Execution Flow"></p>
+<h2>Component Design</h2>
+<p>The application is structured around data-driven components.</p>
+<h3>Data Structures</h3>
+<p><strong>DirNode (The File Tree)</strong></p>
+<p>Represents the recursive file system structure in memory.</p>
+<pre><code class="language-C++">struct DirNode {
+  fs::path relativePath;        // Path relative to input root
+  std::string dirName;          // Name of the current folder
+  std::vector&lt;fs::path&gt; files;  // .md and .htm files in this folder
+  std::vector&lt;DirNode&gt; subdirs; // Nested directories
+};
+</code></pre>
+<p><strong>Config</strong></p>
+<p>Holds runtime settings loaded from the .cfg file.</p>
+<pre><code class="language-C++">struct Config {
+  fs::path templatePath; // Path to template.html
+  fs::path outputDir;    // Destination folder
+  fs::path assetsPath;   // Source assets folder (images/css)
+};
+</code></pre>
+<h3>Key Logic Units</h3>
+<h4>Tree Builder (buildTree)</h4>
+<p><strong>Role:</strong> Scans the input directory.</p>
+<p><strong>Filters:</strong></p>
+<ul>
+<li>Ignores files/folders starting with . (hidden files).</li>
+<li>Ignores the folder named assets (to prevent recursion loops if source and output overlap, and to keep navigation clean).</li>
+<li>Only accepts .md and .htm files.</li>
+</ul>
+<p><strong>Sorting:</strong> Sorts directories and files alphabetically for consistent navigation order.</p>
+<h4>Navigation Generator (generateNavHtml)</h4>
+<p><strong>Role:</strong> Creates the HTML <ul><li> structure for the sidebar.</p>
+<p><strong>Logic:</strong></p>
+<ul>
+<li>Receives the full rootNode to generate the complete menu for every page.</li>
+<li><strong>Root Exclusion:</strong> Accepts an isRoot flag. If true, files in the top-level directory (like index.md) are not added to the navigation list, but subdirectories are. This prevents the &quot;Home&quot; page or loose root files from cluttering the menu.</li>
+<li><strong>Active State:</strong> Compares the current file path with the link target to add class=&quot;active&quot; for CSS highlighting.</li>
+<li><strong>Hierarchy:</strong> Renders folders as <strong>DirectoryName</strong> and nests files inside.</li>
+</ul>
+<h4>Content Processor</h4>
+<ul>
+<li><strong>Markdown:</strong> Uses md4c-html to convert Markdown text into safe HTML.</li>
+<li><strong>HTML Fragments:</strong> .htm files are read as plain text and injected directly. This allows specific pages to use complex HTML layouts (grids, cards) that Markdown cannot express.</li>
+</ul>
+<h4>Template Injection (Inja)</h4>
+<p>Merges the processed data into the HTML skeleton.</p>
+<p><strong>JSON Context Data:</strong></p>
+<ul>
+<li>base_path: Relative path back to root (e.g., ../../) for linking CSS/JS correctly from subfolders.</li>
+<li>title: Filename without extension.</li>
+<li>navigation: The generated sidebar HTML string.</li>
+<li>content: The converted page body.</li>
+</ul>
+<h2>File System Structure</h2>
+<h3>Input Structure (Example)</h3>
+<pre><code class="language-bash">docs/
+├── architecture
+│   └── overview.md
+├── howtos
+│   ├── github_action.md
+│   └── static_website.md
+├── index.md
+└── screenshots
+    └── themes.htm
+</code></pre>
+<h3>Design Structure (Example)</h3>
+<pre><code class="language-bash">theme/blue/
+├── assets
+│   ├── css
+│   │   └── main.css
+│   ├── favicon.ico
+│   ├── favicon.svg
+│   ├── img
+│   │   ├── blue_dark.png
+│   │   ├── blue_light.png
+│   │   ├── favicon.svg
+│   │   ├── matrix.png
+│   │   ├── themes.png
+│   │   └── tron.png
+│   └── js
+│       └── main.js
+├── assets copy
+└── blue.cfg
+</code></pre>
+<h3>Output Structure (Example)</h3>
+<pre><code class="language-bash">/dist/
+├── architecture
+│   └── overview.html
+├── howtos
+│   ├── github_action.html
+│   └── static_website.html
+├── index.html
+└── screenshots
+    └── themes.html
+</code></pre>
+<h2>Dependencies &amp; Libraries</h2>
+<table>
+<thead>
+<tr>
+<th align="left">Library</th>
+<th align="left">Purpose</th>
+<th align="left">Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">std::filesystem</td>
+<td align="left">File I/O</td>
+<td align="left">C++ Standard (modern, cross-platform).</td>
+</tr>
+<tr>
+<td align="left">nlohmann/json</td>
+<td align="left">Data Structure</td>
+<td align="left">Standard for passing data to template engines.</td>
+</tr>
+<tr>
+<td align="left">pantor/inja</td>
+<td align="left">Templating</td>
+<td align="left">Fast, Python/Jinja2-like syntax for C++</td>
+</tr>
+<tr>
+<td align="left">md4c</td>
+<td align="left">Markdown</td>
+<td align="left">Extremely fast, compliant C markdown parser</td>
+</tr>
+</tbody>
+</table>
+<h2>Configuration Reference</h2>
+<pre><code class="language-ini"># Path to the HTML layout file
+template=/path/to/theme/template.html
+
+# Folder containing CSS/Images to be copied
+assets=/path/to/theme/assets
+
+# Target directory for the website
+output=/path/to/dist
+</code></pre>
+<h2>Build &amp; Deployment</h2>
+<h3>Compilation</h3>
+<p>Requires a C++23 compliant compiler (GCC/Clang) and the linked libraries.</p>
+<p><em>Linux Example:</em></p>
+<pre><code class="language-bash">g++ -std=c++23 -o ssg main.cpp -lmd4c-html -lmd4c
+</code></pre>
+<blockquote>
+<p>![TIP]
+see <code>CMakeLists.txt</code> for more details</p>
+</blockquote>
+<h3>Execution</h3>
+<p><code>Usage: build/gh_docs_bot &lt;path_to_config&gt; &lt;input_folder&gt;</code></p>
+<p><strong><em>Example</em></strong></p>
+<p><code>./gh_docs_bot /home/zb_bamboo/DEV/gh-a_cr-ghp/theme/blue/blue.cfg /home/zb_bamboo/DEV/gh-a_cr-ghp/docs</code></p>
+<h4>Inputs</h4>
+<table>
+<thead>
+<tr>
+<th align="left">Input</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>path_to_config</code></td>
+<td align="left">Path to the config file to use for the site.</td>
+</tr>
+<tr>
+<td align="left"><code>path_to_docs</code></td>
+<td align="left">Path to the input directory to use for the site.</td>
+</tr>
+</tbody>
+</table>
+</main>
+
+    <footer class="footer">
+      <div class="footer-section_left">SOURCE: MCP_v2</div>
+      <div class="footer-section_center">&copy; 2026 ZHENG ROBERT</div>
+      <div class="footer-section_right">CLEARANCE_LEVEL: 5</div>
+    </footer>
+
+    <script src="../assets/js/main.js" defer></script>
+  </body>
+</html>
