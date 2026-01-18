@@ -333,7 +333,7 @@ code {
     --font-color-code
   ); /* Matrix-Grün (alternativ: 'lime' oder '#4caf50') */
   text-wrap: pretty;
-  padding: var(--universal-padding);
+  padding: 2px;
   width: fit-content;
   max-width: 100%;
 
