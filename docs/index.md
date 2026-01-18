@@ -10,8 +10,10 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
+- [Github Action for GitHub Pages - gh_docs_bot](#github-action-for-github-pages---gh_docs_bot)
 - [Description](#description)
   - [🚀 Features](#-features)
   - [📦 Usage](#-usage)
@@ -68,7 +70,7 @@ For a comprehensive guide on how to configure inputs, set up your repository str
 
 ### Screenshoots
 
-![Themes](theme/tron/assets/img/themes.png)
+![Themes](assets/img/themes.png)
 
 > \[!NOTE]
 > _see more screenshoots in_ [GitHub Pages: Documentation](https://zheng-bote.github.io/gha_ghpages/)
