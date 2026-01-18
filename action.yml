@@ -14,6 +14,10 @@ inputs:
     description: "Directory containing markdown documentation"
     required: false
     default: "docs"
+  assets:
+    description: "Directory conataining addiotnal assets"
+    requierd: false
+    default: "theme/blue/assets"
 runs:
   using: "composite"
   steps:
