@@ -32,35 +32,49 @@ Here is a complete example of how to use this action in your own `.github/workfl
 ```yaml
 name: Deploy Documentation
 
+name: Manual gh_docs_bot Build
+
+# Author: Robert Zheng
+# created: 2026-01-12
+# updated: 2026-01-12
+# version: 1.0.0
+# description: build and generate static website from markdown files to branch gh-pages
+
+run-name: Manual deploy documentation by ${{ github.actor }}
+
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-24.04
-
+  build-and-generate:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Build and Generate Site
-        uses: Zheng-Bote/gha_ghpages@main # or @v1.0.0
+      - uses: actions/checkout@v4
         with:
-          template: "theme/template.html"
-          output: "public"
-          docs: "docs"
+          fetch-depth: 0
+          ref: "main"
+      - name: Build and Generate Site
+        uses: Zheng-Bote/gha_ghpages@main
+        with:
+          template: 'theme/desktop/template.html'
+          assets: 'theme/blue/assets'
+          output: 'public'
+          docs: 'docs'
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: static-site
+          path: public/
 
       - name: Deploy to gh-pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
           folder: public
+
 ```
 
 ## Prerequisites
