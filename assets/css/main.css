@@ -2,8 +2,9 @@
   color-scheme: light dark;
 
   /* --- 1. VARIABLEN AUS DEINER DATEI --- */
-  --font-family: "Inter", -apple-system, BlinkMacSystemFont, Roboto, Ubuntu,
-    "Segeo UI", "Helvetica Neue", Arial, sans-serif;
+  --font-family:
+    "Inter", -apple-system, BlinkMacSystemFont, Roboto, Ubuntu, "Segeo UI",
+    "Helvetica Neue", Arial, sans-serif;
   --font-family-mono: "Orbitron", monospace; /* Für Logos/Titel behalten */
 
   --font-size: 1rem;
@@ -13,10 +14,12 @@
   /* Angepasste Farben basierend auf deiner main.css */
   --font-color: light-dark(hsla(0 0% 0% / 0.9), hsla(0 0% 100% / 0.9));
   --font-color-muted: light-dark(hsla(0 0% 0% / 0.6), hsla(0 0% 100% / 0.6));
+  --font-color-code: light-dark(#00ff41, #1fbf48);
 
   /* Backgrounds: Light (Hellgrau/Weiß) | Dark (Dunkelblau/Grau) */
   --bg-body: light-dark(#f8f9fa, #0d1117);
   --bg-panel: light-dark(#ffffff, #161b22);
+  --bg-code: light-dark(#d9dcde, #161b22);
   --border-color: light-dark(#e1e4e8, #30363d);
 
   /* Deine Primary Colors (Blue) */
@@ -71,7 +74,9 @@ html {
   background-color: var(--bg-body);
   color: var(--font-color);
   /* Sanfter Übergang beim Theme-Wechsel */
-  transition: background-color 0.3s, color 0.3s;
+  transition:
+    background-color 0.3s,
+    color 0.3s;
 }
 
 body {
@@ -322,8 +327,10 @@ samp {
 }
 
 code {
-  background: #333333; /* Dunkelgrau */
-  color: #00ff41; /* Matrix-Grün (alternativ: 'lime' oder '#4caf50') */
+  background: var(--bg-code);
+  color: var(
+    --font-color-code
+  ); /* Matrix-Grün (alternativ: 'lime' oder '#4caf50') */
   text-wrap: pretty;
   padding: var(--universal-padding);
   width: fit-content;
@@ -362,7 +369,9 @@ img {
   box-shadow: var(--shadow-sm);
   padding-bottom: 1rem;
   position: relative;
-  transition: box-shadow 0.2s ease, transform 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    transform 0.2s ease;
 }
 
 .card:hover {
@@ -397,7 +406,9 @@ img {
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   border-bottom: 1px solid var(--border-color);
 
-  transition: transform 0.35s ease, z-index 0s;
+  transition:
+    transform 0.35s ease,
+    z-index 0s;
   transform-origin: center top; /* Zoomt von oben mittig */
   position: relative;
   z-index: 1;
