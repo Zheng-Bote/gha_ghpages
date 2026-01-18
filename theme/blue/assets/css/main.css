@@ -14,7 +14,8 @@
   /* Angepasste Farben basierend auf deiner main.css */
   --font-color: light-dark(hsla(0 0% 0% / 0.9), hsla(0 0% 100% / 0.9));
   --font-color-muted: light-dark(hsla(0 0% 0% / 0.6), hsla(0 0% 100% / 0.6));
-  --font-color-code: light-dark(#00ff41, #1fbf48);
+  /*--font-color-code: light-dark(#00ff41, #1fbf48);*/
+  --font-color-code: light-dark(hsla(0 0% 0% / 0.9), hsla(0 0% 100% / 0.9));
 
   /* Backgrounds: Light (Hellgrau/Weiß) | Dark (Dunkelblau/Grau) */
   --bg-body: light-dark(#f8f9fa, #0d1117);
@@ -323,7 +324,7 @@ kbd,
 pre,
 samp {
   font-family: Menlo, Consolas, monospace;
-  margin: 0 20px 0 20px;
+  /*margin: 0 20px 0 20px;*/
 }
 
 code {
@@ -339,7 +340,7 @@ code {
   /* Ergänzungen für den "Rechteck"-Look */
   display: inline-block; /* Stellt sicher, dass es ein Block/Rechteck bildet */
   border-radius: 4px; /* Optional: Leicht abgerundete Ecken */
-  border: 1px solid #444; /* Optional: Subtiler Rand zur Abgrenzung */
+  border: 1px solid var(--border-color); /* Optional: Subtiler Rand zur Abgrenzung */
 }
 
 /* --- BLUE THEME CARD GRID --- */
