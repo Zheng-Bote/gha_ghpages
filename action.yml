@@ -15,9 +15,13 @@ inputs:
     required: false
     default: "docs"
   assets:
-    description: "Directory conataining addiotnal assets"
-    requierd: false
+    description: "Directory containing additional assets"
+    required: false
     default: "theme/blue/assets"
+  base_path:
+    description: "Base path for the generated site"
+    required: false
+    default: ""
 runs:
   using: "composite"
   steps:
@@ -50,6 +54,7 @@ runs:
         echo "template=${{ inputs.template }}" > config.cfg
         echo "assets=${{ inputs.assets }}" >> config.cfg
         echo "output=${{ inputs.output }}" >> config.cfg
+        echo "base_path=${{ inputs.base_path }}" >> config.cfg
 
     - name: Run Generator
       shell: bash
