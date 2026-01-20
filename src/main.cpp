@@ -2,14 +2,15 @@
  * SPDX-License-Identifier: MIT
  * Author: Robert Zheng
  * Copyright (c) 2026 ZHENG Robert
- * Version: 1.8.0
- * Description: Static Site Generator (Version 11 - Fix: Render HTM Fragments
- * with Inja)
+ * Version: 2.1.0
+ * Date: 2026-01-21
+ * Description: Static Site Generator (Version 15 - Base Path only for Template
+ * Variable)
  */
 
 /**
  * Compile:
- * g++ -std=c++23 -o ssg main12.cpp -lmd4c-html -lmd4c
+ * g++ -std=c++23 -o ssg main15.cpp -lmd4c-html -lmd4c
  */
 
 #include <algorithm>
@@ -38,6 +39,7 @@ struct Config {
   fs::path templatePath;
   fs::path outputDir = "output_site";
   fs::path assetsPath;
+  std::string customBasePath; // Optionaler Base Path aus Config
 };
 
 struct DirNode {
@@ -130,6 +132,8 @@ Config parseConfig(const fs::path &configPath) {
         cfg.outputDir = value;
       else if (key == "assets")
         cfg.assetsPath = value;
+      else if (key == "base_path")
+        cfg.customBasePath = value;
     }
   }
   return cfg;
@@ -199,6 +203,10 @@ void generateNavHtml(const DirNode &currentNode, std::string &html,
   if (!isRoot) {
     for (const auto &file : currentNode.files) {
       std::string nameNoExt = file.stem().string();
+
+      // Unterstriche durch Leerzeichen ersetzen
+      std::ranges::replace(nameNoExt, '_', ' ');
+
       fs::path targetFile = getTargetFilename(file);
       fs::path fullLinkPath = currentNode.relativePath / targetFile;
 
@@ -219,7 +227,7 @@ void generateNavHtml(const DirNode &currentNode, std::string &html,
   html += "</ul>\n";
 }
 
-// --- Processing (FIXED) ---
+// --- Processing ---
 
 void processFiles(const DirNode &currentNode, const DirNode &rootNode,
                   const fs::path &inputRoot, const Config &cfg,
@@ -235,35 +243,50 @@ void processFiles(const DirNode &currentNode, const DirNode &rootNode,
     fs::path outputPath = currentOutputDir / targetFilename;
     fs::path currentActiveFile = currentNode.relativePath / targetFilename;
 
+    // --- Pfad-Logik Trennung ---
+
+    // 1. Navigation bleibt IMMER relativ (damit Links funktionieren)
+    std::string navBasePath = backPrefix;
+
+    // 2. Template Variable {{ base_path }} (für Assets, CSS im Head)
+    // Wenn Config gesetzt -> Nimm Config. Wenn leer -> Nimm Relativ.
+    std::string templateBasePath = backPrefix;
+    if (!cfg.customBasePath.empty()) {
+      templateBasePath = cfg.customBasePath;
+      if (!templateBasePath.ends_with('/')) {
+        templateBasePath += '/';
+      }
+    }
+
+    // Navigation generieren (nutzt navBasePath -> relativ)
     std::string navHtml;
-    // Navigation generieren
-    generateNavHtml(rootNode, navHtml, backPrefix, currentActiveFile, true);
+    generateNavHtml(rootNode, navHtml, navBasePath, currentActiveFile, true);
 
     std::string rawContent = readFile(inputPath);
     std::string contentToInject;
     std::string ext = file.extension().string();
 
-    // 1. Daten-Kontext VORHER erstellen (wichtig für HTM Fragmente)
+    // JSON Daten vorbereiten
     json data;
-    data["base_path"] = backPrefix;
+    data["base_path"] = templateBasePath; // <-- Hier kommt der absolute (oder
+                                          // relative) Pfad rein
     data["title"] = file.stem().string();
     data["navigation"] = navHtml;
 
-    // 2. Content verarbeiten
+    // Content verarbeiten
     if (ext == ".md") {
       contentToInject = renderMarkdown(rawContent);
     } else if (ext == ".htm") {
-      // FIX: .htm Inhalt auch durch Inja rendern lassen
       try {
+        // Auch im HTM-Fragment wird {{ base_path }} ersetzt (z.B. für Bilder)
         contentToInject = env.render(rawContent, data);
       } catch (const std::exception &e) {
         std::cerr << "Warning: Failed to render fragment " << file.string()
                   << ": " << e.what() << std::endl;
-        contentToInject = rawContent; // Fallback auf Raw, falls Syntax-Fehler
+        contentToInject = rawContent;
       }
     }
 
-    // 3. Content in das Daten-Objekt packen für das Haupt-Template
     data["content"] = contentToInject;
 
     try {
