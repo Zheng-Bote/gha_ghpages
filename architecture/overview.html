@@ -1,43 +1,95 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GHP | overview</title>
+
+    <meta name="theme-color" content="#d4d4d4" />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#d4d4d4"
+    />
+
+    <title>CakePlanner | overview</title>
 
     <link
       rel="shortcut icon"
-      href="../assets/favicon.ico"
+      href="https://zheng-bote.github.io/gha_ghpages/assets/favicon.ico"
       type="image/x-icon"
     />
     <link
       rel="icon"
       type="image/svg+xml"
-      href="../assets/img/favicon.svg"
+      href="https://zheng-bote.github.io/gha_ghpages/assets/img/favicon.svg"
     />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;500&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/css/main.css" />
+    <link rel="stylesheet" href="https://zheng-bote.github.io/gha_ghpages/assets/css/main.css" />
   </head>
   <body>
     <header>
       <div class="header_left">
         <img
-          src="../assets/img/favicon.svg"
+          src="https://zheng-bote.github.io/gha_ghpages/assets/img/favicon.svg"
           alt="Logo"
+          title="Home"
           loading="eager"
         />
-        <h1>GHP</h1>
+        <h1>CakePlanner</h1>
       </div>
       <div class="header_middle">
-        <span>System Status: Active</span>
+        <span>Frontends</span>
       </div>
       <div class="header_right">
-        <button class="tron-btn">Login</button>
-        <button class="tron-btn" style="margin-left: 10px">Sync</button>
+        <label
+          class="theme-switch"
+          for="checkbox"
+          title="Switch Light/Dark Mode"
+        >
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round">
+            <svg
+              class="icon-sun"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="5"></circle>
+              <line x1="12" y1="1" x2="12" y2="3"></line>
+              <line x1="12" y1="21" x2="12" y2="23"></line>
+              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+              <line x1="1" y1="12" x2="3" y2="12"></line>
+              <line x1="21" y1="12" x2="23" y2="12"></line>
+              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+            </svg>
+            <svg
+              class="icon-moon"
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+            </svg>
+          </div>
+        </label>
       </div>
     </header>
 
@@ -46,13 +98,13 @@
   <li><strong>architecture</strong>
 <ul class="nav-list">
   <li><a href="../architecture/overview.html" class="active">overview</a></li>
-  <li><a href="../architecture/overview_md.html">overview_md</a></li>
+  <li><a href="../architecture/overview_md.html">overview md</a></li>
 </ul>
   </li>
   <li><strong>howtos</strong>
 <ul class="nav-list">
-  <li><a href="../howtos/github_action.html">github_action</a></li>
-  <li><a href="../howtos/static_website.html">static_website</a></li>
+  <li><a href="../howtos/github_action.html">github action</a></li>
+  <li><a href="../howtos/static_website.html">static website</a></li>
 </ul>
   </li>
   <li><strong>screenshots</strong>
@@ -112,6 +164,9 @@
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <hr>
 <h2>Architecture Overview</h2>
+
+<p>das ist der base_path: https://zheng-bote.github.io/gha_ghpages/</p>
+
 <ul>
 <li>Version: 1.x.x</li>
 <li>Language: C++23</li>
@@ -136,11 +191,11 @@
 </ul>
 <h2>High-Level Architecture</h2>
 <p>The system operates on a linear Pipeline Pattern. It takes three primary inputs (Configuration, Content, Template) and produces a directory of static HTML files.</p>
-<img src="../assets/img/high-level-architecture_pipeline-pattern.png" alt="Pipeline">
+<img src="https://zheng-bote.github.io/gha_ghpages/assets/img/high-level-architecture_pipeline-pattern.png" alt="Pipeline">
 <h2>Core Workflow</h2>
 <p>The main() function orchestrates the lifecycle of the generation process.</p>
 <p>Execution Flow Diagram</p>
-<img src="../assets/img/high-level-architecture_execution-flow.png" alt="Execution Flow">
+<img src="https://zheng-bote.github.io/gha_ghpages/assets/img/high-level-architecture_execution-flow.png" alt="Execution Flow">
 <h2>Component Design</h2>
 <p>The application is structured around data-driven components.</p>
 <h3>Data Structures</h3>
@@ -314,11 +369,19 @@ see <code>CMakeLists.txt</code> for more details</p>
 </main>
 
     <footer class="footer">
-      <div class="footer-section_left">SOURCE: MCP_v2</div>
+      <div class="footer-section_left">v0.12.0</div>
       <div class="footer-section_center">&copy; 2026 ZHENG ROBERT</div>
-      <div class="footer-section_right">CLEARANCE_LEVEL: 5</div>
+      <div class="footer-section_right">
+        <a
+          href="https://github.com/Zheng-Bote/cake-planner-frontends/"
+          alt="GitHub"
+          title="GitHub"
+        >
+          &lt;/&gt;</a
+        >
+      </div>
     </footer>
 
-    <script src="../assets/js/main.js" defer></script>
+    <script src="https://zheng-bote.github.io/gha_ghpages/assets/js/main.js" defer></script>
   </body>
 </html>
