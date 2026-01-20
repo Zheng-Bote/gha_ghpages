@@ -6,11 +6,13 @@ This action allows you to build and generate a static website from your Markdown
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
-- [Inputs](#inputs)
-- [Example Workflow](#example-workflow)
-- [Prerequisites](#prerequisites)
+- [How To Use GH Docs Bot Action](#how-to-use-gh-docs-bot-action)
+  - [Inputs](#inputs)
+  - [Example Workflow](#example-workflow)
+  - [Prerequisites](#prerequisites)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -18,12 +20,13 @@ This action allows you to build and generate a static website from your Markdown
 
 ## Inputs
 
-| Input      | Description                                              | Default                       | Required |
-| :--------- | :------------------------------------------------------- | :---------------------------- | :------- |
-| `template` | Path to the HTML template file to use for the site.      | `theme/desktop/template.html` | No       |
-| `assets`   | Path to the assets directory to use for the site.        | `theme/blue/assets`           | No       |
-| `output`   | Directory where the generated HTML files will be placed. | `public`                      | No       |
-| `docs`     | Directory containing your source Markdown files.         | `docs`                        | No       |
+| Input       | Description                                              | Default                                     | Required |
+| :---------- | :------------------------------------------------------- | :------------------------------------------ | :------- |
+| `template`  | Path to the HTML template file to use for the site.      | `theme/desktop/template.html`               | No       |
+| `assets`    | Path to the assets directory to use for the site.        | `theme/blue/assets`                         | No       |
+| `output`    | Directory where the generated HTML files will be placed. | `public`                                    | No       |
+| `docs`      | Directory containing your source Markdown / HTM files.   | `docs`                                      | No       |
+| `base_path` | Base path for the generated site                         | `https://zheng-bote.github.io/gha_ghpages/` | No       |
 
 ## Example Workflow
 
