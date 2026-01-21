@@ -2,23 +2,23 @@
  * SPDX-License-Identifier: MIT
  * Author: Robert Zheng
  * Copyright (c) 2026 ZHENG Robert
- * Version: 2.2.1
- * Description: Static Site Generator (Version 16 - Auto TOC Generation)
+ * Version: 2.1.0
+ * Date: 2026-01-21
+ * Description: Static Site Generator (Version 15 - Base Path only for Template
+ * Variable)
  */
 
 /**
  * Compile:
- * g++ -std=c++23 -o ssg main.cpp -lmd4c-html -lmd4c
+ * g++ -std=c++23 -o ssg main15.cpp -lmd4c-html -lmd4c
  */
 
 #include <algorithm>
-#include <cctype>
 #include <filesystem>
 #include <format>
 #include <fstream>
 #include <iostream>
 #include <ranges>
-#include <regex>
 #include <string>
 #include <vector>
 
@@ -39,8 +39,7 @@ struct Config {
   fs::path templatePath;
   fs::path outputDir = "output_site";
   fs::path assetsPath;
-  std::string customBasePath;
-  bool generateTOC = false; // NEU: TOC Aktivierung
+  std::string customBasePath; // Optionaler Base Path aus Config
 };
 
 struct DirNode {
@@ -48,12 +47,6 @@ struct DirNode {
   std::string dirName;          ///< Name of the directory.
   std::vector<fs::path> files;  ///< List of files in this directory.
   std::vector<DirNode> subdirs; ///< List of subdirectories.
-};
-
-struct TocEntry {
-  int level;
-  std::string text;
-  std::string id;
 };
 
 // --- Helpers ---
@@ -74,158 +67,6 @@ void writeFile(const fs::path &path, std::string_view content) {
     throw std::runtime_error(
         std::format("Could not write file: {}", path.string()));
   out << content;
-}
-
-// --- Helper: Slugify for IDs ---
-std::string slugify(const std::string &text) {
-  std::string slug;
-  for (char c : text) {
-    if (std::isalnum(c)) {
-      slug += std::tolower(c);
-    } else if (c == ' ' || c == '-') {
-      if (!slug.empty() && slug.back() != '-') {
-        slug += '-';
-      }
-    }
-  }
-  // Trim trailing dashes
-  while (!slug.empty() && slug.back() == '-') {
-    slug.pop_back();
-  }
-  return slug.empty() ? "section" : slug;
-}
-
-// --- TOC Logic ---
-
-// --- TOC Logic ---
-
-std::string injectTOC(std::string htmlContent) {
-  // 1. Check for placeholders
-  const std::string startMarker = "<!-- START doctoc generated TOC please keep "
-                                  "comment here to allow auto update -->";
-  const std::string endMarker = "<!-- END doctoc generated TOC please keep "
-                                "comment here to allow auto update -->";
-
-  // Quick check if markers exist before doing expensive regex
-  if (htmlContent.find(startMarker) == std::string::npos ||
-      htmlContent.find(endMarker) == std::string::npos) {
-    return htmlContent;
-  }
-
-  // 2. Scan Headers, Generate IDs, and Rebuild Content (SINGLE PASS)
-  std::regex headerRegex(R"(<h([2-4])([^>]*)>(.*?)</h\1>)",
-                         std::regex_constants::icase);
-  std::regex idRegex(R"(id=["']([^"']*)["'])", std::regex_constants::icase);
-
-  std::vector<TocEntry> tocEntries;
-  std::string processedHtml;
-  // Pre-allocate memory to avoid reallocations (heuristic)
-  processedHtml.reserve(htmlContent.size() + 1024);
-
-  auto words_begin =
-      std::sregex_iterator(htmlContent.begin(), htmlContent.end(), headerRegex);
-  auto words_end = std::sregex_iterator();
-
-  size_t lastPos = 0;
-
-  // Iteriere NUR EINMAL über alle Treffer
-  for (std::sregex_iterator i = words_begin; i != words_end; ++i) {
-    std::smatch match = *i;
-
-    // 1. Text VOR dem aktuellen Header unverändert übernehmen
-    // match.position() gibt den Index des Starts des aktuellen Headers zurück
-    processedHtml.append(htmlContent, lastPos, match.position() - lastPos);
-
-    // Update lastPos auf das Ende dieses Headers
-    lastPos = match.position() + match.length();
-
-    // 2. Header analysieren
-    int level = std::stoi(match[1].str());
-    std::string attrs = match[2].str();
-    std::string text = match[3].str();
-
-    // TOC-Überschrift selbst ignorieren
-    if (text == "Table of Contents") {
-      processedHtml.append(match.str()); // Header unverändert übernehmen
-      continue;
-    }
-
-    std::string id;
-    std::string newAttrs = attrs;
-
-    // Checken ob ID existiert
-    std::smatch idMatch;
-    if (std::regex_search(attrs, idMatch, idRegex)) {
-      id = idMatch[1].str();
-    } else {
-      // ID generieren und einfügen
-      id = slugify(text);
-      newAttrs += std::format(" id=\"{}\"", id);
-    }
-
-    // Zur TOC Liste hinzufügen
-    tocEntries.push_back({level, text, id});
-
-    // Modifizierten Header (mit ID) in den HTML String schreiben
-    processedHtml.append(
-        std::format("<h{}{}>{}</h{}>", level, newAttrs, text, level));
-  }
-
-  // Den Rest der Datei (nach dem letzten Header) anhängen
-  processedHtml.append(htmlContent, lastPos, std::string::npos);
-
-  // Falls keine TOC Einträge gefunden wurden (aber Marker da waren), original
-  // zurückgeben
-  if (tocEntries.empty()) {
-    return htmlContent;
-  }
-
-  // 3. Build TOC HTML
-  std::string tocHtml = "<h2>Table of Contents</h2>\n";
-
-  // Starte logisch bei Level 2 (da wir h2-h4 scannen)
-  int currentLevel = 2;
-  tocHtml += "<ul class=\"toc-level-2\">\n";
-
-  for (const auto &entry : tocEntries) {
-    if (entry.level > currentLevel) {
-      while (entry.level > currentLevel) {
-        tocHtml +=
-            std::format("<ul class=\"toc-level-{}\">\n", currentLevel + 1);
-        currentLevel++;
-      }
-    } else if (entry.level < currentLevel) {
-      while (entry.level < currentLevel) {
-        tocHtml += "</ul>\n";
-        currentLevel--;
-      }
-    }
-
-    tocHtml +=
-        std::format("<li><a href=\"#{}\">{}</a></li>\n", entry.id, entry.text);
-  }
-
-  // Schließe offene Listen
-  while (currentLevel > 2) {
-    tocHtml += "</ul>\n";
-    currentLevel--;
-  }
-  tocHtml += "</ul>\n";
-
-  // 4. Inject TOC into placeholders in the PROCESSED HTML
-  // Wichtig: Wir suchen die Marker jetzt im neu gebauten String (processedHtml)
-  size_t startPos = processedHtml.find(startMarker);
-  size_t endPos = processedHtml.find(endMarker);
-
-  if (startPos != std::string::npos && endPos != std::string::npos &&
-      endPos > startPos) {
-    size_t replacementStart = startPos + startMarker.length();
-    // Wir ersetzen alles ZWISCHEN Start- und End-Marker mit der TOC
-    processedHtml.replace(replacementStart, endPos - replacementStart,
-                          "\n" + tocHtml + "\n");
-  }
-
-  return processedHtml;
 }
 
 // --- Asset Management ---
@@ -293,8 +134,6 @@ Config parseConfig(const fs::path &configPath) {
         cfg.assetsPath = value;
       else if (key == "base_path")
         cfg.customBasePath = value;
-      else if (key == "toc")
-        cfg.generateTOC = (value == "true"); // NEU
     }
   }
   return cfg;
@@ -364,6 +203,8 @@ void generateNavHtml(const DirNode &currentNode, std::string &html,
   if (!isRoot) {
     for (const auto &file : currentNode.files) {
       std::string nameNoExt = file.stem().string();
+
+      // Unterstriche durch Leerzeichen ersetzen
       std::ranges::replace(nameNoExt, '_', ' ');
 
       fs::path targetFile = getTargetFilename(file);
@@ -402,7 +243,13 @@ void processFiles(const DirNode &currentNode, const DirNode &rootNode,
     fs::path outputPath = currentOutputDir / targetFilename;
     fs::path currentActiveFile = currentNode.relativePath / targetFilename;
 
+    // --- Pfad-Logik Trennung ---
+
+    // 1. Navigation bleibt IMMER relativ (damit Links funktionieren)
     std::string navBasePath = backPrefix;
+
+    // 2. Template Variable {{ base_path }} (für Assets, CSS im Head)
+    // Wenn Config gesetzt -> Nimm Config. Wenn leer -> Nimm Relativ.
     std::string templateBasePath = backPrefix;
     if (!cfg.customBasePath.empty()) {
       templateBasePath = cfg.customBasePath;
@@ -411,6 +258,7 @@ void processFiles(const DirNode &currentNode, const DirNode &rootNode,
       }
     }
 
+    // Navigation generieren (nutzt navBasePath -> relativ)
     std::string navHtml;
     generateNavHtml(rootNode, navHtml, navBasePath, currentActiveFile, true);
 
@@ -418,30 +266,20 @@ void processFiles(const DirNode &currentNode, const DirNode &rootNode,
     std::string contentToInject;
     std::string ext = file.extension().string();
 
+    // JSON Daten vorbereiten
     json data;
-    data["base_path"] = templateBasePath;
+    data["base_path"] = templateBasePath; // <-- Hier kommt der absolute (oder
+                                          // relative) Pfad rein
     data["title"] = file.stem().string();
     data["navigation"] = navHtml;
 
-    // --- Content Transformation ---
+    // Content verarbeiten
     if (ext == ".md") {
-      // 1. Markdown -> HTML
       contentToInject = renderMarkdown(rawContent);
-
-      // 2. NEU: TOC Injection (falls aktiviert)
-      if (cfg.generateTOC) {
-        contentToInject = injectTOC(contentToInject);
-      }
-
     } else if (ext == ".htm") {
       try {
+        // Auch im HTM-Fragment wird {{ base_path }} ersetzt (z.B. für Bilder)
         contentToInject = env.render(rawContent, data);
-
-        // 2. NEU: Auch für HTM TOC möglich, sofern Kommentare drin sind
-        if (cfg.generateTOC) {
-          contentToInject = injectTOC(contentToInject);
-        }
-
       } catch (const std::exception &e) {
         std::cerr << "Warning: Failed to render fragment " << file.string()
                   << ": " << e.what() << std::endl;

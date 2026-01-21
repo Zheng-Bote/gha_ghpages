@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.23)
 # cmake --build build -j$(nproc)  --target gh_docs_bot
 
 project(gh_docs_bot
-    VERSION 1.9.0
+    VERSION 2.2.1
     DESCRIPTION "Static Site Generator"
     HOMEPAGE_URL "https://github.com/Zheng-Bote/gh-docs-bot"
     LANGUAGES CXX)
