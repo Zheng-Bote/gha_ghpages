@@ -1,0 +1,40 @@
+name: Generate CycloneDX SBOM (C++)
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  sbom:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install cdxgen and atom
+        run: |
+          npm install -g @cyclonedx/cdxgen
+          npm install -g @anchore/atom || true
+
+      - name: Generate CycloneDX SBOM (C++)
+        run: |
+          cdxgen \
+            --language cpp \
+            --spec-version 1.5 \
+            --output cyclonedx.json \
+            --include "include/**/*.hpp" \
+            --include "src/**/*.cpp"
+
+      - name: Upload SBOM artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cyclonedx-sbom
+          path: cyclonedx.json
