@@ -2,8 +2,8 @@ name: Manual gh_docs_bot Build
 
 # Author: Robert Zheng
 # created: 2026-01-12
-# updated: 2026-01-21
-# version: 2.1.0
+# updated: 2026-02-01
+# version: 2.2.0
 # description: build and generate static website from markdown files to branch gh-pages
 
 run-name: Manual gh_docs_bot Build by ${{ github.actor }}
@@ -25,8 +25,8 @@ jobs:
       - name: Build and Generate Site
         uses: ./
         with:
-          template: "theme/desktop/template.html"
-          assets: "theme/blue/assets"
+          template: "theme/desktop/fluid_template.html"
+          assets: "theme/fluid/assets"
           output: "public"
           docs: "docs"
           base_path: "https://zheng-bote.github.io/gha_ghpages/"
