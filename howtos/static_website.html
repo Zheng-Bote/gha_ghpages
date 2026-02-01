@@ -98,18 +98,27 @@
   <li><strong>architecture</strong>
 <ul class="nav-list">
   <li><a href="../architecture/overview.html">overview</a></li>
-  <li><a href="../architecture/overview_md.html">overview md</a></li>
+</ul>
+  </li>
+  <li><strong>build</strong>
+<ul class="nav-list">
+  <li><a href="../build/Readme.html">Readme</a></li>
 </ul>
   </li>
   <li><strong>howtos</strong>
 <ul class="nav-list">
-  <li><a href="../howtos/github_action.html">github action</a></li>
+  <li><a href="../howtos/Github_Action.html">Github Action</a></li>
   <li><a href="../howtos/static_website.html" class="active">static website</a></li>
 </ul>
   </li>
   <li><strong>screenshots</strong>
 <ul class="nav-list">
   <li><a href="../screenshots/themes.html">themes</a></li>
+</ul>
+  </li>
+  <li><strong>themes</strong>
+<ul class="nav-list">
+  <li><a href="../themes/Fluid_UI.html">Fluid UI</a></li>
 </ul>
   </li>
 </ul>
@@ -120,21 +129,27 @@
 <p>The gh_docs_bot is a custom C++ Static Site Generator (SSG) that allows you to build and generate a static website from your Markdown and HTML documentation. It encapsulates the entire build process, including dependency installation (LLVM 21, etc.), CMake configuration, and execution.</p>
 <hr>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<p><strong>Table of Contents</strong></p>
-<ul>
-<li><a href="#usage">Usage</a><ul>
+<h2>Table of Contents</h2>
+<ul class="toc-level-2">
+<li><a href="#usage">Usage</a></li>
+<ul class="toc-level-3">
 <li><a href="#inputs">Inputs</a></li>
 </ul>
-</li>
+<li><a href="#example">Example</a></li>
+<ul class="toc-level-3">
+<li><a href="#project-structure">Project Structure</a></li>
+<li><a href="#configuration">Configuration</a></li>
+<li><a href="#execution">Execution</a></li>
 </ul>
+</ul>
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <hr>
-<h1>Usage</h1>
+<h2 id="usage">Usage</h2>
 <p><code>Usage: build/gh_docs_bot &lt;path_to_config&gt; &lt;input_folder&gt;</code></p>
 <p><strong><em>Example</em></strong></p>
 <p><code>./gh_docs_bot /home/zb_bamboo/DEV/gh-a_cr-ghp/theme/blue/blue.cfg /home/zb_bamboo/DEV/gh-a_cr-ghp/docs</code></p>
-<h2>Inputs</h2>
+<h3 id="inputs">Inputs</h3>
 <table>
 <thead>
 <tr>
@@ -153,6 +168,84 @@
 </tr>
 </tbody>
 </table>
+<h2 id="example">Example</h2>
+<h3 id="project-structure">Project Structure</h3>
+<pre><code class="language-tree">my_project/
+|__docs/
+|   |__input_documents/
+|   |  |__architecture/
+|   |  |  |__overview.md
+|   |  |  |__components.htm
+|   |  |__howtos/
+|   |     |__static_website.htm
+|   |     |__github_action.md
+|   |__themes/
+|      |__desktop/
+|      |  |__fluid_template.html
+|      |  |__legacy_template.html
+|      |__fluid/
+|         |__stayle/
+|         |  |__config.cfg
+|         |  |__assets/
+|         |     |__css/
+|         |     |  |__fluid.css
+|         |     |  |__layout.css
+|         |     |  |__tokens.css
+|         |     |__js/
+|         |     |  |__action.js
+|         |     |__imgs/
+|         |     |  |__logo.png
+|         |     |  |__favicon.ico
+|         |__amber/
+|         |  |__config.cfg
+|         |     |__css/
+|         |     |  |__fluid.css
+|         |     |  |__layout.css
+|         |     |  |__tokens.css
+|         |     |__js/
+|         |     |  |__action.js
+|         |     |__imgs/
+|         |     |  |__logo.png
+|         |     |  |__favicon.ico
+|__dist/
+   |__website/
+|     |__architecture/
+|     |  |__overview.html
+|     |  |__components.html
+|     |__howtos/
+|     |  |__static_website.html
+|     |  |__github_action.html
+|     |__assets/
+|        |__css/
+|        |  |__fluid.css
+|        |  |__layout.css
+|        |  |__tokens.css
+|        |__js/
+|        |  |__action.js
+|        |__imgs/
+|        |  |__logo.png
+|        |  |__favicon.ico
+</code></pre>
+<h3 id="configuration">Configuration</h3>
+<p><code>docs/themes/fluid/stayle/config.cfg</code></p>
+<pre><code class="language-ini"># Path to the HTML layout file
+template=docs/themes/desktop/fluid_template.html
+
+# Folder containing CSS/Images/JS to be copied
+assets=docs/themes/fluid/stayle/assets
+
+# Target output directory for the website
+output=dist/website
+
+# Base path for the website
+base_path=https://zheng-bote.github.io/gha_ghpages/
+
+# Enable table of contents
+toc=true
+</code></pre>
+<h3 id="execution">Execution</h3>
+<pre><code class="language-bash">./build/gh_docs_bot docs/themes/fluid/stayle/config.cfg docs/input_documents
+</code></pre>
 </main>
 
     <footer class="footer">

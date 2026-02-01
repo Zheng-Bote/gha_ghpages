@@ -98,18 +98,27 @@
   <li><strong>architecture</strong>
 <ul class="nav-list">
   <li><a href="architecture/overview.html">overview</a></li>
-  <li><a href="architecture/overview_md.html">overview md</a></li>
+</ul>
+  </li>
+  <li><strong>build</strong>
+<ul class="nav-list">
+  <li><a href="build/Readme.html">Readme</a></li>
 </ul>
   </li>
   <li><strong>howtos</strong>
 <ul class="nav-list">
-  <li><a href="howtos/github_action.html">github action</a></li>
+  <li><a href="howtos/Github_Action.html">Github Action</a></li>
   <li><a href="howtos/static_website.html">static website</a></li>
 </ul>
   </li>
   <li><strong>screenshots</strong>
 <ul class="nav-list">
   <li><a href="screenshots/themes.html">themes</a></li>
+</ul>
+  </li>
+  <li><strong>themes</strong>
+<ul class="nav-list">
+  <li><a href="themes/Fluid_UI.html">Fluid UI</a></li>
 </ul>
   </li>
 </ul>
@@ -123,34 +132,26 @@
 <p><strong>gh_docs_bot</strong> is a high-performance, custom C++ Static Site Generator (SSG) packaged as a reusable GitHub Action. It is designed to automatically build and deploy static documentation websites from Markdown files directly within your GitHub workflows.</p>
 <hr>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<p><strong>Table of Contents</strong></p>
-<ul>
-<li><a href="#description">Description</a><ul>
-<li><a href="#-features">🚀 Features</a></li>
-<li><a href="#-usage">📦 Usage</a><ul>
+<h2>Table of Contents</h2>
+<ul class="toc-level-2">
+<li><a href="#features">🚀 Features</a></li>
+<li><a href="#usage">📦 Usage</a></li>
+<ul class="toc-level-3">
 <li><a href="#quick-start">Quick Start</a></li>
 </ul>
-</li>
-<li><a href="#-documentation">📚 Documentation</a><ul>
+<li><a href="#documentation">📚 Documentation</a></li>
+<ul class="toc-level-3">
 <li><a href="#screenshoots">Screenshoots</a></li>
 </ul>
-</li>
-</ul>
-</li>
-<li><a href="#-license">📄 License</a></li>
-<li><a href="#-contributing">🤝 Contributing</a></li>
-<li><a href="#-author">👤 Author</a><ul>
 <li><a href="#code-contributors">Code Contributors</a></li>
 </ul>
-</li>
-</ul>
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <hr>
 <h1>Description</h1>
 <p>Github Action for building and deploying static documentation websites from Markdown files directly within your GitHub workflows.</p>
 <p>A lightweight, high-performance Static Site Generator that converts a directory of Markdown files into a static HTML website. It features recursive directory scanning, automatic navigation generation, modern templating and automated asset management.</p>
-<h2>🚀 Features</h2>
+<h2 id="features">🚀 Features</h2>
 <ul>
 <li><strong>High Performance</strong>: Built with <strong>C++23</strong>, utilizing <code>md4c</code> for ultra-fast Markdown processing.</li>
 <li><strong>Zero-Config Bundle</strong>: The GitHub Action handles all dependencies, including <strong>LLVM 21</strong>, <strong>CMake</strong>, and <strong>Ninja</strong>.</li>
@@ -158,9 +159,9 @@
 <li><strong>GitHub Pages Ready</strong>: Optimized for deploying directly to <code>gh-pages</code>.</li>
 <li><strong>Security Focused</strong>: Includes built-in SBOM generation and security slices (via CDXGen/Atom integration in the repo).</li>
 </ul>
-<h2>📦 Usage</h2>
+<h2 id="usage">📦 Usage</h2>
 <p>You can use this action in your own workflows to build your documentation site. It will compile the generator from source (ensuring the latest version) and run it against your documentation folder.</p>
-<h3>Quick Start</h3>
+<h3 id="quick-start">Quick Start</h3>
 <p>Add the following step to your <code>.github/workflows/deploy.yml</code>:</p>
 <pre><code class="language-yaml">- name: Build and Generate Site
   uses: Zheng-Bote/gha_ghpages@main
@@ -174,9 +175,9 @@
 <p>[!TIP]
 <em>see themes folder for examples</em></p>
 </blockquote>
-<h2>📚 Documentation</h2>
+<h2 id="documentation">📚 Documentation</h2>
 <p>For a comprehensive guide on how to configure inputs, set up your repository structure, and a full workflow example, please read our <strong><a href="docs/howtos/index.md">How-To Guide</a></strong> or the <strong><a href="https://zheng-bote.github.io/gha_ghpages/">GitHub Pages: Documentation</a></strong>.</p>
-<h3>Screenshoots</h3>
+<h3 id="screenshoots">Screenshoots</h3>
 <p><img src="assets/img/themes.png" alt="Themes"></p>
 <blockquote>
 <p>[!NOTE]
@@ -198,7 +199,7 @@
 </ol>
 <h1>👤 Author</h1>
 <p><a href="https://www.github.com/Zheng-Bote"><img src="https://img.shields.io/badge/Github-Zheng_Robert-black?logo=github" alt="Zheng Robert - Core Development"></a></p>
-<h2>Code Contributors</h2>
+<h2 id="code-contributors">Code Contributors</h2>
 <p><img src="https://img.shields.io/github/contributors/Zheng-Bote/gha_ghpages?color=dark-green" alt="Contributors"></p>
 <hr>
 <p>(<a href="#top">back to top</a>)</p>

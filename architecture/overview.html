@@ -98,18 +98,27 @@
   <li><strong>architecture</strong>
 <ul class="nav-list">
   <li><a href="../architecture/overview.html" class="active">overview</a></li>
-  <li><a href="../architecture/overview_md.html">overview md</a></li>
+</ul>
+  </li>
+  <li><strong>build</strong>
+<ul class="nav-list">
+  <li><a href="../build/Readme.html">Readme</a></li>
 </ul>
   </li>
   <li><strong>howtos</strong>
 <ul class="nav-list">
-  <li><a href="../howtos/github_action.html">github action</a></li>
+  <li><a href="../howtos/Github_Action.html">Github Action</a></li>
   <li><a href="../howtos/static_website.html">static website</a></li>
 </ul>
   </li>
   <li><strong>screenshots</strong>
 <ul class="nav-list">
   <li><a href="../screenshots/themes.html">themes</a></li>
+</ul>
+  </li>
+  <li><strong>themes</strong>
+<ul class="nav-list">
+  <li><a href="../themes/Fluid_UI.html">Fluid UI</a></li>
 </ul>
   </li>
 </ul>
@@ -120,50 +129,47 @@
 <p>comprehensive architecture documentation for the GHP Static Site Generator (v1.x.x). It includes high-level concepts, data flow, internal components, and diagrams using Mermaid syntax (standard for GitHub Markdown).</p>
 <hr>
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<p><strong>Table of Contents</strong></p>
-<ul>
-<li><a href="#ghp-static-site-generator---architecture--design">GHP Static Site Generator - Architecture &amp; Design</a><ul>
+<h2>Table of Contents</h2>
+<ul class="toc-level-2">
 <li><a href="#architecture-overview">Architecture Overview</a></li>
-<li><a href="#system-overview">System Overview</a><ul>
+<li><a href="#system-overview">System Overview</a></li>
+<ul class="toc-level-3">
 <li><a href="#key-features">Key Features</a></li>
 </ul>
-</li>
 <li><a href="#high-level-architecture">High-Level Architecture</a></li>
 <li><a href="#core-workflow">Core Workflow</a></li>
-<li><a href="#component-design">Component Design</a><ul>
+<li><a href="#component-design">Component Design</a></li>
+<ul class="toc-level-3">
 <li><a href="#data-structures">Data Structures</a></li>
-<li><a href="#key-logic-units">Key Logic Units</a><ul>
+<li><a href="#key-logic-units">Key Logic Units</a></li>
+<ul class="toc-level-4">
 <li><a href="#tree-builder-buildtree">Tree Builder (buildTree)</a></li>
 <li><a href="#navigation-generator-generatenavhtml">Navigation Generator (generateNavHtml)</a></li>
 <li><a href="#content-processor">Content Processor</a></li>
 <li><a href="#template-injection-inja">Template Injection (Inja)</a></li>
 </ul>
-</li>
 </ul>
-</li>
-<li><a href="#file-system-structure">File System Structure</a><ul>
+<li><a href="#file-system-structure">File System Structure</a></li>
+<ul class="toc-level-3">
 <li><a href="#input-structure-example">Input Structure (Example)</a></li>
 <li><a href="#design-structure-example">Design Structure (Example)</a></li>
 <li><a href="#output-structure-example">Output Structure (Example)</a></li>
 </ul>
-</li>
-<li><a href="#dependencies--libraries">Dependencies &amp; Libraries</a></li>
+<li><a href="#dependencies-amp-libraries">Dependencies &amp; Libraries</a></li>
 <li><a href="#configuration-reference">Configuration Reference</a></li>
-<li><a href="#build--deployment">Build &amp; Deployment</a><ul>
+<li><a href="#build-amp-deployment">Build &amp; Deployment</a></li>
+<ul class="toc-level-3">
 <li><a href="#compilation">Compilation</a></li>
-<li><a href="#execution">Execution</a><ul>
+<li><a href="#execution">Execution</a></li>
+<ul class="toc-level-4">
 <li><a href="#inputs">Inputs</a></li>
 </ul>
-</li>
 </ul>
-</li>
 </ul>
-</li>
-</ul>
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <hr>
-<h2>Architecture Overview</h2>
+<h2 id="architecture-overview">Architecture Overview</h2>
 
 <p>das ist der base_path: https://zheng-bote.github.io/gha_ghpages/</p>
 
@@ -174,9 +180,9 @@
 <li>command line tool</li>
 <li>Platform: Linux, macOS</li>
 </ul>
-<h2>System Overview</h2>
+<h2 id="system-overview">System Overview</h2>
 <p>The GHP Static Site Generator is a high-performance console application designed to convert a recursive directory structure of content files into a fully navigational static HTML website. It supports Markdown (.md) for content authoring and raw HTML fragments (.htm) for custom layouts, wrapping them into a customizable Inja template.</p>
-<h3>Key Features</h3>
+<h3 id="key-features">Key Features</h3>
 <ul>
 <li><strong>Recursive Scanning</strong>: Maps arbitrary folder depths.</li>
 <li><strong>Hybrid Parsing</strong>:<ul>
@@ -189,16 +195,16 @@
 <li><strong>Asset Management</strong>: Automatically copies theme assets (CSS, JS, Images) from a configured source.</li>
 <li><strong>Templating</strong>: Uses Inja for variable substitution (Title, Navigation, Content, Base Path).</li>
 </ul>
-<h2>High-Level Architecture</h2>
+<h2 id="high-level-architecture">High-Level Architecture</h2>
 <p>The system operates on a linear Pipeline Pattern. It takes three primary inputs (Configuration, Content, Template) and produces a directory of static HTML files.</p>
-<img src="https://zheng-bote.github.io/gha_ghpages/assets/img/high-level-architecture_pipeline-pattern.png" alt="Pipeline">
-<h2>Core Workflow</h2>
+<img src="https://zheng-bote.github.io/gha_ghpages/assets/img_tmp/high-level-architecture_pipeline-pattern.png" alt="Pipeline">
+<h2 id="core-workflow">Core Workflow</h2>
 <p>The main() function orchestrates the lifecycle of the generation process.</p>
 <p>Execution Flow Diagram</p>
-<img src="https://zheng-bote.github.io/gha_ghpages/assets/img/high-level-architecture_execution-flow.png" alt="Execution Flow">
-<h2>Component Design</h2>
+<img src="https://zheng-bote.github.io/gha_ghpages/assets/img_tmp/high-level-architecture_execution-flow.png" alt="Execution Flow">
+<h2 id="component-design">Component Design</h2>
 <p>The application is structured around data-driven components.</p>
-<h3>Data Structures</h3>
+<h3 id="data-structures">Data Structures</h3>
 <p><strong>DirNode (The File Tree)</strong></p>
 <p>Represents the recursive file system structure in memory.</p>
 <pre><code class="language-C++">struct DirNode {
@@ -216,8 +222,8 @@
   fs::path assetsPath;   // Source assets folder (images/css)
 };
 </code></pre>
-<h3>Key Logic Units</h3>
-<h4>Tree Builder (buildTree)</h4>
+<h3 id="key-logic-units">Key Logic Units</h3>
+<h4 id="tree-builder-buildtree">Tree Builder (buildTree)</h4>
 <p><strong>Role:</strong> Scans the input directory.</p>
 <p><strong>Filters:</strong></p>
 <ul>
@@ -226,7 +232,7 @@
 <li>Only accepts .md and .htm files.</li>
 </ul>
 <p><strong>Sorting:</strong> Sorts directories and files alphabetically for consistent navigation order.</p>
-<h4>Navigation Generator (generateNavHtml)</h4>
+<h4 id="navigation-generator-generatenavhtml">Navigation Generator (generateNavHtml)</h4>
 <p><strong>Role:</strong> Creates the HTML <ul><li> structure for the sidebar.</p>
 <p><strong>Logic:</strong></p>
 <ul>
@@ -235,12 +241,12 @@
 <li><strong>Active State:</strong> Compares the current file path with the link target to add class=&quot;active&quot; for CSS highlighting.</li>
 <li><strong>Hierarchy:</strong> Renders folders as <strong>DirectoryName</strong> and nests files inside.</li>
 </ul>
-<h4>Content Processor</h4>
+<h4 id="content-processor">Content Processor</h4>
 <ul>
 <li><strong>Markdown:</strong> Uses md4c-html to convert Markdown text into safe HTML.</li>
 <li><strong>HTML Fragments:</strong> .htm files are read as plain text and injected directly. This allows specific pages to use complex HTML layouts (grids, cards) that Markdown cannot express.</li>
 </ul>
-<h4>Template Injection (Inja)</h4>
+<h4 id="template-injection-inja">Template Injection (Inja)</h4>
 <p>Merges the processed data into the HTML skeleton.</p>
 <p><strong>JSON Context Data:</strong></p>
 <ul>
@@ -249,8 +255,8 @@
 <li>navigation: The generated sidebar HTML string.</li>
 <li>content: The converted page body.</li>
 </ul>
-<h2>File System Structure</h2>
-<h3>Input Structure (Example)</h3>
+<h2 id="file-system-structure">File System Structure</h2>
+<h3 id="input-structure-example">Input Structure (Example)</h3>
 <pre><code class="language-bash">docs/
 ├── architecture
 │   └── overview.md
@@ -261,7 +267,7 @@
 └── screenshots
     └── themes.htm
 </code></pre>
-<h3>Design Structure (Example)</h3>
+<h3 id="design-structure-example">Design Structure (Example)</h3>
 <pre><code class="language-bash">theme/blue/
 ├── assets
 │   ├── css
@@ -280,7 +286,7 @@
 ├── assets copy
 └── blue.cfg
 </code></pre>
-<h3>Output Structure (Example)</h3>
+<h3 id="output-structure-example">Output Structure (Example)</h3>
 <pre><code class="language-bash">/dist/
 ├── architecture
 │   └── overview.html
@@ -291,7 +297,7 @@
 └── screenshots
     └── themes.html
 </code></pre>
-<h2>Dependencies &amp; Libraries</h2>
+<h2 id="dependencies-amp-libraries">Dependencies &amp; Libraries</h2>
 <table>
 <thead>
 <tr>
@@ -323,18 +329,25 @@
 </tr>
 </tbody>
 </table>
-<h2>Configuration Reference</h2>
-<pre><code class="language-ini"># Path to the HTML layout file
-template=/path/to/theme/template.html
+<h2 id="configuration-reference">Configuration Reference</h2>
+<pre><code class="language-ini">
+# Path to the HTML layout file
+template=/path/to/theme/desktop/fluid_template.html
 
-# Folder containing CSS/Images to be copied
-assets=/path/to/theme/assets
+# Folder containing CSS/Images/JS to be copied
+assets=/path/to/theme/fluid/assets
 
 # Target directory for the website
 output=/path/to/dist
+
+# Base path for the website
+base_path=https://zheng-bote.github.io/gha_ghpages/
+
+# Enable table of contents
+toc=true
 </code></pre>
-<h2>Build &amp; Deployment</h2>
-<h3>Compilation</h3>
+<h2 id="build-amp-deployment">Build &amp; Deployment</h2>
+<h3 id="compilation">Compilation</h3>
 <p>Requires a C++23 compliant compiler (GCC/Clang) and the linked libraries.</p>
 <p><em>Linux Example:</em></p>
 <pre><code class="language-bash">g++ -std=c++23 -o ssg main.cpp -lmd4c-html -lmd4c
@@ -343,11 +356,11 @@ output=/path/to/dist
 <p>![TIP]
 see <code>CMakeLists.txt</code> for more details</p>
 </blockquote>
-<h3>Execution</h3>
+<h3 id="execution">Execution</h3>
 <p><code>Usage: build/gh_docs_bot &lt;path_to_config&gt; &lt;input_folder&gt;</code></p>
 <p><strong><em>Example</em></strong></p>
 <p><code>./gh_docs_bot /home/zb_bamboo/DEV/gh-a_cr-ghp/theme/blue/blue.cfg /home/zb_bamboo/DEV/gh-a_cr-ghp/docs</code></p>
-<h4>Inputs</h4>
+<h4 id="inputs">Inputs</h4>
 <table>
 <thead>
 <tr>
