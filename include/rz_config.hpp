@@ -16,15 +16,15 @@
 namespace rz {
 namespace config {
 constexpr std::string_view PROJECT_NAME = "gh_docs_bot";
-constexpr std::string_view PROG_LONGNAME = "FileSorter for Download-Folder";
+constexpr std::string_view PROG_LONGNAME = "Static Site Generator";
 constexpr std::string_view PROJECT_DESCRIPTION = "Static Site Generator";
 
 constexpr std::string_view EXECUTABLE_NAME = "gh_docs_bot";
 
-constexpr std::string_view VERSION = "2.2.0";
+constexpr std::string_view VERSION = "2.2.1";
 constexpr std::int32_t PROJECT_VERSION_MAJOR { 2 };
 constexpr std::int32_t PROJECT_VERSION_MINOR { 2 };
-constexpr std::int32_t PROJECT_VERSION_PATCH { 0 };
+constexpr std::int32_t PROJECT_VERSION_PATCH { 1 };
 
 constexpr std::string_view PROJECT_HOMEPAGE_URL = "https://github.com/Zheng-Bote/gh-docs-bot";
 constexpr std::string_view AUTHOR = "ZHENG Bote";

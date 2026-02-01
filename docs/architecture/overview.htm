@@ -32,11 +32,11 @@
 </ul>
 <h2>High-Level Architecture</h2>
 <p>The system operates on a linear Pipeline Pattern. It takes three primary inputs (Configuration, Content, Template) and produces a directory of static HTML files.</p>
-<img src="{{base_path}}assets/img/high-level-architecture_pipeline-pattern.png" alt="Pipeline">
+<img src="{{base_path}}assets/img_tmp/high-level-architecture_pipeline-pattern.png" alt="Pipeline">
 <h2>Core Workflow</h2>
 <p>The main() function orchestrates the lifecycle of the generation process.</p>
 <p>Execution Flow Diagram</p>
-<img src="{{base_path}}assets/img/high-level-architecture_execution-flow.png" alt="Execution Flow">
+<img src="{{base_path}}assets/img_tmp/high-level-architecture_execution-flow.png" alt="Execution Flow">
 <h2>Component Design</h2>
 <p>The application is structured around data-driven components.</p>
 <h3>Data Structures</h3>
@@ -165,14 +165,21 @@
 </tbody>
 </table>
 <h2>Configuration Reference</h2>
-<pre><code class="language-ini"># Path to the HTML layout file
-template=/path/to/theme/template.html
+<pre><code class="language-ini">
+# Path to the HTML layout file
+template=/path/to/theme/desktop/fluid_template.html
 
-# Folder containing CSS/Images to be copied
-assets=/path/to/theme/assets
+# Folder containing CSS/Images/JS to be copied
+assets=/path/to/theme/fluid/assets
 
 # Target directory for the website
 output=/path/to/dist
+
+# Base path for the website
+base_path=https://zheng-bote.github.io/gha_ghpages/
+
+# Enable table of contents
+toc=true
 </code></pre>
 <h2>Build &amp; Deployment</h2>
 <h3>Compilation</h3>

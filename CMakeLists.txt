@@ -15,7 +15,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 
 # --- Configure (für rz_config.hpp) ---
 set(EXECUTABLE_NAME "${PROJECT_NAME}")
-set(PROG_LONGNAME "FileSorter for Download-Folder")
+set(PROG_LONGNAME "Static Site Generator")
 set(PROG_CREATED "2025")
 set(PROG_AUTHOR "ZHENG Bote")
 set(PROG_ORGANIZATION_NAME "ZHENG Robert")

@@ -1,0 +1,546 @@
+<!-- INTRO -->
+<section id="intro" class="section">
+  <h1>Fluid UI</h1>
+  <p class="brief">Examples</p>
+  <p>
+    Fluid UI is a lightweight, modern CSS framework based on OKLCH colors, Fluid
+    typography, utility classes and a modular layout system.
+  </p>
+</section>
+
+<hr />
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<hr />
+
+<!-- MAIN AREA -->
+<div class="layout-with-sidebar">
+  <h2>ToC (Alternative Navigation)</h2>
+  <p class="brief">Alternative Navigation with different (Mobile) Layout</p>
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <h3>Table of Contents:</h3>
+    <a href="#intro">Introduction</a>
+    <a href="#tokens">Design Tokens</a>
+    <a href="#colors">Colors</a>
+    <a href="#typography">Typography</a>
+    <a href="#layout">Layout</a>
+    <a href="#utilities">Utilities</a>
+    <a href="#components-buttons">Buttons</a>
+    <a href="#components-forms">Forms</a>
+    <a href="#components-cards">Cards</a>
+    <a href="#components-badges">Badges & Chips</a>
+    <a href="#components-tabs">Tabs</a>
+    <a href="#components-figures">Images & Figures</a>
+    <a href="#components-tables">Tables</a>
+    <a href="#examples">Examples</a>
+  </aside>
+
+  <!-- CONTENT -->
+  <main class="site-main">
+    <section id="theme-preview" class="section">
+      <h2>Theme Preview</h2>
+      <p class="brief">Examples</p>
+
+      <div class="grid grid-auto-md grid-gap-3">
+        <div class="card theme-preview-card" data-theme-preview="blue">
+          <div class="card-title">Blue</div>
+          <p>Standard Theme</p>
+        </div>
+
+        <div class="card theme-preview-card" data-theme-preview="emerald">
+          <div class="card-title">Emerald</div>
+          <p>Fresh Green</p>
+        </div>
+
+        <div class="card theme-preview-card" data-theme-preview="amber">
+          <div class="card-title">Amber</div>
+          <p>Warm & Friendly</p>
+        </div>
+
+        <div class="card theme-preview-card" data-theme-preview="berry">
+          <div class="card-title">Berry</div>
+          <p>Rose & Fruity</p>
+        </div>
+
+        <div class="card theme-preview-card" data-theme-preview="violet">
+          <div class="card-title">Violet</div>
+          <p>Rich & Elegant</p>
+        </div>
+
+        <div class="card theme-preview-card" data-theme-preview="slate">
+          <div class="card-title">Slate</div>
+          <p>Modern & Minimal</p>
+        </div>
+
+        <div class="card theme-preview-card" data-theme-preview="cyan">
+          <div class="card-title">Cyan</div>
+          <p>Modern & Clear</p>
+        </div>
+
+        <div class="card theme-preview-card" data-theme-preview="blue2">
+          <div class="card-title">Blue2</div>
+          <p>Cold Blue</p>
+        </div>
+        <div class="card theme-preview-card" data-theme-preview="matrix">
+          <div class="card-title">Matrix</div>
+          <p>Cool Green</p>
+        </div>
+        <div class="card theme-preview-card" data-theme-preview="tron">
+          <div class="card-title">Tron</div>
+          <p>Cool Cyan-Green</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TOKENS -->
+    <section id="tokens" class="section">
+      <h2>Design Tokens</h2>
+      <p>
+        All colors, spacing, radius and typography values ​​are defined as CSS
+        variables.
+      </p>
+
+      <h3>Colors</h3>
+      <div class="grid grid-auto-md grid-gap-3">
+        <div class="card">
+          <div class="card-title">Primary</div>
+          <div
+            style="
+              height: 40px;
+              border-radius: var(--radius-sm);
+              background: var(--color-primary);
+            "
+          ></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Soft</div>
+          <div
+            style="
+              height: 40px;
+              border-radius: var(--radius-sm);
+              background: var(--color-primary-soft);
+            "
+          ></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Dark</div>
+          <div
+            style="
+              height: 40px;
+              border-radius: var(--radius-sm);
+              background: var(--color-primary-dark);
+            "
+          ></div>
+        </div>
+      </div>
+
+      <h3>Radius</h3>
+      <pre><code>--radius-sm: 8px;
+--radius-md: 12px;
+--radius-lg: 18px;</code></pre>
+
+      <h3>Spacing</h3>
+      <pre><code>--space-1: 0.25rem;
+--space-2: 0.5rem;
+--space-3: 0.75rem;
+--space-4: 1rem;</code></pre>
+    </section>
+
+    <!-- COLORS -->
+    <section id="colors" class="section">
+      <h2>Colors</h2>
+      <p>Fluid UI supports Light, Dark and Auto‑Theme.</p>
+
+      <div class="grid grid-auto-md grid-gap-3">
+        <div class="card">
+          <div class="card-title">Background</div>
+          <div
+            style="
+              height: 40px;
+              background: var(--bg);
+              border-radius: var(--radius-sm);
+            "
+          ></div>
+        </div>
+        <div class="card">
+          <div class="card-title">Text</div>
+          <p>Example Text</p>
+        </div>
+        <div class="card">
+          <div class="card-title">Accent</div>
+          <div
+            style="
+              height: 40px;
+              background: var(--color-primary);
+              border-radius: var(--radius-sm);
+            "
+          ></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TYPOGRAPHY -->
+    <section id="typography" class="section">
+      <h2>Typography</h2>
+
+      <h1>H1 Example</h1>
+      <h2>H2 Example</h2>
+      <p>Standard paragraph</p>
+      >
+      <p class="text-muted">Muted Text</p>
+    </section>
+
+    <!-- LAYOUT -->
+    <section id="layout" class="section">
+      <h2>Layout</h2>
+
+      <div class="grid grid-cols-3 grid-gap-3">
+        <div class="card text-center">1</div>
+        <div class="card text-center">2</div>
+        <div class="card text-center">3</div>
+      </div>
+      <pre><code>&lt;div class="grid grid-cols-3 grid-gap-3"&gt;
+  &lt;div class="card"&gt;1&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+    </section>
+
+    <section class="section">
+      <h2>Breadcrumbs & Pagination</h2>
+
+      <section id="navigation" class="section">
+        <h2>Navigation</h2>
+
+        <div class="breadcrumb mb-3">
+          <a href="#">Home</a>
+          <span class="breadcrumb-separator">/</span>
+          <a href="#">Docs</a>
+          <span class="breadcrumb-separator">/</span>
+          <span>Components</span>
+        </div>
+
+        <div class="pagination">
+          <button class="page-btn">«</button>
+          <button class="page-btn is-active">1</button>
+          <button class="page-btn">2</button>
+          <button class="page-btn">3</button>
+          <button class="page-btn">»</button>
+        </div>
+      </section>
+    </section>
+
+    <section id="components-forms-advanced" class="section">
+      <h2>Forms – Advanced Elements</h2>
+
+      <div class="form-row">
+        <input type="checkbox" class="input-checkbox" id="chk1" />
+        <label for="chk1">Checkbox</label>
+      </div>
+
+      <div class="form-row">
+        <input type="radio" class="input-radio" id="r1" name="rgroup" />
+        <label for="r1">Option 1</label>
+      </div>
+
+      <div class="form-row">
+        <input type="radio" class="input-radio" id="r2" name="rgroup" />
+        <label for="r2">Option 2</label>
+      </div>
+
+      <div class="form-row">
+        <input type="checkbox" id="toggleDemo" class="toggle-input" />
+        <label for="toggleDemo" class="toggle">
+          <span class="toggle-knob"></span>
+        </label>
+        <span>Toggle</span>
+      </div>
+
+      <label class="field-label">Selection</label>>
+      <select class="select-control">
+        <option>Option A</option>
+        <option>Option B</option>
+        <option>Option C</option>
+      </select>
+    </section>
+
+    <!-- UTILITIES -->
+    <section id="utilities" class="section">
+      <h2>Utilities</h2>
+
+      <h3>Flex</h3>
+      <pre><code>.flex .items-center .justify-between</code></pre>
+
+      <h3>Spacing</h3>
+      <pre><code>.mb-4 .p-3 .mt-2</code></pre>
+
+      <h3>Grid</h3>
+      <pre><code>.grid .grid-auto-md .grid-gap-3</code></pre>
+    </section>
+
+    <!-- BUTTONS -->
+    <section id="components-buttons" class="section">
+      <h2>Buttons</h2>
+
+      <div class="flex gap-2">
+        <button class="btn">Default</button>
+        <button class="btn btn-primary">Primary</button>
+        <button class="btn btn-outline">Outline</button>
+        <button class="btn btn-ghost">Ghost</button>
+      </div>
+
+      <pre><code>&lt;button class="btn btn-primary"&gt;Primary&lt;/button&gt;</code></pre>
+    </section>
+
+    <!-- FORMS -->
+    <section id="components-forms" class="section">
+      <h2>Forms</h2>
+
+      <label class="field-label">E‑Mail</label>
+      <input class="field-control mb-3" placeholder="du@example.com" />
+
+      <label class="field-label">Message</label>>
+      <textarea class="field-control" rows="3"></textarea>
+    </section>
+
+    <!-- CARDS -->
+    <section id="components-cards" class="section">
+      <h2>Cards</h2>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Card Title</div>
+          <div class="card-subtitle">Meta</div>
+        </div>
+        <p>Card content.</p>
+        >
+      </div>
+    </section>
+
+    <!-- BADGES -->
+    <section id="components-badges" class="section">
+      <h2>Badges & Chips</h2>
+
+      <div class="flex gap-2">
+        <span class="badge">Badge</span>
+        <span class="badge soft">Soft</span>
+        <span class="chip">Chip</span>
+        <span class="chip active">Active</span>
+      </div>
+    </section>
+
+    <!-- TABS -->
+    <section id="components-tabs" class="section">
+      <h2>Tabs</h2>
+
+      <div class="tabs">
+        <button class="tab active">Tab 1</button>
+        <button class="tab">Tab 2</button>
+        <button class="tab">Tab 3</button>
+      </div>
+    </section>
+
+    <section id="components-accordion" class="section">
+      <h2>Accordion</h2>
+      <div class="accordion">
+        <div class="accordion-item is-open">
+          <div class="accordion-header">
+            <span>Section 1</span>
+            <span>▾</span>
+          </div>
+          <div class="accordion-body">Content of Section 1.</div>
+        </div>
+        <div class="accordion-item">
+          <div class="accordion-header">
+            <span>Section 2</span>
+            <span>▾</span>
+          </div>
+          <div class="accordion-body">Content of Section 2.</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="components-toasts" class="section">
+      <h2>Toasts</h2>
+      <button class="btn btn-primary" onclick="showToast('Saved!', 'success')">
+        Success Toast
+      </button>
+    </section>
+
+    <section id="components-tooltip" class="section">
+      <h2>Tooltip</h2>
+      <button class="btn tooltip">
+        Hover me
+        <span class="tooltip-content">I am a tooltip</span>
+      </button>
+    </section>
+
+    <!-- FIGURES -->
+    <section id="components-figures" class="section">
+      <h2>Images & Figures</h2>
+
+      <figure>
+        <img
+          src="https://dummyimage.com/800x400/000/fff&text=Hello+World"
+          alt="Example image"
+          loading="lazy"
+        />
+        <figcaption>
+          An example image with a figcaption in Fluid Blue design.
+        </figcaption>
+      </figure>
+    </section>
+
+    <section id="components-gallery" class="section">
+      <h2>Mini-Gallery</h2>
+      <div class="gallery">
+        <figure
+          data-modal-image="https://dummyimage.com/800x400/000/fff&text=Hello+World"
+        >
+          <img
+            class="lazy-img"
+            data-src="https://dummyimage.com/800x400/000/fff&text=Hello+World"
+            alt="Bild 1"
+            loading="lazy"
+          />
+          <figcaption>Image 1 – Description</figcaption>
+        </figure>
+        <figure
+          data-modal-image="https://dummyimage.com/800x400/000/fff&text=Hello+World"
+        >
+          <img
+            class="lazy-img"
+            data-src="https://dummyimage.com/800x400/000/fff&text=Hello+World"
+            alt="Bild 2"
+            loading="lazy"
+          />
+          <figcaption>Image 2 – Description</figcaption>
+        </figure>
+        <figure
+          data-modal-image="https://dummyimage.com/800x400/000/fff&text=Hello+World"
+        >
+          <img
+            class="lazy-img"
+            data-src="https://dummyimage.com/800x400/000/fff&text=Hello+World"
+            alt="Bild 2"
+            loading="lazy"
+          />
+          <figcaption>Image 2 – Description</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Modal für Gallery -->
+    <div id="imageModal" class="modal-backdrop" aria-hidden="true">
+      <div class="modal">
+        <button
+          class="modal-close"
+          aria-label="Close"
+          onclick="closeModal('imageModal')"
+        >
+          ✕
+        </button>
+        <img id="modalImage" class="modal-image" src="" alt="" />
+        <p id="modalCaption" class="mt-2 text-muted"></p>
+      </div>
+    </div>
+
+    <!-- TABLES -->
+    <section id="components-tables" class="section">
+      <h2>Tables</h2>
+
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Role</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Anna Müller</td>
+            <td>Administrator</td>
+            <td>Active</td>
+          </tr>
+          <tr>
+            <td>Max Schmidt</td>
+            <td>Editor</td>
+            <td>Inactive</td>
+          </tr>
+          <tr>
+            <td>Lisa Weber</td>
+            <td>Viewer</td>
+            <td>Active</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <pre><code>&lt;table class="table"&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Rolle&lt;/th&gt;&lt;th&gt;Status&lt;/th&gt;&lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;&lt;td&gt;Anna&lt;/td&gt;&lt;td&gt;Admin&lt;/td&gt;&lt;td&gt;Active&lt;/td&gt;&lt;/tr&gt;;
+  &lt;/tbody&gt;
+&lt;/table&gt;</code></pre>
+    </section>
+
+    <section id="components-cards-status" class="section">
+      <h2>Card Status Variants</h2>
+
+      <div class="grid grid-auto-md grid-gap-3">
+        <div class="card card-ok">
+          <div class="card-title">OK</div>
+          <p>Everything is fine.</p>
+          >
+        </div>
+
+        <div class="card card-warning">
+          <div class="card-title">Warning</div>
+          <p>Please check.</p>
+          >
+        </div>
+
+        <div class="card card-critical">
+          <div class="card-title">Critical</div>
+          <p>Immediate action required.</p>
+          >
+        </div>
+      </div>
+    </section>
+
+    <section id="components-messages" class="section">
+      <h2>Message Boxes</h2>
+
+      <div class="success-msg">The action was successfully executed.</div>
+      <div class="info-msg">This is general information.</div>
+      <div class="warning-msg">Please check your input.</div>
+      <div class="error-msg">An error has occurred.</div>
+    </section>
+
+    <!-- EXAMPLES -->
+    <section id="examples" class="section">
+      <h2>Examples</h2>
+      <ul>
+        <li><a href="dashboard.html">Dashboard</a></li>
+        <li><a href="settings.html">Settings</a></li>
+        <li><a href="profile.html">Profile</a></li>
+      </ul>
+    </section>
+
+    <article>
+      <h2>Example Text</h2>
+      <p class="text">
+        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
+        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
+        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet
+        clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit
+        amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
+        nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat,
+        sed diam voluptua. At vero eos et accusam et justo duo dolores et ea
+        rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
+        ipsum dolor sit amet.
+      </p>
+    </article>
+  </main>
+</div>

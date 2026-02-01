@@ -6,11 +6,13 @@ This action allows you to build and generate a static website from your Markdown
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
-- [Inputs](#inputs)
-- [Example Workflow](#example-workflow)
-- [Prerequisites](#prerequisites)
+- [How To Use GH Docs Bot Action](#how-to-use-gh-docs-bot-action)
+  - [Inputs](#inputs)
+  - [Example Workflow](#example-workflow)
+  - [Prerequisites](#prerequisites)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -25,6 +27,7 @@ This action allows you to build and generate a static website from your Markdown
 | `output`    | Directory where the generated HTML files will be placed. | `public`                                    | No       |
 | `docs`      | Directory containing your source Markdown / HTM files.   | `docs`                                      | No       |
 | `base_path` | Base path for the generated site                         | `https://zheng-bote.github.io/gha_ghpages/` | No       |
+| `toc`       | Enable Table of Contents                                 | `true`                                      | No       |
 
 ## Example Workflow
 
@@ -60,10 +63,12 @@ jobs:
       - name: Build and Generate Site
         uses: Zheng-Bote/gha_ghpages@main
         with:
-          template: 'theme/desktop/template.html'
-          assets: 'theme/blue/assets'
+          template: 'theme/desktop/fluid_template.html'
+          assets: 'theme/fluid/assets'
           output: 'public'
           docs: 'docs'
+          base_path: 'https://zheng-bote.github.io/gha_ghpages/'
+          toc: true
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
