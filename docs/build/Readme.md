@@ -5,6 +5,17 @@ This document describes how to build the `gh_docs_bot` application from source a
 ---
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Prerequisites](#prerequisites)
+- [Dependencies](#dependencies)
+- [Configuration](#configuration)
+- [Build Instructions](#build-instructions)
+- [Output](#output)
+- [Usage](#usage)
+  - [Configuration](#configuration-1)
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ---
