@@ -1,0 +1,142 @@
+<h1 id="gh_docs_bot">gh_docs_bot</h1>
+<p>
+  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License" />
+  <img
+    src="https://img.shields.io/badge/platform-Github_Action-lightgrey.svg"
+    alt="Platform"
+  />
+  <a href="https://github.com/Zheng-Bote/gha_ghpages/releases"
+    ><img
+      src="https://img.shields.io/github/v/release/Zheng-Bote/gha_ghpages?logo=GitHub"
+      alt="GitHub release (latest by date)"
+  /></a>
+</p>
+<p>
+  <strong>gh_docs_bot</strong> is a high-performance, custom C++ Static Site
+  Generator (SSG) packaged as a reusable GitHub Action. It is designed to
+  automatically build and deploy static documentation websites from
+  Markdown/HTML files directly within your GitHub workflows.
+</p>
+<hr />
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<hr />
+<h2 id="description">Description</h2>
+<p>
+  Github Action for building and deploying static documentation websites from
+  Markdown/HTML files directly within your GitHub workflows.
+</p>
+<p>
+  A lightweight, high-performance Static Site Generator that converts a
+  directory of Markdown/HTML files into a static HTML website. It features
+  recursive directory scanning, automatic navigation generation, modern
+  templating and automated asset management.
+</p>
+<h2 id="features">🚀 Features</h2>
+<ul>
+  <li>
+    <strong>High Performance</strong>: Built with <strong>C++23</strong>,
+    utilizing <code>md4c</code> for ultra-fast Markdown processing.
+  </li>
+  <li>
+    <strong>Zero-Config Bundle</strong>: The GitHub Action handles all
+    dependencies, including <strong>LLVM 21</strong>, <strong>CMake</strong>,
+    and <strong>Ninja</strong>.
+  </li>
+  <li>
+    <strong>Customizable</strong>: Uses
+    <a href="https://github.com/pantor/inja">Inja</a> for flexible HTML
+    templating.
+  </li>
+  <li>
+    <strong>GitHub Pages Ready</strong>: Optimized for deploying directly to
+    <code>gh-pages</code>.
+  </li>
+  <li>
+    <strong>Security Focused</strong>: Includes built-in SBOM generation and
+    security slices (via CDXGen/Atom integration in the repo).
+  </li>
+</ul>
+<h2 id="usage">📦 Usage</h2>
+<p>
+  You can use this action in your own workflows to build your documentation
+  site. It will compile the generator from source (ensuring the latest version)
+  and run it against your documentation folder.
+</p>
+<p>
+  You can also use the Static Site Generator directly to build your
+  documentation site locally.
+</p>
+<h3 id="quick-start">Quick Start</h3>
+<p>Add the following step to your <code>.github/workflows/deploy.yml</code>:</p>
+<div class="sourceCode" id="cb1">
+  <pre
+    class="sourceCode yaml"
+  ><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Build and Generate Site</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> Zheng-Bote/gha_ghpages@main</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">with</span><span class="kw">:</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">template</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;theme/desktop/template.html&quot;</span><span class="co"> # Path to your HTML template</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">assets</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;theme/tron/assets&quot;</span><span class="co"> # Path to your assets</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;public&quot;</span><span class="co"> # Output directory</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">docs</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;docs&quot;</span><span class="co"> # Directory with Markdown (*.md) and/or HTM (*.htm) files</span></span></code></pre>
+</div>
+<blockquote>
+  <p>[!TIP] <em>see themes folder for examples</em></p>
+</blockquote>
+<h2 id="documentation">📚 Documentation</h2>
+<p>
+  For a comprehensive guide on how to configure inputs, set up your repository
+  structure, and a full workflow example, please read our
+  <strong>How-To Guides</strong>.
+</p>
+<h3 id="screenshots">Screenshots</h3>
+<figure>
+  <img src="./assets/img_tmp/themes_2.png" alt="Themes" />
+  <figcaption aria-hidden="true">Themes</figcaption>
+</figure>
+<blockquote>
+  <p>
+    [!NOTE] <em>see more screenshoots in</em>
+    <a href="https://zheng-bote.github.io/gha_ghpages/screenshots/themes.html"
+      >GitHub Pages: Documentation</a
+    >
+  </p>
+</blockquote>
+<hr />
+<h2 id="license">📄 License</h2>
+<p>Distributed under the MIT License. See LICENSE for more information.</p>
+<p>Copyright (c) 2026 ZHENG Robert</p>
+<h2 id="contributing">🤝 Contributing</h2>
+<p>
+  Contributions are welcome! Please fork the repository and create a pull
+  request.
+</p>
+<ol type="1">
+  <li>Fork the Project</li>
+  <li>Create your Feature Branch (git checkout -b feature/AmazingFeature)</li>
+  <li>Commit your Changes (git commit -m ‘Add some AmazingFeature’)</li>
+  <li>Push to the Branch (git push origin feature/AmazingFeature)</li>
+  <li>Open a Pull Request</li>
+</ol>
+<h2 id="author">👤 Author</h2>
+<p>
+  <a href="https://www.github.com/Zheng-Bote"
+    ><img
+      src="https://img.shields.io/badge/Github-Zheng_Robert-black?logo=github"
+      alt="Zheng Robert - Core Development"
+  /></a>
+</p>
+<h3 id="code-contributors">Code Contributors</h3>
+<figure>
+  <img
+    src="https://img.shields.io/github/contributors/Zheng-Bote/gha_ghpages?color=dark-green"
+    alt="Contributors"
+  />
+  <figcaption aria-hidden="true">Contributors</figcaption>
+</figure>
+
+<hr />
+
+<p>🖖</p>

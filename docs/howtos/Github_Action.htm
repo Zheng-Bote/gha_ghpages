@@ -7,20 +7,9 @@
 </p>
 <hr />
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-<p><strong>Table of Contents</strong></p>
-<ul class="incremental">
-  <li>
-    <a href="#how-to-use-gh-docs-bot-action">How To Use GH Docs Bot Action</a>
-    <ul class="incremental">
-      <li><a href="#inputs">Inputs</a></li>
-      <li><a href="#example-workflow">Example Workflow</a></li>
-      <li><a href="#prerequisites">Prerequisites</a></li>
-    </ul>
-  </li>
-</ul>
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <hr />
+
 <h2 id="inputs">Inputs</h2>
 <table class="table">
   <thead>
@@ -99,7 +88,7 @@
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># version: 1.0.0</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co"># description: build and generate static website from markdown files to branch gh-pages</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">run-name</span><span class="kw">:</span><span class="at"> Manual deploy documentation by ${{ github.actor }}</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="fu">run-name</span><span class="kw">:</span><span class="at"> Manual deploy documentation by ${ github.actor }</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">on</span><span class="kw">:</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">workflow_dispatch</span><span class="kw">:</span></span>
