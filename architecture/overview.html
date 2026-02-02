@@ -24,8 +24,12 @@
 
     <link
       rel="icon"
+      href="https://zheng-bote.github.io/gha_ghpages/assets/icons/favicon.svg"
       type="image/svg+xml"
-      href="https://zheng-bote.github.io/gha_ghpages/assets/img/favicon.svg"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://zheng-bote.github.io/gha_ghpages/assets/icons/apple-touch-icon.png"
     />
     <link rel="shortcut icon" href="https://zheng-bote.github.io/gha_ghpages/assets/img/favicon.ico" />
   </head>
@@ -38,6 +42,8 @@
           alt="Logo"
           title="Home"
           loading="eager"
+          decoding="async"
+          fetchpriority="high"
         />gh_docs_bot
       </div>
       <div class="header-center">overview</div>
@@ -57,6 +63,7 @@
         <button id="themeToggle" class="btn btn-icon btn-ghost">
           <span id="themeIcon"></span>
         </button>
+        <rz-fontsize> <rz-fontsize/>
       </div>
     </header>
 
@@ -76,6 +83,7 @@
 <ul class="nav-list">
   <li><a href="../howtos/Github_Action.html">Github Action</a></li>
   <li><a href="../howtos/static_website.html">static website</a></li>
+  <li><a href="../howtos/test.html">test</a></li>
 </ul>
   </li>
   <li><strong>screenshots</strong>
@@ -86,6 +94,7 @@
   <li><strong>themes</strong>
 <ul class="nav-list">
   <li><a href="../themes/Fluid_UI.html">Fluid UI</a></li>
+  <li><a href="../themes/Web_Components.html">Web Components</a></li>
 </ul>
   </li>
 </ul>
@@ -365,7 +374,14 @@ see <code>CMakeLists.txt</code> for more details</p>
     </button>
 
     <footer class="site-footer">
-      <div class="footer-left">gh_docs_bot v1.8.0</div>
+      <div class="footer-left">
+        <a
+          href="https://github.com/Zheng-Bote/fluid_ui"
+          alt="Link to Github"
+          title="https://github.com/Zheng-Bote/fluid_ui"
+          >Build with Fluid UI</a
+        >
+      </div>
       <div class="footer-center">
         <a
           href="https://www.robert.hase-zheng.net/"
@@ -390,7 +406,8 @@ see <code>CMakeLists.txt</code> for more details</p>
         window.location.href = "https://zheng-bote.github.io/gha_ghpages/";
       });
     </script>
-    <script>
+
+   <script>
       // Theme
       const root = document.documentElement;
       const themeToggle = document.getElementById("themeToggle");
@@ -400,18 +417,43 @@ see <code>CMakeLists.txt</code> for more details</p>
       // Reihenfolge der Modi
       const modes = ["auto", "light", "dark"];
 
-      // gespeicherte Werte laden
-      let currentTheme = localStorage.getItem("theme") || "blue";
+      // --- SVG DEFINITIONEN ---
+      // Wir definieren die Icons ausserhalb der Funktion, damit sie nur einmal erstellt werden
+      const icons = {
+        light: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="5"></circle>
+                  <line x1="12" y1="1" x2="12" y2="3"></line>
+                  <line x1="12" y1="21" x2="12" y2="23"></line>
+                  <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                  <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                  <line x1="1" y1="12" x2="3" y2="12"></line>
+                  <line x1="21" y1="12" x2="23" y2="12"></line>
+                  <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                  <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>`,
+        dark: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+               </svg>`,
+        auto: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                 <mask id="mask-half">
+                   <rect x="0" y="0" width="12" height="24" fill="white" />
+                 </mask>
+                 <circle cx="12" cy="12" r="5"></circle>
+                 <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" mask="url(#mask-half)" />
+                 <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" transform="translate(2, -2) scale(0.9)" />
+               </svg>`
+      };
+
+      // Gespeicherte Werte laden
+      let currentTheme = localStorage.getItem("theme") || "blue2";
       let currentMode = localStorage.getItem("mode") || "auto";
 
-      // Attribute setzen
+      // Theme (Farbe) initial setzen
       root.setAttribute("data-theme", currentTheme);
-      root.setAttribute("data-mode", currentMode);
 
       // Select initialisieren
       if (themeSelect) {
         themeSelect.value = currentTheme;
-
         themeSelect.addEventListener("change", () => {
           currentTheme = themeSelect.value;
           root.setAttribute("data-theme", currentTheme);
@@ -419,45 +461,67 @@ see <code>CMakeLists.txt</code> for more details</p>
         });
       }
 
-      // Icon initial setzen
-      updateThemeIcon(currentMode);
+      // --- LOGIK FÜR DARK MODE ---
 
-      // Klick → nächsten Modus aktivieren
+      function applyMode() {
+        let effectiveMode = currentMode;
+
+        // Wenn Auto gewählt ist, System abfragen
+        if (currentMode === "auto") {
+          const systemDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+          ).matches;
+          effectiveMode = systemDark ? "dark" : "light";
+        }
+
+        root.setAttribute("data-mode", effectiveMode);
+        updateThemeIcon(currentMode);
+      }
+
+      // Icon-Setter (Korrigiert: Keine Verschachtelung mehr)
+      function updateThemeIcon(mode) {
+        if (icons[mode]) {
+          themeIcon.innerHTML = icons[mode];
+        } else {
+          themeIcon.innerHTML = icons['auto']; 
+        }
+      }
+
+      // Event Listener: Klick auf den Toggle-Button
       themeToggle.addEventListener("click", () => {
         const nextIndex = (modes.indexOf(currentMode) + 1) % modes.length;
         currentMode = modes[nextIndex];
 
-        root.setAttribute("data-mode", currentMode);
         localStorage.setItem("mode", currentMode);
-
-        updateThemeIcon(currentMode);
+        applyMode();
       });
 
-      // Icon-Setter
-      function updateThemeIcon(mode) {
-        if (mode === "light") {
-          themeIcon.innerHTML = `<img src="https://zheng-bote.github.io/gha_ghpages/assets/icons/sun.svg" width="18" height="18" alt="Light">`;
-        } else if (mode === "dark") {
-          themeIcon.innerHTML = `<img src="https://zheng-bote.github.io/gha_ghpages/assets/icons/moon.svg" width="18" height="18" alt="Dark">`;
-        } else {
-          themeIcon.innerHTML = `<img src="https://zheng-bote.github.io/gha_ghpages/assets/icons/sun-moon.svg" width="18" height="18" alt="Auto">`;
-        }
-      }
+      // Event Listener: System ändert Dark Mode
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (e) => {
+          if (currentMode === "auto") {
+            applyMode();
+          }
+        });
 
-      /* --- Theme Preview Cards → Theme setzen --- */
+      // Initiale Ausführung beim Laden
+      applyMode();
+
+      /* --- Theme Preview Cards --- */
       document.querySelectorAll("[data-theme-preview]").forEach((card) => {
         card.addEventListener("click", () => {
           const theme = card.getAttribute("data-theme-preview");
           root.setAttribute("data-theme", theme);
           localStorage.setItem("theme", theme);
 
-          const themeSelect = document.getElementById("themeSelect");
           if (themeSelect) {
             themeSelect.value = theme;
           }
         });
       });
     </script>
+
     <script>
       // Utilities
       /* -- Scroll to Top Button -- */
@@ -590,5 +654,7 @@ see <code>CMakeLists.txt</code> for more details</p>
       lazyImages.forEach((img) => lazyObserver.observe(img));
       // =========================================================
     </script>
+
+    <script type="module" src="https://zheng-bote.github.io/gha_ghpages/assets/js/rz-fontsize.js"></script>
   </body>
 </html>

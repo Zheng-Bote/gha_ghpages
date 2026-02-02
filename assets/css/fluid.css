@@ -822,6 +822,101 @@ figcaption {
   opacity: 1;
 }
 
+/* =========================================================
+   TABLE OF CONTENTS (TOC)
+   Generated automatically by SSG
+   Adapted for Fluid Tokens & Themes
+   ========================================================= */
+
+/* 1. Container-Look für die Hauptliste */
+ul.toc-level-2 {
+  background: var(--bg-alt); /* Nutzt Theme-Hintergrund */
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--color-primary); /* Theme-Akzentfarbe */
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem 1rem 1rem;
+  margin: 0.5rem 0 2rem 0;
+  display: inline-block;
+  min-width: 300px;
+  max-width: 100%;
+
+  /* Fluid Shadow Token */
+  box-shadow: var(--shadow-soft);
+
+  /* Optional: Glass-Effekt für Tron/Blue2 Themes */
+  backdrop-filter: blur(5px);
+}
+
+/* 2. Reset für alle Listen-Ebenen */
+ul[class^="toc-level-"] {
+  list-style: none;
+  padding-left: 0; /* Reset padding für saubere Ausrichtung */
+}
+
+/* 3. Abstände der Listeneinträge */
+ul[class^="toc-level-"] li {
+  margin-bottom: 0.4rem;
+  line-height: 1.4;
+  position: relative;
+}
+
+/* 4. Einrückung und Guides für Unterebenen (h3, h4) */
+.toc-level-3,
+.toc-level-4 {
+  margin-top: 0.4rem;
+  margin-left: 1.2rem;
+  padding-left: 0.8rem;
+  /* Dünne Linie in Theme-Border-Farbe */
+  border-left: 1px solid var(--border);
+}
+
+.toc-level-4 {
+  font-size: 0.9em;
+}
+
+/* 5. Link-Styling */
+ul[class^="toc-level-"] a {
+  color: var(--text);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  display: inline-block;
+  transition: all var(--transition-fast) ease;
+  opacity: 0.9;
+}
+
+ul[class^="toc-level-"] a:hover {
+  color: var(--color-primary);
+  opacity: 1;
+  transform: translateX(4px); /* Slide-Effekt */
+}
+
+/* 6. Anpassung des Pfeils (Breadcrumb-Style Arrow) */
+ul[class^="toc-level-"] a::before {
+  content: "» "; /* Inhalt explizit setzen */
+  color: var(--color-primary-soft); /* Nutzt die "softe" Primärfarbe */
+  font-weight: normal;
+  margin-right: 0.25rem;
+  opacity: 0.7;
+  display: inline-block;
+}
+
+/* --- THEME SPECIFIC OVERRIDES (Optional tweaks) --- */
+
+/* Tron: Stärkerer Glow für das TOC */
+:root[data-theme="tron"] ul.toc-level-2 {
+  box-shadow: 0 0 15px oklch(0.75 0.18 210 / 0.15);
+  border: 1px solid var(--color-primary);
+}
+
+/* Matrix: Terminal Look */
+:root[data-theme="matrix"] ul.toc-level-2 {
+  border-left-width: 1px; /* Matrix mag eher dünne Linien */
+  border: 1px dashed var(--color-primary-dark);
+}
+:root[data-theme="matrix"] ul[class^="toc-level-"] a::before {
+  content: "> "; /* Terminal Prompt Style */
+}
+
 /* ---------------------------------------------------------
    4) UTILITIES
    --------------------------------------------------------- */
@@ -1158,7 +1253,7 @@ figcaption {
 }
 
 .table th {
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--font-weight-bold);
   color: var(--text-muted);
 }
 
@@ -1298,6 +1393,9 @@ figcaption {
   border: var(--code-border, 1px solid var(--border));
   border-radius: var(--code-border-radius, 8px);
   box-shadow: var(--code-box-shadow, none);
+
+  overflow-x: auto;
+  max-width: 100%;
 
   /* Falls du den Hintergrund von Code-Blöcken auch über das Token steuern willst: */
   /* background: var(--code-background, var(--bg-elevated)); */
