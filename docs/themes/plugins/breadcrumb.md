@@ -5,6 +5,13 @@ The **Breadcrumb Plugin** automatically generates a breadcrumb navigation path.
 ---
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [How it works](#how-it-works)
+- [Configuration](#configuration)
+- [Template Usage](#template-usage)
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ---
