@@ -62,7 +62,7 @@ runs:
         echo "base_path=${{ inputs.base_path }}" >> config.cfg
         echo "toc=${{ inputs.toc }}" >> config.cfg
         echo "[plugins]" >> config.cfg
-        echo "path=./build/plugins" >> config.cfg
+        echo "path=./plugins" >> config.cfg
         echo "enabled=markdown, html, toc, asciidoc, search, sitemap, mermaid, breadcrumb, reading_time, shortcode, minify" >> config.cfg
         echo "[reading_time]" >> config.cfg
         echo "threshold=200" >> config.cfg
