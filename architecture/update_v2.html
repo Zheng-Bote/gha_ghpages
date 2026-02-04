@@ -1,0 +1,407 @@
+<!doctype html><html lang="en" data-theme="auto" data-base-path="https://zheng-bote.github.io/gha_ghpages/"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>gh_docs_bot: update_v2</title><link rel="stylesheet" href="https://zheng-bote.github.io/gha_ghpages/assets/css/tokens.css" /><link rel="stylesheet" href="https://zheng-bote.github.io/gha_ghpages/assets/css/layouts.css" /><link rel="stylesheet" href="https://zheng-bote.github.io/gha_ghpages/assets/css/fluid.css" /><meta
+      name="description"
+      content="gh_docs_bot is a high-performance, custom C++ Static Site Generator (SSG) packaged as a reusable GitHub Action. It is designed to automatically build and deploy static documentation websites from Markdown and HTML files directly within your GitHub workflows."
+    /><meta
+      name="keywords"
+      content="Github Action, Static Site Generator, SSG, Documentation, Markdown, HTML, GitHub Workflows, ZHENG Robert, Robert Zheng, ZHENG Bote, 郑 伯特"
+    /><meta name="author" content="Zheng Robert" /><meta name="robots" content="index, follow" /><meta name="googlebot" content="index, follow" /><link
+      rel="icon"
+      href="https://zheng-bote.github.io/gha_ghpages/assets/icons/favicon.svg"
+      type="image/svg+xml"
+    /><link
+      rel="apple-touch-icon"
+      href="https://zheng-bote.github.io/gha_ghpages/assets/icons/apple-touch-icon.png"
+    /><link rel="shortcut icon" href="https://zheng-bote.github.io/gha_ghpages/assets/img/favicon.ico" /></head><body class="app-shell"><header class="site-header"><div class="header-left"><img
+          src="https://zheng-bote.github.io/gha_ghpages/assets/img/favicon.svg"
+          alt="Logo"
+          title="Home"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />gh_docs_bot
+      </div><div class="header-center">update_v2</div><div class="header-right flex items-center justify-end gap-3"><button id="searchTrigger" class="btn btn-icon btn-ghost" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button><select id="themeSelect" class="select-control" style="width: auto"><option value="blue">Blue</option><option value="emerald">Emerald</option><option value="amber">Amber</option><option value="berry">Berry</option><option value="violet">Violet</option><option value="slate">Slate</option><option value="cyan">Cyan</option><option value="blue2">Blue 2</option><option value="matrix">Matrix</option><option value="tron">Tron</option></select><button id="themeToggle" class="btn btn-icon btn-ghost"><span id="themeIcon"></span></button><rz-fontsize><rz-fontsize/></div></header><div class="layout-with-sidebar"><aside class="sidebar"><ul class="nav-list"><li><strong>architecture</strong><ul class="nav-list"><li><a href="../architecture/overview.html">overview</a></li><li><a href="../architecture/update_v2.html" class="active">update v2</a></li></ul></li><li><strong>development</strong><ul class="nav-list"><li><a href="../development/Plugin_dev_guide.html">Plugin dev guide</a></li><li><a href="../development/build.html">build</a></li></ul></li><li><strong>howtos</strong><ul class="nav-list"><li><a href="../howtos/Github_Action.html">Github Action</a></li><li><a href="../howtos/SSG_locally.html">SSG locally</a></li><li><a href="../howtos/User_Guide_v2.html">User Guide v2</a></li></ul></li><li><strong>screenshots</strong><ul class="nav-list"><li><a href="../screenshots/themes.html">themes</a></li></ul></li><li><strong>themes</strong><ul class="nav-list"><li><a href="../themes/Fluid_UI.html">Fluid UI</a></li><li><a href="../themes/Web_Components.html">Web Components</a></li><li><strong>plugins</strong><ul class="nav-list"><li><a href="../themes/plugins/asciidoc.html">asciidoc</a></li><li><a href="../themes/plugins/breadcrumb.html">breadcrumb</a></li><li><a href="../themes/plugins/html.html">html</a></li><li><a href="../themes/plugins/markdown.html">markdown</a></li><li><a href="../themes/plugins/mermaid.html">mermaid</a></li><li><a href="../themes/plugins/minify.html">minify</a></li><li><a href="../themes/plugins/reading_time.html">reading time</a></li><li><a href="../themes/plugins/search.html">search</a></li><li><a href="../themes/plugins/shortcode.html">shortcode</a></li><li><a href="../themes/plugins/sitemap.html">sitemap</a></li><li><a href="../themes/plugins/toc.html">toc</a></li></ul></li></ul></li></ul></aside><main class="site-main"><div class="flex justify-between items-center mb-3"><div class="breadcrumb mb-3"><a href="../index.html">Home</a><span class="breadcrumb-separator">/</span><a href="#">Architecture</a><span class="breadcrumb-separator">/</span><span>update_v2</span></div><span class="badge soft">⏱️ 4 min read</span></div><h1>Architecture &amp; Refactoring Overview</h1><hr><div class="toc"><h3>Table of Contents</h3><ul class="toc-level-2"><li><a href="#1-motivation">1. Motivation</a></li><li><a href="#2-new-architecture-dynamic-plugin-system">2. New Architecture: Dynamic Plugin System</a></li><ul class="toc-level-3"><li><a href="#21-core-components">2.1 Core Components</a></li><li><a href="#22-diagrams">2.2 Diagrams</a></li><ul class="toc-level-4"><li><a href="#class-diagram">Class Diagram</a></li><li><a href="#high-level-architecture">High-Level Architecture</a></li><li><a href="#build-workflow">Build Workflow</a></li></ul></ul><li><a href="#3-the-no-regex-approach">3. The "No-Regex" Approach</a></li><li><a href="#4-directory-structure">4. Directory Structure</a></li></ul></div><hr><h2 id="1-motivation">1. Motivation</h2><p>The original Static Site Generator (SSG) was a monolithic C++ application. While functional, it had several limitations:</p><ul><li><strong>Scalability:</strong> Adding new features (like syntax highlighting or RSS feeds) required modifying the core logic and recompiling the entire application.</li><li><strong>Fragility:</strong> Table of Contents (TOC) generation relied on Regex parsing of HTML, which is error-prone.</li><li><strong>Flexibility:</strong> Markdown rendering was tightly coupled to the build process.</li></ul><h2 id="2-new-architecture-dynamic-plugin-system">2. New Architecture: Dynamic Plugin System</h2><p>The redesigned architecture separates the <strong>Host Application</strong> (<code>gh_docs_bot</code>) from the <strong>Logic</strong> (<code>Plugins</code>). Plugins are now compiled as <strong>Shared Libraries</strong> (<code>.so</code> files) and loaded dynamically at runtime.</p><h3 id="21-core-components">2.1 Core Components</h3><ul><li><strong>SiteBuilder:</strong> The main controller. It scans directories, manages the lifecycle of the build process, and orchestrates the <code>PluginManager</code>. It reads the configuration to determine which plugins to load.</li><li><strong>PluginManager:</strong> Responsible for loading plugins dynamically using <code>dlopen</code>/<code>dlsym</code> and dispatching events (Hooks). It acts as the <code>IPluginHost</code> for plugins.</li><li><strong>IPluginHost:</strong> An interface exposed to plugins allowing them to interact with the host (e.g., dispatching markdown events back to the manager) without linking against the manager implementation.</li><li><strong>Plugins:</strong> Standalone shared libraries (e.g., <code>libplugin_markdown.so</code>) that implement the <code>IPlugin</code> interface and export factory functions (<code>create_plugin</code>, <code>destroy_plugin</code>).</li><li><strong>Context Models:</strong><ul><li><code>SiteContext</code>: Holds global configuration, paths, and shared data.</li><li><code>PageContext</code>: Holds data specific to the current file being processed (raw content, HTML, metadata, headers).</li></ul></li></ul><h3 id="22-diagrams">2.2 Diagrams</h3><h4 id="class-diagram">Class Diagram</h4><div class="mermaid">
+classDiagram
+    class SiteBuilder {
+        +build()
+        +register_plugins()
+    }
+    class PluginManager {
+        +load_plugin_from_file()
+        +dispatch()
+        +get_renderer()
+    }
+    class IPluginHost {
+        &lt;&lt;interface&gt;&gt;
+        +dispatch_md_enter()
+        +dispatch_md_leave()
+        +dispatch_md_text()
+    }
+    class IPlugin {
+        &lt;&lt;interface&gt;&gt;
+        +on_init()
+        +on_before_render()
+        +on_md_block_enter()
+        +on_after_render()
+    }
+    class IRenderer {
+        &lt;&lt;interface&gt;&gt;
+        +render()
+    }
+
+    SiteBuilder --&gt; SiteContext : manages
+    SiteBuilder --&gt; PluginManager : uses
+    PluginManager --|&gt; IPluginHost : implements
+    PluginManager --&gt; IPlugin : manages (dynamic load)
+    IPlugin ..&gt; IRenderer : creates
+
+    class MarkdownPlugin {
+        +create_renderer()
+    }
+    class TocPlugin {
+        +on_md_block_enter()
+        +on_after_render()
+    }
+
+    IPlugin &lt;|-- MarkdownPlugin
+    IPlugin &lt;|-- TocPlugin
+</div><h4 id="high-level-architecture">High-Level Architecture</h4><div class="mermaid">
+graph TD
+    User[User] --&gt;|Run CLI| App[Host Application]
+    App --&gt;|Reads| Config[Config File]
+
+    subgraph Host[Host Process]
+        SB[SiteBuilder]
+        PM[PluginManager]
+        Ctx[Context]
+    end
+
+    subgraph Plugins[Shared Libraries]
+        MD[libplugin_markdown.so]
+        HTML[libplugin_html.so]
+        TOC[libplugin_toc.so]
+    end
+
+    App --&gt; SB
+    SB --&gt; PM
+    SB --&gt; Ctx
+    PM --&gt;|dlopen| Plugins
+    MD -.-&gt;|Implements| IPlugin
+    HTML -.-&gt;|Implements| IPlugin
+    TOC -.-&gt;|Implements| IPlugin
+
+    PM &lt;--&gt;|Events/Hooks| Plugins
+</div><h4 id="build-workflow">Build Workflow</h4><div class="mermaid">
+sequenceDiagram
+    participant SB as SiteBuilder
+    participant PM as PluginManager
+    participant P as Plugins
+    participant R as Renderer
+
+    SB-&gt;&gt;PM: register_plugins()
+    PM-&gt;&gt;P: dlopen()
+
+    SB-&gt;&gt;PM: dispatch(on_init)
+    PM-&gt;&gt;P: on_init(ctx)
+
+    SB-&gt;&gt;SB: scan_directory()
+
+    loop Per File
+        SB-&gt;&gt;PM: get_renderer(ext)
+        PM-&gt;&gt;P: create_renderer(ext)
+        P--&gt;&gt;SB: IRenderer
+
+        SB-&gt;&gt;PM: dispatch(on_before_render)
+        PM-&gt;&gt;P: on_before_render(ctx)
+
+        SB-&gt;&gt;R: render(ctx)
+        alt Markdown
+             R-&gt;&gt;PM: dispatch_md_event()
+             PM-&gt;&gt;P: on_md_event()
+        end
+        R--&gt;&gt;SB: HTML
+
+        SB-&gt;&gt;PM: dispatch(on_after_render)
+        PM-&gt;&gt;P: on_after_render(ctx)
+
+        SB-&gt;&gt;SB: Apply Template
+        SB-&gt;&gt;SB: Write File
+    end
+
+    SB-&gt;&gt;PM: dispatch(on_post_build)
+    PM-&gt;&gt;P: on_post_build(ctx)
+</div><h2 id="3-the-no-regex-approach">3. The "No-Regex" Approach</h2><p>A key requirement was removing Regex for HTML parsing. We achieved this by hooking directly into the Markdown parser (MD4C) events.</p><ol><li><strong>Parsing:</strong> The <code>MarkdownPlugin</code> initiates the MD4C parser.</li><li><strong>Interception:</strong> The <code>TocPlugin</code> subscribes to <code>on_md_block_enter</code>.</li><li><strong>Extraction:</strong> When a Header (<code>H1</code>-<code>H4</code>) is detected, the <code>TocPlugin</code> captures the text stream directly from the source.</li><li><strong>ID Generation:</strong> The plugin generates a clean Slug ID from the raw text.</li><li><strong>Rendering:</strong> The plugin writes the HTML tag <code>&lt;h2 id=&quot;...&quot;&gt;</code> itself, bypassing the default renderer.</li></ol><h2 id="4-directory-structure">4. Directory Structure</h2><pre><code>/
+├── include/
+│   ├── core/       # Interfaces, PluginManager, SiteBuilder
+│   ├── model/      # Data structures (Contexts)
+│   └── plugins/    # Plugin headers
+├── src/
+│   ├── core/       # Implementation of core logic
+│   └── plugins/    # Concrete plugin implementations (Shared Libs)
+├── main.cpp        # Entry point
+└── plugins/        # Compiled .so files (Runtime)
+</code></pre><script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ startOnLoad: true });
+</script></main></div><button id="scrollTopBtn" class="scroll-top-btn" aria-label="Nach oben"><svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ><path d="M12 19V5" /><path d="M5 12l7-7 7 7" /></svg></button><footer class="site-footer"><div class="footer-left"><a
+          href="https://github.com/Zheng-Bote/fluid_ui"
+          alt="Link to Github"
+          title="https://github.com/Zheng-Bote/fluid_ui"
+          >Build with Fluid UI</a
+        ></div><div class="footer-center"><a
+          href="https://www.robert.hase-zheng.net/"
+          alt="Homepage"
+          title="Homepage"
+          >© 2026 ZHENG Robert</a
+        ></div><div class="footer-right"><a
+          href="https://github.com/Zheng-Bote/gha_ghpages"
+          alt="Github"
+          title="Github"
+          >&lt;/&gt;</a
+        ></div></footer><script>
+      let brand = document.querySelector(".header-left");
+      if (brand) {
+        brand.addEventListener("click", () => {
+          window.location.href = "https://zheng-bote.github.io/gha_ghpages/";
+        });
+      }
+    </script><script>
+      // Theme
+      const root = document.documentElement;
+      const themeToggle = document.getElementById("themeToggle");
+      const themeIcon = document.getElementById("themeIcon");
+      const themeSelect = document.getElementById("themeSelect");
+
+      // Reihenfolge der Modi
+      const modes = ["auto", "light", "dark"];
+
+      // --- SVG DEFINITIONEN ---
+      // Wir definieren die Icons ausserhalb der Funktion, damit sie nur einmal erstellt werden
+      const icons = {
+        light: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`,
+        dark: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`,
+        auto: `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><mask id="mask-half"><rect x="0" y="0" width="12" height="24" fill="white" /></mask><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" mask="url(#mask-half)" /><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" transform="translate(2, -2) scale(0.9)" /></svg>`
+      };
+
+      // Gespeicherte Werte laden
+      let currentTheme = localStorage.getItem("theme") || "blue2";
+      let currentMode = localStorage.getItem("mode") || "auto";
+
+      // Theme (Farbe) initial setzen
+      root.setAttribute("data-theme", currentTheme);
+
+      // Select initialisieren
+      if (themeSelect) {
+        themeSelect.value = currentTheme;
+        themeSelect.addEventListener("change", () => {
+          currentTheme = themeSelect.value;
+          root.setAttribute("data-theme", currentTheme);
+          localStorage.setItem("theme", currentTheme);
+        });
+      }
+
+      // --- LOGIK FÜR DARK MODE ---
+
+      function applyMode() {
+        let effectiveMode = currentMode;
+
+        // Wenn Auto gewählt ist, System abfragen
+        if (currentMode === "auto") {
+          const systemDark = window.matchMedia(
+            "(prefers-color-scheme: dark)",
+          ).matches;
+          effectiveMode = systemDark ? "dark" : "light";
+        }
+
+        root.setAttribute("data-mode", effectiveMode);
+        updateThemeIcon(currentMode);
+      }
+
+      // Icon-Setter (Korrigiert: Keine Verschachtelung mehr)
+      function updateThemeIcon(mode) {
+        if (icons[mode]) {
+          themeIcon.innerHTML = icons[mode];
+        } else {
+          themeIcon.innerHTML = icons['auto']; 
+        }
+      }
+
+      // Event Listener: Klick auf den Toggle-Button
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          const nextIndex = (modes.indexOf(currentMode) + 1) % modes.length;
+          currentMode = modes[nextIndex];
+
+          localStorage.setItem("mode", currentMode);
+          applyMode();
+        });
+      }
+
+      // Event Listener: System ändert Dark Mode
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (e) => {
+          if (currentMode === "auto") {
+            applyMode();
+          }
+        });
+
+      // Initiale Ausführung beim Laden
+      applyMode();
+
+      /* --- Theme Preview Cards --- */
+      document.querySelectorAll("[data-theme-preview]").forEach((card) => {
+        card.addEventListener("click", () => {
+          const theme = card.getAttribute("data-theme-preview");
+          root.setAttribute("data-theme", theme);
+          localStorage.setItem("theme", theme);
+
+          if (themeSelect) {
+            themeSelect.value = theme;
+          }
+        });
+      });
+    </script><script>
+      // Utilities
+      /* -- Scroll to Top Button -- */
+      const scrollBtn = document.getElementById("scrollTopBtn");
+      const header = document.querySelector(".site-header");
+
+      // Sichtbarkeit steuern
+      window.addEventListener("scroll", () => {
+        const headerBottom = header.getBoundingClientRect().bottom;
+
+        if (headerBottom < -20) {
+          scrollBtn.classList.add("visible");
+        } else {
+          scrollBtn.classList.remove("visible");
+        }
+      });
+
+      // Smooth Scroll nach oben
+      if (scrollBtn) {
+        scrollBtn.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+      }
+      /* -- Ende Scroll to Top Button -- */
+
+      // Accordion
+      document.querySelectorAll(".accordion-header").forEach((header) => {
+        header.addEventListener("click", () => {
+          const item = header.closest(".accordion-item");
+          item.classList.toggle("is-open");
+        });
+      });
+
+      // Toast helper
+      function showToast(message, type = "info") {
+        let container = document.querySelector(".toast-container");
+        if (!container) {
+          container = document.createElement("div");
+          container.className = "toast-container";
+          document.body.appendChild(container);
+        }
+
+        const toast = document.createElement("div");
+        toast.className = "toast";
+        toast.textContent = message;
+
+        if (type === "success") toast.classList.add("success-msg");
+        if (type === "error") toast.classList.add("error-msg");
+        if (type === "warning") toast.classList.add("warning-msg");
+        if (type === "info") toast.classList.add("info-msg");
+
+        container.appendChild(toast);
+
+        setTimeout(() => {
+          toast.remove();
+        }, 3000);
+      }
+
+      // Modal helper (generic)
+      function openModal(id) {
+        const backdrop = document.getElementById(id);
+        if (backdrop) backdrop.classList.add("is-open");
+      }
+
+      function closeModal(id) {
+        const backdrop = document.getElementById(id);
+        if (backdrop) backdrop.classList.remove("is-open");
+      }
+
+      // Gallery Modal
+      const imageModal = document.getElementById("imageModal");
+      const modalImage = document.getElementById("modalImage");
+      const modalCaption = document.getElementById("modalCaption");
+
+      document.querySelectorAll(".gallery figure").forEach((fig) => {
+        fig.addEventListener("click", () => {
+          const src = fig.getAttribute("data-modal-image");
+          const caption = fig.querySelector("figcaption")?.textContent || "";
+          modalImage.src = src;
+          modalCaption.textContent = caption;
+          openModal("imageModal");
+        });
+      });
+      document.querySelectorAll(".gallery-2 figure").forEach((fig) => {
+        fig.addEventListener("click", () => {
+          const src = fig.getAttribute("data-modal-image");
+          const caption = fig.querySelector("figcaption")?.textContent || "";
+          modalImage.src = src;
+          modalCaption.textContent = caption;
+          openModal("imageModal");
+        });
+      });
+
+      // Close modal on backdrop click
+      if (imageModal) {
+        imageModal.addEventListener("click", (e) => {
+          if (e.target === imageModal) {
+            closeModal("imageModal");
+          }
+        });
+      }
+
+      // =========================================================
+      // Lazy Loading for Gallery Images
+      // =========================================================
+
+      const lazyImages = document.querySelectorAll(".lazy-img");
+
+      const lazyObserver = new IntersectionObserver(
+        (entries, observer) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+
+            const img = entry.target;
+            const realSrc = img.getAttribute("data-src");
+
+            if (realSrc) {
+              img.src = realSrc;
+              img.onload = () => img.classList.add("loaded");
+            }
+
+            observer.unobserve(img);
+          });
+        },
+        {
+          rootMargin: "200px 0px", // lädt frühzeitig
+          threshold: 0.01,
+        },
+      );
+
+      lazyImages.forEach((img) => lazyObserver.observe(img));
+      // =========================================================
+    </script><div id="searchModal" class="modal-backdrop"><div class="modal" style="max-width: 600px; height: 80vh; display: flex; flex-direction: column; padding: 0;"><div class="p-4 border-b flex items-center gap-2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg><input type="text" id="searchInput" class="field-control" style="border:none; box-shadow: none; font-size: 1.1rem;" placeholder="Search docs... (Press /)" autocomplete="off"><button id="searchClose" class="btn btn-icon btn-ghost btn-sm">✕</button></div><div id="searchResults" style="overflow-y: auto; flex: 1; padding: 0;"></div></div></div><script type="module" src="https://zheng-bote.github.io/gha_ghpages/assets/js/search.js"></script><script type="module" src="https://zheng-bote.github.io/gha_ghpages/assets/js/rz-fontsize.js"></script></body></html>
