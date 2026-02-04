@@ -101,7 +101,7 @@ set_target_properties(plugin_toc PROPERTIES
 
 # AsciiDoc Plugin
 add_library(plugin_asciidoc SHARED src/plugins/asciidoc_plugin.cpp)
-target_include_directories(plugin_asciidoc PRIVATE include)
+target_include_directories(plugin_asciidoc PRIVATE include ${md4c_SOURCE_DIR}/src)
 set_target_properties(plugin_asciidoc PROPERTIES 
     PREFIX ""
     OUTPUT_NAME "plugin_asciidoc"
@@ -110,7 +110,7 @@ set_target_properties(plugin_asciidoc PROPERTIES
 
 # Search Plugin
 add_library(plugin_search SHARED src/plugins/search_plugin.cpp)
-target_include_directories(plugin_search PRIVATE include)
+target_include_directories(plugin_search PRIVATE include ${md4c_SOURCE_DIR}/src)
 target_link_libraries(plugin_search PRIVATE nlohmann_json::nlohmann_json)
 set_target_properties(plugin_search PROPERTIES 
     PREFIX ""
@@ -120,7 +120,7 @@ set_target_properties(plugin_search PROPERTIES
 
 # Sitemap Plugin
 add_library(plugin_sitemap SHARED src/plugins/sitemap_plugin.cpp)
-target_include_directories(plugin_sitemap PRIVATE include)
+target_include_directories(plugin_sitemap PRIVATE include ${md4c_SOURCE_DIR}/src)
 target_link_libraries(plugin_sitemap PRIVATE nlohmann_json::nlohmann_json)
 set_target_properties(plugin_sitemap PROPERTIES 
     PREFIX ""
@@ -139,7 +139,7 @@ set_target_properties(plugin_mermaid PROPERTIES
 
 # Breadcrumb Plugin
 add_library(plugin_breadcrumb SHARED src/plugins/breadcrumb_plugin.cpp)
-target_include_directories(plugin_breadcrumb PRIVATE include)
+target_include_directories(plugin_breadcrumb PRIVATE include ${md4c_SOURCE_DIR}/src)
 set_target_properties(plugin_breadcrumb PROPERTIES 
     PREFIX ""
     OUTPUT_NAME "plugin_breadcrumb"
@@ -148,7 +148,7 @@ set_target_properties(plugin_breadcrumb PROPERTIES
 
 # Minify Plugin
 add_library(plugin_minify SHARED src/plugins/minify_plugin.cpp)
-target_include_directories(plugin_minify PRIVATE include)
+target_include_directories(plugin_minify PRIVATE include ${md4c_SOURCE_DIR}/src)
 set_target_properties(plugin_minify PROPERTIES 
     PREFIX ""
     OUTPUT_NAME "plugin_minify"
@@ -157,7 +157,7 @@ set_target_properties(plugin_minify PROPERTIES
 
 # Reading Time Plugin
 add_library(plugin_reading_time SHARED src/plugins/reading_time_plugin.cpp)
-target_include_directories(plugin_reading_time PRIVATE include)
+target_include_directories(plugin_reading_time PRIVATE include ${md4c_SOURCE_DIR}/src)
 set_target_properties(plugin_reading_time PROPERTIES 
     PREFIX ""
     OUTPUT_NAME "plugin_reading_time"
@@ -166,7 +166,7 @@ set_target_properties(plugin_reading_time PROPERTIES
 
 # Shortcode Plugin
 add_library(plugin_shortcode SHARED src/plugins/shortcode_plugin.cpp)
-target_include_directories(plugin_shortcode PRIVATE include)
+target_include_directories(plugin_shortcode PRIVATE include ${md4c_SOURCE_DIR}/src)
 set_target_properties(plugin_shortcode PROPERTIES 
     PREFIX ""
     OUTPUT_NAME "plugin_shortcode"
