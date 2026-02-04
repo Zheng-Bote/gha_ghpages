@@ -55,11 +55,18 @@ runs:
     - name: Create Configuration
       shell: bash
       run: |
-        echo "template=${{ inputs.template }}" > config.cfg
+        echo "[General]" > config.cfg
+        echo "template=${{ inputs.template }}" >> config.cfg
         echo "assets=${{ inputs.assets }}" >> config.cfg
         echo "output=${{ inputs.output }}" >> config.cfg
         echo "base_path=${{ inputs.base_path }}" >> config.cfg
         echo "toc=${{ inputs.toc }}" >> config.cfg
+        echo "[plugins]" >> config.cfg
+        echo "path=./build/plugins" >> config.cfg
+        echo "enabled=markdown, html, toc, asciidoc, search, sitemap, mermaid, breadcrumb, reading_time, shortcode, minify" >> config.cfg
+        echo "[reading_time]" >> config.cfg
+        echo "threshold=200" >> config.cfg
+        echo "wpm=200" >> config.cfg
 
     - name: Run Generator
       shell: bash
