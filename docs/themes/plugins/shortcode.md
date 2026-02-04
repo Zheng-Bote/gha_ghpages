@@ -6,19 +6,17 @@ The **Shortcode Plugin** allows inserting complex HTML components using simple p
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 **Table of Contents**
 
-- [Shortcode Plugin](#shortcode-plugin)
-  - [Syntax](#syntax)
-  - [Available Shortcodes](#available-shortcodes)
-    - [YouTube](#youtube)
-      - [Example Youtube](#example-youtube)
-    - [Alert / Note](#alert--note)
-      - [Example Alert](#example-alert)
-    - [Button](#button)
-      - [Example Button](#example-button)
-  - [Configuration](#configuration)
+- [Syntax](#syntax)
+- [Available Shortcodes](#available-shortcodes)
+  - [YouTube](#youtube)
+    - [Example Youtube](#example-youtube)
+  - [Alert / Note](#alert--note)
+    - [Example Alert](#example-alert)
+  - [Button](#button)
+    - [Example Button](#example-button)
+- [Configuration](#configuration)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
