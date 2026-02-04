@@ -70,7 +70,7 @@ For a comprehensive guide on how to configure inputs, set up your repository str
 
 ### Screenshoots
 
-![Themes](theme/fluid/assets/img_tmp/themes.png)
+![Themes](theme/fluid/assets/img_tmp/themes_2.png)
 
 > \[!NOTE]
 > _see more screenshoots in_ [GitHub Pages: Documentation](https://zheng-bote.github.io/gha_ghpages/)
