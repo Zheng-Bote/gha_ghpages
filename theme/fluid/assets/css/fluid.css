@@ -237,7 +237,8 @@ h6 {
   color: oklch(0.99 0 0);
 }
 
-#themeToggle:hover svg {
+#themeToggle:hover svg,
+#searchTrigger:hover svg {
   color: var(--color-primary-dark);
   stroke: var(--color-primary-dark);
   fill: var(--color-primary-dark);
@@ -1143,6 +1144,13 @@ ul[class^="toc-level-"] a::before {
   display: none;
 }
 
+/* Mermaid Diagrams */
+.mermaid {
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
 /* Text */
 .text-left {
   text-align: left;
@@ -1459,4 +1467,55 @@ ul[class^="toc-level-"] a::before {
     max-width: 1600px;
     margin: auto;
   }
+}
+
+/* =========================================================
+   SEARCH STYLES
+   ========================================================= */
+
+.search-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-list li {
+  border-bottom: 1px solid var(--border);
+}
+
+.search-list li:last-child {
+  border-bottom: none;
+}
+
+.search-list a {
+  display: block;
+  padding: 1rem;
+  text-decoration: none;
+  transition: background var(--transition-fast);
+}
+
+.search-list a:hover,
+.search-list a:focus {
+  background: var(--bg-alt);
+  outline: none;
+}
+
+.search-title {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.search-snippet {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.search-snippet mark {
+  background: color-mix(in oklch, var(--color-primary) 30%, transparent);
+  color: inherit;
+  padding: 0 2px;
+  border-radius: 2px;
 }

@@ -42,7 +42,7 @@
 
   <section>
     <h3>World Clocks</h3>
-    <script type="module" src="{{ base_path }}assets/js/rz-clock.js"></script>
+    <script type="module" src="../assets/js/rz-clock.js"></script>
     <rz-clock clock_width="250" title="Berlin Office" timezone="Europe/Berlin">
     </rz-clock>
 
@@ -52,10 +52,7 @@
   <br />
   <section>
     <h3>World Date Time</h3>
-    <script
-      type="module"
-      src="{{ base_path }}assets/js/rz-datetime.js"
-    ></script>
+    <script type="module" src="../assets/js/rz-datetime.js"></script>
     <rz-datetime
       tz="Europe/Berlin"
       format="de-DE"
@@ -73,42 +70,71 @@
 
 <section>
   <h2>Online Status</h2>
-  <script type="module" src="{{ base_path }}assets/js/rz-online.js"></script>
-  <rz-online></rz-online>&nbsp;
-  <rz-online with_text="yes"></rz-online>
+  <script type="module" src="../assets/js/rz-online.js"></script>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Attribute</th>
+        <th>Description</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>with_text="no"</td>
+        <td>empty or "no"</td>
+        <td><rz-online></rz-online></td>
+      </tr>
+      <tr>
+        <td>with_text="yes"</td>
+        <td>with text "online" or "offline"</td>
+        <td><rz-online with_text="yes"></rz-online></td>
+      </tr>
+    </tbody>
+  </table>
 </section>
 <br />
 <section>
   <h2>Weather</h2>
-  <script type="module" src="{{ base_path }}assets/js/rz-weather.js"></script>
-  <p class="brief">
-    needs an API-Key "rz-weather" from weatherapi.com in localStorage
-  </p>
+  <script type="module" src="../assets/js/rz-weather.js"></script>
+
   <div style="max-width: fit-content">
     <rz-weather location="Munich" with_title="yes"></rz-weather>
   </div>
+  <br />
+  <h3>Example Screenshot</h3>
+  <div class="info-msg">needs at least a free API-Key from weatherapi.com</div>
+
+  <img
+    src="{{ base_path }}/assets/img_tmp/web-component_weather.png"
+    alt="rz-weather"
+    style="max-width: 100%"
+  />
 </section>
 <br />
 <section>
   <h2>Environment</h2>
-  <script
-    type="module"
-    src="{{ base_path }}assets/js/rz-environment.js"
-  ></script>
+  <script type="module" src="../assets/js/rz-environment.js"></script>
+
   <rz-environment lat="53.55" lon="9.99" location_name="Hamburg Port">
   </rz-environment>
+  <br />
+  <h3>Example Screenshot</h3>
+  <div class="info-msg">
+    needs at least a free API-Key from https://openweathermap.org/api,
+    https://rapidapi.com/hub, https://stormglass.io/
+  </div>
+  <img
+    src="{{ base_path }}/assets/img_tmp/web-component_environment.png"
+    alt="rz-environment"
+    style="max-width: 100%"
+  />
 </section>
 <br />
 <section>
   <h2>GitHub Card</h2>
-  <script
-    type="module"
-    src="{{ base_path }}assets/js/rz-code-snippet.js"
-  ></script>
-  <script
-    type="module"
-    src="{{ base_path }}assets/js/rz-github-card.js"
-  ></script>
+  <script type="module" src="../assets/js/rz-code-snippet.js"></script>
+  <script type="module" src="../assets/js/rz-github-card.js"></script>
   <rz-github-card repo="Zheng-Bote/gha_ghpages"></rz-github-card>
 </section>
 <br />
@@ -321,10 +347,7 @@
   <section>
     <h3>Images</h3>
     <p class="brief">Examples</p>
-    <script
-      type="module"
-      src="{{ base_path }}assets/js/rz-image-card.js"
-    ></script>
+    <script type="module" src="../assets/js/rz-image-card.js"></script>
     <div style="display: flex; gap: 20px; flex-wrap: wrap">
       <rz-image-card
         src="https://picsum.photos/id/1018/800/600"

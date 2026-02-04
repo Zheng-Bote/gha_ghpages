@@ -6,10 +6,8 @@
 <hr>
 <h2>Architecture Overview</h2>
 
-<p>das ist der base_path: {{base_path}}</p>
-
 <ul>
-<li>Version: 1.x.x</li>
+<li>Version: 1.x.x (Version 2.x.x updates see below)</li>
 <li>Language: C++23</li>
 <li>License: MIT</li>
 <li>command line tool</li>
@@ -32,11 +30,11 @@
 </ul>
 <h2>High-Level Architecture</h2>
 <p>The system operates on a linear Pipeline Pattern. It takes three primary inputs (Configuration, Content, Template) and produces a directory of static HTML files.</p>
-<img src="{{base_path}}assets/img_tmp/high-level-architecture_pipeline-pattern.png" alt="Pipeline">
+<img src="{{ base_path }}assets/img_tmp/high-level-architecture_pipeline-pattern.png" alt="Pipeline" style="max-width: 100%;">
 <h2>Core Workflow</h2>
 <p>The main() function orchestrates the lifecycle of the generation process.</p>
 <p>Execution Flow Diagram</p>
-<img src="{{base_path}}assets/img_tmp/high-level-architecture_execution-flow.png" alt="Execution Flow">
+<img src="{{ base_path }}assets/img_tmp/high-level-architecture_execution-flow.png" alt="Execution Flow" style="max-width: 100%;">
 <h2>Component Design</h2>
 <p>The application is structured around data-driven components.</p>
 <h3>Data Structures</h3>

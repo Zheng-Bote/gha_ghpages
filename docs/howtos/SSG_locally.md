@@ -1,4 +1,4 @@
-# How To Use gh_docs_bot manually
+# SSG manually / locally
 
 The gh_docs_bot is a custom C++ Static Site Generator (SSG) that allows you to build and generate a static website from your Markdown and HTML documentation. It encapsulates the entire build process, including dependency installation (LLVM 21, etc.), CMake configuration, and execution.
 
@@ -6,14 +6,16 @@ The gh_docs_bot is a custom C++ Static Site Generator (SSG) that allows you to b
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
-- [Usage](#usage)
-  - [Inputs](#inputs)
-- [Example](#example)
-  - [Project Structure](#project-structure)
-  - [Configuration](#configuration)
-  - [Execution](#execution)
+- [SSG manually / locally](#ssg-manually--locally)
+  - [Usage](#usage)
+    - [Inputs](#inputs)
+  - [Example](#example)
+    - [Project Structure](#project-structure)
+    - [Configuration](#configuration)
+    - [Execution](#execution)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -33,6 +35,8 @@ The gh_docs_bot is a custom C++ Static Site Generator (SSG) that allows you to b
 | :--------------- | :----------------------------------------------- |
 | `path_to_config` | Path to the config file to use for the site.     |
 | `path_to_docs`   | Path to the input directory to use for the site. |
+
+\
 
 ## Example
 

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="auto">
+<html lang="en" data-theme="auto" data-base-path="{{ base_path }}">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -48,6 +48,12 @@
       </div>
       <div class="header-center">{{ title }}</div>
       <div class="header-right flex items-center justify-end gap-3">
+        <button id="searchTrigger" class="btn btn-icon btn-ghost" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
         <select id="themeSelect" class="select-control" style="width: auto">
           <option value="blue">Blue</option>
           <option value="emerald">Emerald</option>
@@ -70,7 +76,15 @@
     <div class="layout-with-sidebar">
       <aside class="sidebar">{{ navigation }}</aside>
 
-      <main class="site-main">{{ content }}</main>
+      <main class="site-main">
+        <div class="flex justify-between items-center mb-3">
+          {{ breadcrumbs }}
+          {% if show_reading_time %}
+            <span class="badge soft">⏱️ {{ reading_time }}</span>
+          {% endif %}
+        </div>
+        {{ content }}
+      </main>
     </div>
 
     <button id="scrollTopBtn" class="scroll-top-btn" aria-label="Nach oben">
@@ -118,9 +132,11 @@
 
     <script>
       let brand = document.querySelector(".header-left");
-      brand.addEventListener("click", () => {
-        window.location.href = "{{ base_path }}";
-      });
+      if (brand) {
+        brand.addEventListener("click", () => {
+          window.location.href = "{{ base_path }}";
+        });
+      }
     </script>
 
    <script>
@@ -204,13 +220,15 @@
       }
 
       // Event Listener: Klick auf den Toggle-Button
-      themeToggle.addEventListener("click", () => {
-        const nextIndex = (modes.indexOf(currentMode) + 1) % modes.length;
-        currentMode = modes[nextIndex];
+      if (themeToggle) {
+        themeToggle.addEventListener("click", () => {
+          const nextIndex = (modes.indexOf(currentMode) + 1) % modes.length;
+          currentMode = modes[nextIndex];
 
-        localStorage.setItem("mode", currentMode);
-        applyMode();
-      });
+          localStorage.setItem("mode", currentMode);
+          applyMode();
+        });
+      }
 
       // Event Listener: System ändert Dark Mode
       window
@@ -256,12 +274,14 @@
       });
 
       // Smooth Scroll nach oben
-      scrollBtn.addEventListener("click", () => {
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
+      if (scrollBtn) {
+        scrollBtn.addEventListener("click", () => {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
         });
-      });
+      }
       /* -- Ende Scroll to Top Button -- */
 
       // Accordion
@@ -333,11 +353,13 @@
       });
 
       // Close modal on backdrop click
-      imageModal.addEventListener("click", (e) => {
-        if (e.target === imageModal) {
-          closeModal("imageModal");
-        }
-      });
+      if (imageModal) {
+        imageModal.addEventListener("click", (e) => {
+          if (e.target === imageModal) {
+            closeModal("imageModal");
+          }
+        });
+      }
 
       // =========================================================
       // Lazy Loading for Gallery Images
@@ -371,6 +393,22 @@
       // =========================================================
     </script>
 
+    <!-- Search Modal -->
+    <div id="searchModal" class="modal-backdrop">
+      <div class="modal" style="max-width: 600px; height: 80vh; display: flex; flex-direction: column; padding: 0;">
+        <div class="p-4 border-b flex items-center gap-2">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" class="field-control" style="border:none; box-shadow: none; font-size: 1.1rem;" placeholder="Search docs... (Press /)" autocomplete="off">
+          <button id="searchClose" class="btn btn-icon btn-ghost btn-sm">✕</button>
+        </div>
+        <div id="searchResults" style="overflow-y: auto; flex: 1; padding: 0;"></div>
+      </div>
+    </div>
+
+    <script type="module" src="{{ base_path }}assets/js/search.js"></script>
     <script type="module" src="{{ base_path }}assets/js/rz-fontsize.js"></script>
   </body>
 </html>
