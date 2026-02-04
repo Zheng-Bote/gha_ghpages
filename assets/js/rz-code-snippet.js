@@ -42,11 +42,14 @@ class RzCodeSnippet extends HTMLElement {
   }
 
   getStyles() {
+    // Resolve paths relative to the script location
+    const cssPath = new URL('../css/', import.meta.url).href;
+
     return `
       <style>
         /* Importiere deine globalen Tokens */
-        @import url("../css/tokens.css");
-        @import url("../css/fluid.css");
+        @import url("${cssPath}tokens.css");
+        @import url("${cssPath}fluid.css");
 
         :host {
           display: block;
