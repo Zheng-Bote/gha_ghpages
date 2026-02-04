@@ -6,14 +6,19 @@ The **Shortcode Plugin** allows inserting complex HTML components using simple p
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
-- [Syntax](#syntax)
-- [Available Shortcodes](#available-shortcodes)
-  - [YouTube](#youtube)
-  - [Alert / Note](#alert--note)
-  - [Button](#button)
-- [Configuration](#configuration)
+- [Shortcode Plugin](#shortcode-plugin)
+  - [Syntax](#syntax)
+  - [Available Shortcodes](#available-shortcodes)
+    - [YouTube](#youtube)
+      - [Example Youtube](#example-youtube)
+    - [Alert / Note](#alert--note)
+      - [Example Alert](#example-alert)
+    - [Button](#button)
+      - [Example Button](#example-button)
+  - [Configuration](#configuration)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -22,7 +27,7 @@ The **Shortcode Plugin** allows inserting complex HTML components using simple p
 ## Syntax
 
 ```text
-[[ name: param1=value, param2=value ]]
+[ name: param1=value, param2=value ]]
 ```
 
 ## Available Shortcodes
@@ -31,27 +36,62 @@ The **Shortcode Plugin** allows inserting complex HTML components using simple p
 
 Embeds a responsive video.
 
-`[[ youtube: ID ]]` or `[[ youtube: id=ID ]]`
+```text
+[ youtube: ID ]]
+```
+
+or
+
+```text
+[ youtube: id=ID ]]
+```
+
+#### Example Youtube
+
+[[youtube: id=xp0sFFEwvic]]
 
 ### Alert / Note
 
 Creates a colored alert box.
 
-`[[ alert: text="Message" ]]`
+```text
+[ alert: type=info, text="This is an Info message" ]]
+```
+
 Optional parameter: `type` (info, warning, error, success).
+
+#### Example Alert
+
+[[alert: type=info, text="This is an info"]]
+
+[[alert: type=warning, text="This is a warning"]]
+
+[[alert: type=error, text="This is an error"]]
+
+[[alert: type=success, text="This is a success"]]
 
 ### Button
 
 Creates a link button.
 
-`[[ button: url=https://example.com, text="Click me" ]]`
-Optional parameters: `type` (primary, outline, ghost), `alt`, `title`.
+```text
+[ button: url=https://example.com, text="Click me" ]]
+```
+
+#### Example Button
+
+[[button: url=https://www.robert.hase-zheng.net/, alt="my Website", text="My Website"]]
+
+[[button: url=https://www.robert.hase-zheng.net/, alt="my Website", text="My Website", type="secondary"]]
+
+[[button: url=https://www.robert.hase-zheng.net/, alt="my Website", text="My Website", type="ghost"]]
 
 ## Configuration
 
 Enable in `fluid.cfg`:
-
-```ini
 [plugins]
 enabled=..., shortcode
+
+```
+
 ```

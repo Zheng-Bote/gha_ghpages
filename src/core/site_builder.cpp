@@ -300,7 +300,13 @@ void SiteBuilder::process_file(const fs::path& file_path, const DirNode& current
         auto tmpl = inja_env.parse_template(site_ctx.template_path.string());
         
         // Final render of content to resolve variables inside the page body
-        std::string rendered_content = inja_env.render(page_ctx.html_content, page_ctx.meta_data);
+        std::string rendered_content;
+        try {
+            rendered_content = inja_env.render(page_ctx.html_content, page_ctx.meta_data);
+        } catch (const std::exception& e) {
+            std::println(stderr, "Warning: Inja content render failed for {}: {}. Using raw HTML.", file_path.string(), e.what());
+            rendered_content = page_ctx.html_content;
+        }
         page_ctx.meta_data["content"] = rendered_content;
         
         std::string final_html = inja_env.render(tmpl, page_ctx.meta_data);
