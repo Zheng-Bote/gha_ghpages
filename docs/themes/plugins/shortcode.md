@@ -5,6 +5,16 @@ The **Shortcode Plugin** allows inserting complex HTML components using simple p
 ---
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Syntax](#syntax)
+- [Available Shortcodes](#available-shortcodes)
+  - [YouTube](#youtube)
+  - [Alert / Note](#alert--note)
+  - [Button](#button)
+- [Configuration](#configuration)
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ---

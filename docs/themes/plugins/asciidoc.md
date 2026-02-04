@@ -5,6 +5,13 @@ The **AsciiDoc Plugin** allows rendering of `.adoc` and `.asciidoc` files.
 ---
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [How it works](#how-it-works)
+- [Prerequisites](#prerequisites)
+- [Configuration](#configuration)
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ---

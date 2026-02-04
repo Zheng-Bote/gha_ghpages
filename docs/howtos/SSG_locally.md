@@ -6,16 +6,14 @@ The gh_docs_bot is a custom C++ Static Site Generator (SSG) that allows you to b
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
 **Table of Contents**
 
-- [SSG manually / locally](#ssg-manually--locally)
-  - [Usage](#usage)
-    - [Inputs](#inputs)
-  - [Example](#example)
-    - [Project Structure](#project-structure)
-    - [Configuration](#configuration)
-    - [Execution](#execution)
+- [Usage](#usage)
+  - [Inputs](#inputs)
+- [Example](#example)
+  - [Project Structure](#project-structure)
+  - [Configuration](#configuration)
+  - [Execution](#execution)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
