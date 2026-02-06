@@ -110,7 +110,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 # Office Plugin (ODT/DOCX)
 add_library(plugin_office SHARED src/plugins/office_plugin.cpp)
-target_include_directories(plugin_office PRIVATE include)
+target_include_directories(plugin_office PRIVATE include ${md4c_SOURCE_DIR}/src)
 target_link_libraries(plugin_office PRIVATE pugixml::pugixml zip)
 set_target_properties(plugin_office PROPERTIES 
     PREFIX ""
@@ -222,7 +222,7 @@ set_target_properties(plugin_shortcode PROPERTIES
 
 # Info Plugin
 add_library(plugin_info SHARED src/plugins/info_plugin.cpp)
-target_include_directories(plugin_info PRIVATE include)
+target_include_directories(plugin_info PRIVATE include ${md4c_SOURCE_DIR}/src)
 set_target_properties(plugin_info PROPERTIES 
     PREFIX ""
     OUTPUT_NAME "plugin_info"
