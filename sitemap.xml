@@ -43,6 +43,9 @@
     <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/html.html</loc>
   </url>
   <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/info.html</loc>
+  </url>
+  <url>
     <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/markdown.html</loc>
   </url>
   <url>
@@ -50,6 +53,9 @@
   </url>
   <url>
     <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/minify.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/office.html</loc>
   </url>
   <url>
     <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/reading_time.html</loc>
