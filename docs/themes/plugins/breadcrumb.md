@@ -1,28 +1,14 @@
 # Breadcrumb Plugin
 
-The **Breadcrumb Plugin** automatically generates a breadcrumb navigation path.
-
----
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
-
-- [How it works](#how-it-works)
-- [Configuration](#configuration)
-- [Template Usage](#template-usage)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
----
+The **Breadcrumb Plugin** generates a navigation trail based on the site's directory structure.
 
 ## How it works
 
-Based on the directory structure of the source file, an HTML fragment is created that represents the path from the home page to the current file.
+The plugin analyzes the relative path of the current page and creates a sequence of links back to the root.
 
-- Folders are displayed as intermediate steps.
-- Since not every folder necessarily has an `index.html`, intermediate folders link to `#`.
-- The path is injected into the `{ breadcrumbs }}` template variable.
+## Variables (Template)
+
+- `[ breadcrumbs ]`: The generated HTML for the breadcrumb trail (e.g., `Home / Docs / Components`).
 
 ## Configuration
 
@@ -33,10 +19,10 @@ Enable in `fluid.cfg`:
 enabled=..., breadcrumb
 ```
 
-## Template Usage
-
-In your HTML template:
+## Example Usage
 
 ```html
-<main>{ breadcrumbs }} { content }}</main>
+<div class="header-breadcrumb">
+  [ breadcrumbs ]
+</div>
 ```

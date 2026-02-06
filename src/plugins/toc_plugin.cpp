@@ -6,9 +6,9 @@
  * SPDX-License-Identifier: MIT
  *
  * @file toc_plugin.cpp
- * @brief Implementation of the TOC Plugin.
- * @version 0.1.0
- * @date 2026-02-03
+ * @brief Implementation of the TOC Plugin with support for HTML and Markdown.
+ * @version 0.1.2
+ * @date 2026-02-06
  *
  * @author ZHENG Robert (robert@hase-zheng.net)
  * @copyright Copyright (c) 2026 ZHENG Robert
@@ -21,14 +21,18 @@
 #include <format>
 #include <iostream>
 #include <md4c.h>
+#include <regex>
 
 namespace ssg::plugins {
 
 std::string TocPlugin::slugify(const std::string &text) {
   std::string slug;
-  for (char c : text) {
-    if (std::isalnum(c)) {
-      slug += std::tolower(c);
+  // Remove HTML tags from text if any (e.g. from raw HTML headers)
+  std::string clean_text = std::regex_replace(text, std::regex("<[^>]*>"), "");
+
+  for (char c : clean_text) {
+    if (std::isalnum(static_cast<unsigned char>(c))) {
+      slug += static_cast<char>(std::tolower(static_cast<unsigned char>(c)));
     } else if (c == ' ' || c == '-') {
       if (!slug.empty() && slug.back() != '-') {
         slug += '-';
@@ -46,15 +50,13 @@ std::string TocPlugin::slugify(const std::string &text) {
   std::string final_slug = slug;
   int counter = 1;
   while (used_ids.contains(final_slug)) {
-    final_slug = std::format("{}-", slug, counter++);
+    final_slug = std::format("{}-{}", slug, counter++);
   }
   used_ids.insert(final_slug);
   return final_slug;
 }
 
-void TocPlugin::on_init(model::SiteContext &ctx) {
-  // Check config if needed
-}
+void TocPlugin::on_init(model::SiteContext &ctx) {}
 
 void TocPlugin::on_before_render(model::PageContext &ctx) {
   state = State{};
@@ -81,7 +83,7 @@ bool TocPlugin::on_md_text(MD_TEXTTYPE type, const char *text, MD_SIZE size,
                            model::PageContext &ctx, std::ostream &out) {
   if (state.in_header) {
     state.buffer.write(text, size);
-    return true; // Suppress default rendering, we buffer it
+    return true; // Suppress default rendering
   }
   return false;
 }
@@ -94,10 +96,7 @@ bool TocPlugin::on_md_block_leave(MD_BLOCKTYPE type, void *detail,
       std::string text = state.buffer.str();
       std::string id = slugify(text);
 
-      // 1. Store for TOC generation
       ctx.headers.push_back({state.current_level, text, id});
-
-      // 2. Render HTML with ID
       out << std::format("<h{} id=\"{}\">{}</h{}>\n", state.current_level, id,
                          text, state.current_level);
 
@@ -109,15 +108,58 @@ bool TocPlugin::on_md_block_leave(MD_BLOCKTYPE type, void *detail,
 }
 
 void TocPlugin::on_after_render(model::PageContext &ctx) {
+  // 1. If headers list is empty, it's likely a non-Markdown file or raw HTML.
+  //    Scan the generated HTML content for headers.
+  if (ctx.headers.empty()) {
+    std::regex header_regex(R"(<h([2-4])([^>]*)>(.*?)</h\1>)", std::regex_constants::icase);
+    std::regex id_regex(R"(id=["']([^"']*)["'])", std::regex_constants::icase);
+    
+    std::string new_html;
+    new_html.reserve(ctx.html_content.size());
+    
+    auto words_begin = std::sregex_iterator(ctx.html_content.begin(), ctx.html_content.end(), header_regex);
+    auto words_end = std::sregex_iterator();
+    
+    size_t last_pos = 0;
+    for (std::sregex_iterator i = words_begin; i != words_end; ++i) {
+      std::smatch match = *i;
+      new_html.append(ctx.html_content, last_pos, match.position() - last_pos);
+      
+      int level = std::stoi(match[1].str());
+      std::string attrs = match[2].str();
+      std::string content = match[3].str();
+      
+      std::string id;
+      std::smatch id_match;
+      if (std::regex_search(attrs, id_match, id_regex)) {
+        id = id_match[1].str();
+        // Register existing ID to avoid collisions
+        used_ids.insert(id);
+      } else {
+        id = slugify(content);
+        // Inject ID into the tag
+        attrs += std::format(" id=\"{}\"", id);
+      }
+      
+      ctx.headers.push_back({level, content, id});
+      new_html += std::format("<h{}{}>{}</h{}>", level, attrs, content, level);
+      
+      last_pos = match.position() + match.length();
+    }
+    new_html.append(ctx.html_content, last_pos, std::string::npos);
+    ctx.html_content = new_html;
+  }
+
   if (ctx.headers.empty())
     return;
 
+  // 2. Generate TOC HTML
   std::stringstream html;
   html << "<div class=\"toc\">\n";
   html << "<h3>Table of Contents</h3>\n";
 
-  // Initialize with the level of the first header to avoid empty opening lists
-  int current_level = ctx.headers[0].level;
+  int start_level = ctx.headers[0].level;
+  int current_level = start_level;
   html << "<ul class=\"toc-level-" << current_level << "\">\n";
 
   for (const auto &h : ctx.headers) {
@@ -132,35 +174,23 @@ void TocPlugin::on_after_render(model::PageContext &ctx) {
         current_level--;
       }
     }
-    // Now we are at the correct level, write the item
     html << std::format("<li><a href=\"#{}\">{}</a></li>\n", h.id, h.text);
   }
 
-  // Close remaining lists back to the starting level
-  // Note: We don't know the absolute start level anymore easily unless we
-  // stored it, but we can just close until we match the stack depth? Actually,
-  // we just need to close everything we opened. But wait, the first <ul> was
-  // opened manually. If we end at level 3, and started at level 1. We need to
-  // close 3 and 2. The 1 is closed at the very end.
-
-  while (current_level > ctx.headers[0].level) {
+  while (current_level > start_level) {
     html << "</ul>\n";
     current_level--;
   }
-  html << "</ul>\n"; // Close the root list
-  html << "</div>\n";
+  html << "</ul>\n</div>\n";
 
-  // Inject into metadata
   ctx.meta_data["toc"] = html.str();
 
-  // Also support placeholder replacement for legacy compat
+  // 3. Support legacy placeholder replacement
   std::string placeholder_start = "<!-- START doctoc generated TOC";
   std::string placeholder_end = "<!-- END doctoc generated TOC";
 
   size_t start = ctx.html_content.find(placeholder_start);
   size_t end = ctx.html_content.find(placeholder_end);
-
-  // ... (previous content)
 
   if (start != std::string::npos && end != std::string::npos && end > start) {
     size_t content_start = ctx.html_content.find("-->", start) + 3;
@@ -172,8 +202,6 @@ void TocPlugin::on_after_render(model::PageContext &ctx) {
 }
 
 } // namespace ssg::plugins
-
-// --- Factory Functions ---
 
 extern "C" ssg::core::IPlugin *create_plugin(ssg::core::IPluginHost *host) {
   return new ssg::plugins::TocPlugin();

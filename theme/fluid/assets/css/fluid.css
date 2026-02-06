@@ -21,6 +21,10 @@
   }
 }
 
+@view-transition {
+  navigation: auto;
+}
+
 html {
   font-size: var(--font-size-root);
   font-synthesis: none;
@@ -108,14 +112,6 @@ h6 {
 .brief::before {
   opacity: 0.5;
   content: "» ";
-}
-
-.text {
-  max-width: 70ch;
-  padding: 3em 1em;
-  margin: auto;
-  line-height: 1.75;
-  text-wrap: pretty;
 }
 
 /* ---------------------------------------------------------
@@ -237,6 +233,7 @@ h6 {
   color: oklch(0.99 0 0);
 }
 
+#share-btn:hover svg,
 #themeToggle:hover svg,
 #searchTrigger:hover svg {
   color: var(--color-primary-dark);
@@ -634,6 +631,27 @@ h6 {
 .tab.active {
   background: var(--color-primary);
   color: oklch(0.99 0 0);
+}
+
+.tab-panel {
+  display: none;
+  animation: fadeInTab 0.3s ease;
+}
+
+.tab-panel.is-active {
+  display: block;
+}
+
+@keyframes fadeInTab {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Modal */
@@ -1152,6 +1170,13 @@ ul[class^="toc-level-"] a::before {
 }
 
 /* Text */
+.text {
+  max-width: 70ch;
+  padding: 3em 1em;
+  margin: auto;
+  line-height: 1.75;
+  text-wrap: pretty;
+}
 .text-left {
   text-align: left;
 }

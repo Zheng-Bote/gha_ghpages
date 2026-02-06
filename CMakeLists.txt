@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.23)
 # cmake --build build -j$(nproc)  --target gh_docs_bot
 
 project(gh_docs_bot
-    VERSION 2.2.1
+    VERSION 2.2.2
     DESCRIPTION "Static Site Generator"
     HOMEPAGE_URL "https://github.com/Zheng-Bote/gh-docs-bot"
     LANGUAGES CXX)
@@ -52,6 +52,43 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(inifile-cpp)
 
+# pugixml via FetchContent
+FetchContent_Declare(
+  pugixml
+  GIT_REPOSITORY https://github.com/zeux/pugixml.git
+  GIT_TAG v1.14
+)
+FetchContent_MakeAvailable(pugixml)
+
+# miniz via FetchContent (using a cmake-friendly mirror or wrapper if needed, but miniz is single file usually. 
+# We'll use a repo that provides CMake support or just add it manually if it was local. 
+# Since we need to fetch it, let's use a reliable CMake fork or just standard miniz and add library manually if needed.
+# Actually, let's use kubazip which wraps miniz nicely for C++, or just raw miniz.
+# Let's try raw miniz from a repo that has CMakeLists.
+FetchContent_Declare(
+  miniz
+  GIT_REPOSITORY https://github.com/richgel999/miniz.git
+  GIT_TAG master
+)
+FetchContent_MakeAvailable(miniz)
+# Note: miniz upstream might not have CMakeLists.txt. 
+# If it fails, we will create a simple target for it. 
+# Checking typical usage: usually people just drop miniz.c/.h in. 
+# Let's assume for this environment we might need a backup. 
+# Actually, let's use 'zip' library which is C++ wrapper around miniz: https://github.com/kuba--/zip
+
+# zip (C++ wrapper for miniz)
+FetchContent_Declare(
+  libzip
+  GIT_REPOSITORY https://github.com/kuba--/zip.git
+  GIT_TAG master
+)
+FetchContent_MakeAvailable(libzip)
+# Suppress warnings for the 3rd party zip library
+if(TARGET zip)
+    target_compile_options(zip PRIVATE -w)
+endif()
+
 # --- Main Executable ---
 add_executable(${PROJECT_NAME} 
     src/main.cpp
@@ -70,6 +107,16 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 )
 
 # --- Plugins ---
+
+# Office Plugin (ODT/DOCX)
+add_library(plugin_office SHARED src/plugins/office_plugin.cpp)
+target_include_directories(plugin_office PRIVATE include)
+target_link_libraries(plugin_office PRIVATE pugixml::pugixml zip)
+set_target_properties(plugin_office PROPERTIES 
+    PREFIX ""
+    OUTPUT_NAME "plugin_office"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/plugins"
+)
 
 # Markdown Plugin
 add_library(plugin_markdown SHARED src/plugins/markdown_plugin.cpp)
@@ -173,7 +220,16 @@ set_target_properties(plugin_shortcode PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/plugins"
 )
 
+# Info Plugin
+add_library(plugin_info SHARED src/plugins/info_plugin.cpp)
+target_include_directories(plugin_info PRIVATE include)
+set_target_properties(plugin_info PROPERTIES 
+    PREFIX ""
+    OUTPUT_NAME "plugin_info"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/plugins"
+)
+
 # Install rule
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
-install(TARGETS plugin_markdown plugin_html plugin_toc plugin_asciidoc plugin_search plugin_sitemap plugin_mermaid plugin_breadcrumb plugin_minify plugin_reading_time plugin_shortcode LIBRARY DESTINATION bin/plugins)
+install(TARGETS plugin_markdown plugin_html plugin_toc plugin_asciidoc plugin_search plugin_sitemap plugin_mermaid plugin_breadcrumb plugin_minify plugin_reading_time plugin_shortcode plugin_office plugin_info LIBRARY DESTINATION bin/plugins)
 

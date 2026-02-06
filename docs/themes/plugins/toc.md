@@ -1,23 +1,22 @@
 # TOC Plugin
 
-The **Table of Contents (TOC) Plugin** automatically generates a table of contents.
+The **Table of Contents (TOC) Plugin** automatically generates a hierarchical list of headings.
 
 ## How it works
 
-The plugin hooks into the Markdown parsing process:
+The plugin scans the rendered content for `H2`, `H3`, and `H4` tags, generates unique IDs for them, and builds a nested list.
 
-1. It intercepts headings (`H2` to `H4`).
-2. It automatically generates a URL-friendly ID (slug) for each heading (e.g., "My Heading" -> `#my-heading`).
-3. It creates a hierarchical list (`<ul>`) of all headings.
-4. The result is stored in the `{{ toc }}` variable.
+## Variables (Template)
+
+- `[ toc ]`: The generated HTML list for the table of contents.
 
 ## Legacy Support
 
-If your template or content still contains old `doctoc` markers, they will also be replaced:
+Replaces old `doctoc` markers if present:
 
 ```html
-<!-- START doctoc generated TOC ... -->
-<!-- END doctoc generated TOC ... -->
+<!-- START doctoc ... -->
+<!-- END doctoc ... -->
 ```
 
 ## Configuration
@@ -28,3 +27,14 @@ Enable in `fluid.cfg`:
 [plugins]
 enabled=..., toc
 ```
+
+## Example Usage
+
+```html
+<aside class="sidebar">
+  <h3>Contents</h3>
+  [ toc ]
+</aside>
+```
+
+_Note: In the examples above, `[]` is used instead of the usual double-curly braces to avoid parsing issues in some environments._

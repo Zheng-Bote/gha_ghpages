@@ -1,22 +1,43 @@
-<h1 id="gh_docs_bot">gh_docs_bot</h1>
-<p>
-  <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License" />
-  <img
-    src="https://img.shields.io/badge/platform-Github_Action-lightgrey.svg"
-    alt="Platform"
-  />
-  <a href="https://github.com/Zheng-Bote/gha_ghpages/releases"
-    ><img
-      src="https://img.shields.io/github/v/release/Zheng-Bote/gha_ghpages?logo=GitHub"
-      alt="GitHub release (latest by date)"
-  /></a>
-</p>
-<p>
-  <strong>gh_docs_bot</strong> is a high-performance, custom C++ Static Site
-  Generator (SSG) packaged as a reusable GitHub Action. It is designed to
-  automatically build and deploy static documentation websites from
-  Markdown/HTML files directly within your GitHub workflows.
-</p>
+<div id="top" align="center">
+  <h1 id="gh_docs_bot">Static Site Generator</h1>
+  <span class="text-muted">gh_docs_bot</span>
+  <p>
+    <img
+      src="https://img.shields.io/badge/license-MIT-green.svg"
+      alt="License"
+    />
+    <img
+      src="https://img.shields.io/badge/platform-Github_Action_|_Linux-lightgrey.svg"
+      alt="Platform"
+    />
+    <a href="https://github.com/Zheng-Bote/gha_ghpages/releases"
+      ><img
+        src="https://img.shields.io/github/v/release/Zheng-Bote/gha_ghpages?logo=GitHub"
+        alt="GitHub release (latest by date)"
+    /></a>
+  </p>
+
+  <div class="flex items-center gap-4 mb-6">
+    <img
+      src="{{ base_path }}assets/img/ssg-logo_500x500.png"
+      alt="Logo"
+      title="Logo"
+      loading="lazy"
+      decoding="async"
+      fetchpriority="high"
+      width="300"
+      height="300"
+      style="flex-shrink: 0"
+    />
+    <p class="text-left">
+      <strong>gh_docs_bot</strong> is a high-performance, custom C++ Static Site
+      Generator (SSG) packaged as a reusable GitHub Action. It is designed to
+      automatically build and deploy static documentation websites from
+      Markdown/HTML files directly within your GitHub workflows.
+    </p>
+  </div>
+</div>
+
 <hr />
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -71,16 +92,18 @@
 </p>
 <h3 id="quick-start">Quick Start</h3>
 <p>Add the following step to your <code>.github/workflows/deploy.yml</code>:</p>
-<div class="sourceCode" id="cb1">
-  <pre
-    class="sourceCode yaml"
-  ><code class="sourceCode yaml"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">-</span><span class="at"> </span><span class="fu">name</span><span class="kw">:</span><span class="at"> Build and Generate Site</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">uses</span><span class="kw">:</span><span class="at"> Zheng-Bote/gha_ghpages@main</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="at">  </span><span class="fu">with</span><span class="kw">:</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">template</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;theme/desktop/template.html&quot;</span><span class="co"> # Path to your HTML template</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">assets</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;theme/tron/assets&quot;</span><span class="co"> # Path to your assets</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">output</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;public&quot;</span><span class="co"> # Output directory</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="at">    </span><span class="fu">docs</span><span class="kw">:</span><span class="at"> </span><span class="st">&quot;docs&quot;</span><span class="co"> # Directory with Markdown (*.md) and/or HTM (*.htm) files</span></span></code></pre>
+<div>
+  <pre>
+    <code>
+    name: Build and Generate Site
+    uses: Zheng-Bote/gha_ghpages@main
+    with:
+      template: "theme/desktop/template.html" # Path to your HTML template
+      assets: "theme/tron/assets" # Path to your assets
+      output: "public" # Output directory
+      docs: "docs" # Directory with Markdown (*.md) and/or HTM (*.htm) files
+    </code>
+  </pre>
 </div>
 <blockquote>
   <p>[!TIP] <em>see themes folder for examples</em></p>

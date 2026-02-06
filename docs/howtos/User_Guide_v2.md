@@ -4,17 +4,19 @@
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
-- [1. Prerequisites](#1-prerequisites)
-- [2. Installation / Building](#2-installation--building)
-- [3. Usage](#3-usage)
-  - [Example](#example)
-- [4. Configuration (`config.cfg`)](#4-configuration-configcfg)
-- [5. Content Features](#5-content-features)
-  - [5.1 Frontmatter / Metadata](#51-frontmatter--metadata)
-  - [5.2 Table of Contents (TOC)](#52-table-of-contents-toc)
-  - [5.3 Navigation](#53-navigation)
+- [User Guide](#user-guide)
+  - [1. Prerequisites](#1-prerequisites)
+  - [2. Installation / Building](#2-installation--building)
+  - [3. Usage](#3-usage)
+    - [Example](#example)
+  - [4. Configuration (`config.cfg`)](#4-configuration-configcfg)
+  - [5. Content Features](#5-content-features)
+    - [5.1 Frontmatter / Metadata](#51-frontmatter--metadata)
+    - [5.2 Table of Contents (TOC)](#52-table-of-contents-toc)
+    - [5.3 Navigation](#53-navigation)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -88,7 +90,7 @@ Currently, the SSG treats the filename as the title.
 ### 5.2 Table of Contents (TOC)
 
 The TOC is automatically generated for headers `H1` to `H4`.
-It is injected into the HTML template variable `{{ toc }}`.
+It is injected into the HTML template variable `{ toc }}`.
 
 If you are using Legacy templates, it also replaces the comment markers:
 

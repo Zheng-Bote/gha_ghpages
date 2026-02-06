@@ -1,0 +1,115 @@
+name: C++ Quality & Security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  codeql:
+    name: CodeQL Security Scan
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: cpp
+
+      - name: Build with CMake
+        run: |
+          cmake -S . -B build
+          cmake --build build --parallel
+
+      - name: Analyze
+        uses: github/codeql-action/analyze@v3
+
+  cppcheck:
+    name: Cppcheck Static Analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Cppcheck
+        run: sudo apt-get update && sudo apt-get install -y cppcheck
+
+      - name: Configure CMake (generate compile_commands.json)
+        run: |
+          cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+          cp build/compile_commands.json .
+
+      - name: Run Cppcheck
+        run: |
+          cppcheck \
+            --enable=all \
+            --inconclusive \
+            --std=c++20 \
+            --project=compile_commands.json \
+            --error-exitcode=1 \
+            2> cppcheck-report.txt
+
+      - name: Upload Cppcheck Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: cppcheck-report
+          path: cppcheck-report.txt
+
+  cvecheck:
+    name: Generate CVE-Report
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.x"
+
+      - name: Install cve-bin-tool
+        run: pipx install cve-bin-tool
+
+      - name: CVE Report
+        run: |
+          cve-bin-tool --sbom cyclonedx --sbom-file ./docs/cyclonedx-${{ steps.version.outputs.version }}.json \
+          --format json --output cve-report-${{ steps.version.outputs.version }}.json
+          --disable-data-source OSV,EPSS --cvss 9 || true
+
+      - name: Upload CVE Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: cve-report
+          path: cve-report-${{ steps.version.outputs.version }}.json
+
+  clang_tidy:
+    name: Clang-Tidy Linting
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Clang & Tools
+        run: sudo apt-get update && sudo apt-get install -y clang clang-tidy
+
+      - name: Configure CMake (export compile_commands.json)
+        run: |
+          cmake -S . -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+          cp build/compile_commands.json .
+
+      - name: Run Clang-Tidy
+        run: |
+          clang-tidy \
+            -p . \
+            $(git ls-files '*.cpp') \
+            > clang-tidy-report.txt || true
+
+      - name: Upload Clang-Tidy Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: clang-tidy-report
+          path: clang-tidy-report.txt

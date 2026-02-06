@@ -432,7 +432,8 @@
   /* #f8f9fa converted to oklch */
   --color-bg-light: oklch(0.98 0.01 240);
   /* #ffffff panel */
-  --color-bg-alt-light: oklch(1 0 0);
+  /*--color-bg-alt-light: oklch(1 0 0); */
+  --color-bg-alt-light: oklch(0.99 0.01 250);
   --color-bg-elevated-light: oklch(0.96 0.01 240);
 
   /* Text & Border */

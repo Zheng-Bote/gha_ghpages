@@ -1,0 +1,164 @@
+/**
+ * SPDX-FileComment: Shortcode Plugin Implementation
+ * SPDX-FileType: SOURCE
+ * SPDX-FileContributor: ZHENG Robert
+ * SPDX-FileCopyrightText: 2026 ZHENG Robert
+ * SPDX-License-Identifier: MIT
+ *
+ * @file shortcode_plugin.cpp
+ * @brief Replaces shortcodes like [[ name: args ]] with HTML.
+ * @version 0.1.2
+ * @date 2026-02-04
+ *
+ * @author ZHENG Robert (robert@hase-zheng.net)
+ * @copyright Copyright (c) 2026 ZHENG Robert
+ *
+ * @license MIT License
+ */
+
+#include "core/interfaces.hpp"
+#include <iostream>
+#include <string>
+#include <map>
+#include <functional>
+#include <sstream>
+#include <format>
+#include <algorithm>
+
+namespace ssg::plugins {
+
+class ShortcodePlugin : public core::IPlugin {
+    using ShortcodeHandler = std::function<std::string(const std::map<std::string, std::string>&)>;
+    std::map<std::string, ShortcodeHandler> handlers;
+
+    std::string trim(const std::string& s) {
+        auto start = s.find_first_not_of(" \t\r\n");
+        if (start == std::string::npos) return "";
+        auto end = s.find_last_not_of(" \t\r\n");
+        return s.substr(start, end - start + 1);
+    }
+
+    std::map<std::string, std::string> parse_args(const std::string& args_str) {
+        std::map<std::string, std::string> args;
+        std::stringstream ss(args_str);
+        std::string segment;
+        int positional_index = 0;
+
+        while (std::getline(ss, segment, ',')) {
+            segment = trim(segment);
+            if (segment.empty()) continue;
+
+            size_t eq_pos = segment.find('=');
+            if (eq_pos != std::string::npos) {
+                std::string key = trim(segment.substr(0, eq_pos));
+                std::string val = trim(segment.substr(eq_pos + 1));
+                
+                // Remove surrounding quotes if any
+                if (val.size() >= 2 && ((val.front() == '"' && val.back() == '"') || (val.front() == '\'' && val.back() == '\''))) {
+                    val = val.substr(1, val.size() - 2);
+                }
+                args[key] = val;
+            } else {
+                args["_"] = std::to_string(positional_index++) + ":" + segment;
+            }
+        }
+        return args;
+    }
+
+public:
+    std::string name() const override { return "Shortcode Processor"; }
+    std::string version() const override { return "1.0.2"; }
+    std::string description() const override { return "Processes [[ shortcode ]] syntax"; }
+
+    ShortcodePlugin() {
+        handlers["youtube"] = [](const auto& args) -> std::string {
+            std::string id = args.count("id") ? args.at("id") : (args.count("_0") ? args.at("_0") : "");
+            if (id.empty()) return "<!-- Missing YouTube ID -->";
+            return std::format(R"(<div class=\"video-container\"><iframe src=\"https://www.youtube.com/embed/{}\" frameborder=\"0\" allowfullscreen></iframe></div>)", id);
+        };
+
+        handlers["alert"] = [](const auto& args) -> std::string {
+            std::string type = args.count("type") ? args.at("type") : "info";
+            std::string text = args.count("text") ? args.at("text") : (args.count("_0") ? args.at("_0") : "");
+            std::string class_name = "info-msg";
+            if (type == "warning") class_name = "warning-msg";
+            else if (type == "error") class_name = "error-msg";
+            else if (type == "success") class_name = "success-msg";
+            return std::format(R"(<div class=\"{}\">{}</div>)", class_name, text);
+        };
+
+        handlers["button"] = [](const auto& args) -> std::string {
+            std::string url = args.count("url") ? args.at("url") : "#";
+            std::string text = args.count("text") ? args.at("text") : (args.count("_0") ? args.at("_0") : "Click");
+            std::string alt = args.count("alt") ? args.at("alt") : text;
+            std::string title = args.count("title") ? args.at("title") : url;
+            std::string type = args.count("type") ? args.at("type") : "primary";
+            return std::format(R"(<a href=\"{}\" class=\"btn btn-{}\" alt=\"{}\" title=\"{}`{}`\">{}</a>)", url, type, alt, title, text);
+        };
+
+        handlers["test"] = [](const auto& args) -> std::string {
+            return "SHORTCODE_TEST_OK";
+        };
+    }
+
+    void on_before_render(model::PageContext& ctx) override {
+        const std::string& content = ctx.raw_content;
+        if (content.empty()) return;
+
+        std::string result;
+        result.reserve(content.size());
+        
+        size_t last_pos = 0;
+        size_t start_pos = 0;
+        
+        while ((start_pos = content.find("[[", last_pos)) != std::string::npos) {
+            // 1. Append everything before the [[
+            result.append(content, last_pos, start_pos - last_pos);
+            
+            // 2. Find matching ]]
+            size_t end_pos = content.find("]]]", start_pos + 2);
+            if (end_pos == std::string::npos) {
+                // Malformed, no closing ]], just stop here
+                last_pos = start_pos;
+                break; 
+            }
+            
+            // 3. Extract content between [[ and ]]
+            std::string inner = content.substr(start_pos + 2, end_pos - (start_pos + 2));
+            
+            // 4. Split name and args at the first colon
+            size_t colon_pos = inner.find(':');
+            if (colon_pos != std::string::npos) {
+                std::string name = trim(inner.substr(0, colon_pos));
+                std::string args_str = inner.substr(colon_pos + 1);
+                
+                if (handlers.contains(name)) {
+                    // Success: process and append
+                    result += handlers[name](parse_args(args_str));
+                    last_pos = end_pos + 2;
+                    continue;
+                }
+            }
+            
+            // 5. If it's not a recognized shortcode, keep the [[ and move on
+            result.append("[[");
+            last_pos = start_pos + 2;
+        }
+        
+        // Append whatever is left in the source file
+        result.append(content, last_pos, std::string::npos);
+        ctx.raw_content = result;
+    }
+};
+
+} // namespace ssg::plugins
+
+// --- Factory Functions ---
+
+extern "C" ssg::core::IPlugin* create_plugin(ssg::core::IPluginHost* host) {
+    return new ssg::plugins::ShortcodePlugin();
+}
+
+extern "C" void destroy_plugin(ssg::core::IPlugin* plugin) {
+    delete plugin;
+}

@@ -6,6 +6,7 @@
 /* 1) Viewport-Variable: Default + Desktop-Override */
 :root {
   --viewport-height: 100dvh; /* Mobile & Default */
+  /*--viewport-width: 100dvw;*/
 }
 
 /* =========================================================
@@ -38,6 +39,7 @@ select {
 /* 2) App-Shell: Header / Content / Footer */
 .app-shell {
   min-height: var(--viewport-height);
+  /*min-width: var(--viewport-width);*/
   display: grid;
   grid-template-rows: auto 1fr auto;
 }
@@ -97,6 +99,10 @@ select {
 /* 4) Main-Content ohne Sidebar */
 .site-main {
   padding: var(--space-4);
+}
+
+hr {
+  border: 0.01em solid var(--border);
 }
 
 /* 5) Layout mit Sidebar (Dashboard, Settings, Profile) */

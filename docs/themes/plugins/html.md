@@ -1,28 +1,10 @@
 # HTML Plugin
 
-The **HTML Plugin** is a simple pass-through renderer for `.html` and `.htm` files.
-
----
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
-
-- [How it works](#how-it-works)
-- [Features](#features)
-- [Configuration](#configuration)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
----
+The **HTML Plugin** allows you to use standard `.html` and `.htm` files as source content.
 
 ## How it works
 
-Files with the `.html` extension are not converted but embedded directly into the page template. This is useful for pages requiring specific HTML markup that is difficult to represent in Markdown.
-
-## Features
-
-- **Header Extraction:** The plugin scans HTML content for `<h2>` to `<h4>` tags with `id` attributes and adds them to the Table of Contents (TOC).
+The plugin simply reads the HTML file and provides it as the `[ content ]` for the template. This allows you to mix hand-crafted HTML pages with generated content while keeping the same site theme and navigation.
 
 ## Configuration
 

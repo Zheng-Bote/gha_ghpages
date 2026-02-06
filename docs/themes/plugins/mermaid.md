@@ -1,37 +1,24 @@
 # Mermaid Plugin
 
-The **Mermaid Plugin** enables rendering of diagrams directly in the browser.
-
----
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
-
-- [How it works](#how-it-works)
-- [Features](#features)
-- [Configuration](#configuration)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
----
+The **Mermaid Plugin** enables rendering of diagrams and flowcharts using [Mermaid.js](https://mermaid.js.org/).
 
 ## How it works
 
-The plugin searches Markdown files for code blocks with the language `mermaid`:
+1. It detects Markdown code blocks tagged with `mermaid`.
+2. It wraps the content in a `<div class="mermaid">`.
+3. It automatically injects the necessary Mermaid.js `<script>` at the end of the page.
 
-    ```mermaid
-    graph TD;
-        A-->B;
-        A-->C;
-    ```
+## Usage
 
-It converts these blocks into `<div class="mermaid">` containers and automatically injects the Mermaid.js script from a CDN if diagrams are present on the page.
+In your Markdown file:
 
-## Features
-
-- **HTML Escaping:** Special characters in diagram text (like `<` or `>`) are correctly escaped so the browser doesn't interpret them as HTML tags.
-- **Auto-Load:** The script is only loaded when needed.
+<pre><code>```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```</code></pre>
 
 ## Configuration
 
