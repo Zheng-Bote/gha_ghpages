@@ -1,3 +1,14 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Search Plugin](#search-plugin)
+  - [How it works](#how-it-works)
+  - [Configuration](#configuration)
+  - [Integration](#integration)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Search Plugin
 
 The **Search Plugin** generates a client-side search index.
