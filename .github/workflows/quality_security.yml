@@ -22,6 +22,11 @@ jobs:
         with:
           languages: cpp
 
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev wget pipx cmake ninja-build build-essential gcc-14 g++-14 libboost-dev libboost-system-dev libboost-date-time-dev libboost-regex-dev libboost-test-dev libssl-dev libsqlite3-dev
+
       - name: Build with CMake
         run: |
           cmake -S . -B build
@@ -39,6 +44,11 @@ jobs:
 
       - name: Install Cppcheck
         run: sudo apt-get update && sudo apt-get install -y cppcheck
+
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev wget pipx cmake ninja-build build-essential gcc-14 g++-14 libboost-dev libboost-system-dev libboost-date-time-dev libboost-regex-dev libboost-test-dev libssl-dev libsqlite3-dev
 
       - name: Configure CMake (generate compile_commands.json)
         run: |
