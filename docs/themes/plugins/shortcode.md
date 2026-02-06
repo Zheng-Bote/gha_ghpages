@@ -1,3 +1,17 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Shortcode Plugin](#shortcode-plugin)
+  - [Syntax](#syntax)
+  - [Available Shortcodes](#available-shortcodes)
+    - [Alert](#alert)
+    - [Button](#button)
+    - [YouTube](#youtube)
+  - [Configuration](#configuration)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Shortcode Plugin
 
 The **Shortcode Plugin** provides a powerful syntax for embedding dynamic components using `[[ name: args ]]`.

@@ -15,8 +15,13 @@ The plugin scans the rendered content for `H2`, `H3`, and `H4` tags, generates u
 Replaces old `doctoc` markers if present:
 
 ```html
-<!-- START doctoc ... -->
-<!-- END doctoc ... -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Example Usage](#example-usage)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 ```
 
 ## Configuration

@@ -1,3 +1,15 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Office Plugin](#office-plugin)
+  - [How it works](#how-it-works)
+  - [Supported Features](#supported-features)
+  - [Configuration](#configuration)
+  - [Template Usage](#template-usage)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Office Plugin
 
 The **Office Plugin** allows you to use Microsoft Word (`.docx`) and OpenDocument Text (`.odt`) files as source content for your static site.
