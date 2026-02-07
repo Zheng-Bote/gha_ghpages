@@ -30,11 +30,10 @@
       style="flex-shrink: 0"
     />
     <p class="text-left">
-      <strong>gh_docs_bot</strong> is a high-performance, custom C++ Static Site
-      Generator (SSG) packaged as a reusable GitHub Action. It is designed to
-      automatically build and deploy static documentation websites from
-      Markdown/HTML/AsciiDoc/odt & docx... files directly within your GitHub
-      workflows.
+      **gh_docs_bot** is a high-performance C++ Static Site Generator (SSG)
+      built as a reusable GitHub Action. It is designed to automatically build
+      and deploy static documentation websites from Markdown, HTML, AsciiDoc,
+      and Office files (ODT/DOCX) directly within your GitHub workflows.
     </p>
   </div>
 </div>
@@ -47,20 +46,25 @@
 <hr />
 <h2 id="description">Description</h2>
 <p>
-  Github Action for building and deploying static documentation websites from
-  Markdown/HTML files directly within your GitHub workflows.
+  Github Action for building and deploying static documentation websites
+  directly within your GitHub workflows.
 </p>
 <p>
   A lightweight, high-performance Static Site Generator that converts a
-  directory of Markdown/HTML files into a static HTML website. It features
-  recursive directory scanning, automatic navigation generation, modern
-  templating and automated asset management.
+  directory of content files into a static HTML website. It features recursive
+  directory scanning, automatic navigation generation, modern templating, and
+  automated asset management.
 </p>
 <h2 id="features">🚀 Features</h2>
 <ul>
   <li>
     <strong>High Performance</strong>: Built with <strong>C++23</strong>,
     utilizing <code>md4c</code> for ultra-fast Markdown processing.
+  </li>
+  <li>
+    <strong>Extensible Plugin System</strong>: Modular architecture allowing
+    dynamic content generation. Includes already a set of powerful built-in
+    plugins.
   </li>
   <li>
     <strong>Zero-Config Bundle</strong>: The GitHub Action handles all
@@ -71,6 +75,14 @@
     <strong>Customizable</strong>: Uses
     <a href="https://github.com/pantor/inja">Inja</a> for flexible HTML
     templating.
+  </li>
+  <li>
+    <strong>Multi-Format Support</strong>: Supports Markdown, HTML, AsciiDoc,
+    ODT, and DOCX files.
+  </li>
+  <li>
+    <strong>GH-Pages Templates</strong>: Includes a set of beautiful and
+    responsive templates for GitHub Pages.
   </li>
   <li>
     <strong>GitHub Pages Ready</strong>: Optimized for deploying directly to
