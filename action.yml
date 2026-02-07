@@ -5,7 +5,7 @@ inputs:
   template:
     description: "Path to HTML template file"
     required: false
-    default: "theme/template.html"
+    default: "theme/desktop/fluid_template.html"
   output:
     description: "Output directory for generated HTML"
     required: false
@@ -17,7 +17,7 @@ inputs:
   assets:
     description: "Directory containing additional assets"
     required: false
-    default: "theme/blue/assets"
+    default: "theme/fluid/assets"
   base_path:
     description: "Base path for the generated site"
     required: false
@@ -63,7 +63,7 @@ runs:
         echo "toc=${{ inputs.toc }}" >> config.cfg
         echo "[plugins]" >> config.cfg
         echo "path=./build/plugins" >> config.cfg
-        echo "enabled=markdown, html, toc, asciidoc, search, sitemap, mermaid, breadcrumb, reading_time, shortcode, minify" >> config.cfg
+        echo "enabled=markdown, html, toc, asciidoc, search, sitemap, mermaid, breadcrumb, reading_time, shortcode, minify, office, info, emoji
         echo "[reading_time]" >> config.cfg
         echo "threshold=200" >> config.cfg
         echo "wpm=200" >> config.cfg
