@@ -1,0 +1,274 @@
+<!doctype html><html lang="en" data-theme="auto" data-base-path="https://zheng-bote.github.io/gha_ghpages/"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>gh_docs_bot: Fluid_UI</title><link rel="stylesheet" href="https://zheng-bote.github.io/gha_ghpages/assets/css/tokens.css" /><link rel="stylesheet" href="https://zheng-bote.github.io/gha_ghpages/assets/css/layouts.css" /><link rel="stylesheet" href="https://zheng-bote.github.io/gha_ghpages/assets/css/fluid.css" /><meta
+      name="description"
+      content="gh_docs_bot is a high-performance, custom C++ Static Site Generator (SSG) packaged as a reusable GitHub Action. It is designed to automatically build and deploy static documentation websites from Markdown and HTML files directly within your GitHub workflows."
+    /><meta
+      name="keywords"
+      content="Github Action, Static Site Generator, SSG, Documentation, Markdown, HTML, GitHub Workflows, ZHENG Robert, Robert Zheng, ZHENG Bote, 郑 伯特"
+    /><meta name="author" content="Zheng Robert" /><meta name="robots" content="index, follow" /><meta name="googlebot" content="index, follow" /><link
+      rel="icon"
+      href="https://zheng-bote.github.io/gha_ghpages/assets/icons/favicon.svg"
+      type="image/svg+xml"
+    /><link
+      rel="apple-touch-icon"
+      href="https://zheng-bote.github.io/gha_ghpages/assets/icons/apple-touch-icon.png"
+    /><link rel="shortcut icon" href="https://zheng-bote.github.io/gha_ghpages/assets/favicon.ico" /></head><body class="app-shell"><header class="site-header"><div class="header-left"><img
+          src="https://zheng-bote.github.io/gha_ghpages/assets/favicon.svg"
+          alt="Logo"
+          title="Home"
+          loading="eager"
+          decoding="async"
+          fetchpriority="high"
+        />gh_docs_bot
+      </div><div class="header-center">Fluid_UI</div><div class="header-right flex items-center justify-end gap-3"><button id="searchTrigger" class="btn btn-icon btn-ghost" aria-label="Search"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></button><button id="share-btn" class="btn btn-icon btn-ghost" aria-label="Share" style="display: none;"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line></svg></button><button id="themeToggle" class="btn btn-icon btn-ghost"><span id="themeIcon"></span></button><select id="themeSelect" class="select-control" style="width: auto"><option value="blue">Blue</option><option value="emerald">Emerald</option><option value="amber">Amber</option><option value="berry">Berry</option><option value="violet">Violet</option><option value="slate">Slate</option><option value="cyan">Cyan</option><option value="blue2">Blue 2</option><option value="matrix">Matrix</option><option value="tron">Tron</option></select><rz-fontsize><rz-fontsize/></div></header><div class="layout-with-sidebar"><aside class="sidebar"><ul class="nav-list"><li><strong>architecture</strong><ul class="nav-list"><li><a href="../architecture/overview.html">overview</a></li><li><a href="../architecture/update_v2.html">update v2</a></li></ul></li><li><strong>development</strong><ul class="nav-list"><li><a href="../development/Plugin_dev_guide.html">Plugin dev guide</a></li><li><a href="../development/build.html">build</a></li></ul></li><li><strong>howtos</strong><ul class="nav-list"><li><a href="../howtos/Github_Action.html">Github Action</a></li><li><a href="../howtos/SSG_locally.html">SSG locally</a></li><li><a href="../howtos/User_Guide_v2.html">User Guide v2</a></li></ul></li><li><strong>screenshots</strong><ul class="nav-list"><li><a href="../screenshots/themes.html">themes</a></li></ul></li><li><strong>themes</strong><ul class="nav-list"><li><a href="../themes/Fluid_UI.html" class="active">Fluid UI</a></li><li><a href="../themes/Web_Components.html">Web Components</a></li><li><strong>plugins</strong><ul class="nav-list"><li><a href="../themes/plugins/asciidoc.html">asciidoc</a></li><li><a href="../themes/plugins/breadcrumb.html">breadcrumb</a></li><li><a href="../themes/plugins/emoji.html">emoji</a></li><li><a href="../themes/plugins/html.html">html</a></li><li><a href="../themes/plugins/info.html">info</a></li><li><a href="../themes/plugins/markdown.html">markdown</a></li><li><a href="../themes/plugins/mermaid.html">mermaid</a></li><li><a href="../themes/plugins/minify.html">minify</a></li><li><a href="../themes/plugins/office.html">office</a></li><li><a href="../themes/plugins/overview.html">overview</a></li><li><a href="../themes/plugins/reading_time.html">reading time</a></li><li><a href="../themes/plugins/search.html">search</a></li><li><a href="../themes/plugins/shortcode.html">shortcode</a></li><li><a href="../themes/plugins/sitemap.html">sitemap</a></li><li><a href="../themes/plugins/toc.html">toc</a></li></ul></li></ul></li></ul></aside><main class="site-main"><div class="flex justify-between items-center mb-3"><div class="breadcrumb mb-3"><a href="../index.html">Home</a><span class="breadcrumb-separator">/</span><a href="./index.html">Themes</a><span class="breadcrumb-separator">/</span><span>Fluid_UI</span></div><span class="badge soft">⏱️ 8 min read</span></div><div id="top" align="center"><h1 id="fluid_ui">Fluid UI</h1><span class="text-muted">Modern CSS Framework (for gh_docs_bot)</span><div class="flex items-center gap-4 mb-6"><img
+      src="https://zheng-bote.github.io/gha_ghpages/assets/img/fluid-logo_500x500.png"
+      alt="Logo"
+      title="Logo"
+      loading="lazy"
+      decoding="async"
+      fetchpriority="high"
+      width="300"
+      height="300"
+      style="flex-shrink: 0"
+    /><p class="text-left"><a
+        href="https://github.com/Zheng-Bote/fluid_ui"
+        alt="Fluid UI"
+        title="Fluid UI"
+        >Fluid UI</a
+      >
+      is a lightweight, modern CSS framework built for performance and
+      flexibility. It leverages <strong>OKLCH colors</strong> for better
+      perceptional consistency, <strong>Fluid typography</strong> using
+      <code>clamp()</code>, and a modular layout system.
+    </p></div></div><div class="toc"><h3>Table of Contents</h3><ul class="toc-level-2"><li><a href="#toc-alternative-navigation">ToC (Alternative Navigation)</a></li><ul class="toc-level-3"><li><a href="#table-of-contents">Table of Contents:</a></li></ul><li><a href="#theme-preview">Theme Preview</a></li><li><a href="#design-tokens">Design Tokens</a></li><ul class="toc-level-3"><li><a href="#radius">Radius</a></li><li><a href="#spacing">Spacing</a></li><li><a href="#typography-fluid">Typography (Fluid)</a></li><li><a href="#motion">Motion</a></li></ul><li><a href="#colors-themes">Colors & Themes</a></li><li><a href="#typography">Typography</a></li><li><a href="#heading-2-section">Heading 2 (Section)</a></li><ul class="toc-level-3"><li><a href="#heading-3-sub-section">Heading 3 (Sub-section)</a></li><ul class="toc-level-4"><li><a href="#heading-4">Heading 4</a></li></ul></ul><li><a href="#layout-system">Layout System</a></li><ul class="toc-level-3"><li><a href="#app-shell">App Shell</a></li><li><a href="#sidebar-layout">Sidebar Layout</a></li></ul><li><a href="#utilities">Utilities</a></li><ul class="toc-level-3"><li><a href="#flexbox">Flexbox</a></li><li><a href="#grid">Grid</a></li><li><a href="#spacing-1">Spacing</a></li><li><a href="#typography-text">Typography & Text</a></li></ul><li><a href="#buttons">Buttons</a></li><li><a href="#forms">Forms</a></li><li><a href="#cards">Cards</a></li><li><a href="#badges-chips">Badges & Chips</a></li><li><a href="#tabs">Tabs</a></li><ul class="toc-level-3"><li><a href="#system-overview">System Overview</a></li><li><a href="#core-features">Core Features</a></li><li><a href="#latest-changes">Latest Changes</a></li></ul><li><a href="#accordion">Accordion</a></li><li><a href="#toasts-tooltips">Toasts & Tooltips</a></li><li><a href="#images-gallery">Images & Gallery</a></li><li><a href="#tables">Tables</a></li><li><a href="#status-variants-message-boxes">Status Variants & Message Boxes</a></li></ul></div><div class="layout-with-sidebar"><h2 id="toc-alternative-navigation">ToC (Alternative Navigation)</h2><p class="brief">Alternative Navigation with different (Mobile) Layout</p><aside class="sidebar"><h3 id="table-of-contents">Table of Contents:</h3><a href="#intro">Introduction</a><a href="#tokens">Design Tokens</a><a href="#colors">Colors & Themes</a><a href="#typography">Typography</a><a href="#layout">Layout System</a><a href="#utilities">Utilities</a><a href="#components-buttons">Buttons</a><a href="#components-forms">Forms</a><a href="#components-cards">Cards</a><a href="#components-badges">Badges & Chips</a><a href="#components-tabs">Tabs</a><a href="#components-accordion">Accordion</a><a href="#components-toasts">Toasts & Tooltips</a><a href="#components-figures">Images & Gallery</a><a href="#components-tables">Tables</a><a href="#examples">Message Boxes</a></aside><main class="site-main"><section id="theme-preview" class="section"><h2 id="theme-preview">Theme Preview</h2><p class="brief">Fluid UI supports multiple themes out-of-the-box</p><div class="grid grid-auto-md grid-gap-3"><div class="card theme-preview-card" data-theme-preview="blue"><div class="card-title">Blue</div><p>Standard Theme (Cool Blue)</p></div><div class="card theme-preview-card" data-theme-preview="emerald"><div class="card-title">Emerald</div><p>Natural Green</p></div><div class="card theme-preview-card" data-theme-preview="amber"><div class="card-title">Amber</div><p>Warm & Friendly</p></div><div class="card theme-preview-card" data-theme-preview="berry"><div class="card-title">Berry</div><p>Rose & Fruity</p></div><div class="card theme-preview-card" data-theme-preview="violet"><div class="card-title">Violet</div><p>Deep Purple & Elegant</p></div><div class="card theme-preview-card" data-theme-preview="slate"><div class="card-title">Slate</div><p>Neutral Industrial Slate</p></div><div class="card theme-preview-card" data-theme-preview="cyan"><div class="card-title">Cyan</div><p>Refreshing Teal</p></div><div class="card theme-preview-card" data-theme-preview="blue2"><div class="card-title">Blue2</div><p>Indigo (Legacy Port)</p></div><div class="card theme-preview-card" data-theme-preview="matrix"><div class="card-title">Matrix</div><p>Terminal Neon Green</p></div><div class="card theme-preview-card" data-theme-preview="tron"><div class="card-title">Tron</div><p>Futuristic Electric Cyan</p></div></div></section><section id="tokens" class="section"><h2 id="design-tokens">Design Tokens</h2><p>
+        Core design properties are managed via CSS variables for consistency and
+        easy customization.
+      </p><h3 id="radius">Radius</h3><pre><code>--radius-xs: 4px;
+--radius-sm: 8px;
+--radius-md: 12px;
+--radius-lg: 18px;
+--radius-pill: 999px;</code></pre><h3 id="spacing">Spacing</h3><pre><code>--space-1: 0.25rem;
+--space-2: 0.5rem;
+--space-3: 0.75rem;
+--space-4: 1rem;
+--space-5: 1.5rem;
+--space-6: 2rem;</code></pre><h3 id="typography-fluid">Typography (Fluid)</h3><pre><code>--font-size-root: clamp(16px, 1.2vw + 0.5rem, 22px);
+--font-size-small: clamp(0.8rem, 0.96vw + 0.4rem, 1.1rem);
+--font-size-smaller: clamp(0.7rem, 0.84vw + 0.35rem, 0.96rem);
+--font-weight-normal: 400;
+--font-weight-medium: 500;
+--font-weight-bold: 600;</code></pre><h3 id="motion">Motion</h3><pre><code>--transition-fast: 0.18s ease-out;
+--transition-normal: 0.25s ease;</code></pre></section><section id="colors" class="section"><h2 id="colors-themes">Colors & Themes</h2><p>
+        Fluid UI uses semantic variables that automatically adapt to light/dark
+        modes and selected themes.
+      </p><div class="grid grid-auto-md grid-gap-3"><div class="card"><div class="card-title">Backgrounds</div><p class="text-smaller"><code>--bg</code>, <code>--bg-alt</code>, <code>--bg-elevated</code></p><div class="flex gap-2 mt-2"><div
+              style="
+                flex: 1;
+                height: 30px;
+                background: var(--bg);
+                border: 1px solid var(--border);
+                border-radius: var(--radius-xs);
+              "
+              title="--bg"
+            ></div><div
+              style="
+                flex: 1;
+                height: 30px;
+                background: var(--bg-alt);
+                border: 1px solid var(--border);
+                border-radius: var(--radius-xs);
+              "
+              title="--bg-alt"
+            ></div><div
+              style="
+                flex: 1;
+                height: 30px;
+                background: var(--bg-elevated);
+                border: 1px solid var(--border);
+                border-radius: var(--radius-xs);
+              "
+              title="--bg-elevated"
+            ></div></div></div><div class="card"><div class="card-title">Brand Colors</div><p class="text-smaller"><code>--color-primary</code>, <code>-soft</code>, <code>-dark</code></p><div class="flex gap-2 mt-2"><div
+              style="
+                flex: 1;
+                height: 30px;
+                background: var(--color-primary);
+                border-radius: var(--radius-xs);
+              "
+              title="--color-primary"
+            ></div><div
+              style="
+                flex: 1;
+                height: 30px;
+                background: var(--color-primary-soft);
+                border-radius: var(--radius-xs);
+              "
+              title="--color-primary-soft"
+            ></div><div
+              style="
+                flex: 1;
+                height: 30px;
+                background: var(--color-primary-dark);
+                border-radius: var(--radius-xs);
+              "
+              title="--color-primary-dark"
+            ></div></div></div><div class="card"><div class="card-title">Text & Border</div><p class="text-smaller"><code>--text</code>, <code>--text-muted</code>,
+            <code>--border</code></p><div class="flex gap-2 mt-2"><div
+              style="
+                flex: 1;
+                height: 30px;
+                background: var(--text);
+                border-radius: var(--radius-xs);
+              "
+              title="--text"
+            ></div><div
+              style="
+                flex: 1;
+                height: 30px;
+                background: var(--text-muted);
+                border-radius: var(--radius-xs);
+              "
+              title="--text-muted"
+            ></div><div
+              style="
+                flex: 1;
+                height: 30px;
+                background: var(--border);
+                border-radius: var(--radius-xs);
+              "
+              title="--border"
+            ></div></div></div></div></section><section id="typography" class="section"><h2 id="typography">Typography</h2><p>
+        Fluid UI uses <code>clamp()</code> for responsive heading sizes that
+        scale smoothly between mobile and desktop.
+      </p><div class="card p-4"><h1>Heading 1 (Hero)</h1><h2 id="heading-2-section">Heading 2 (Section)</h2><h3 id="heading-3-sub-section">Heading 3 (Sub-section)</h3><h4 id="heading-4">Heading 4</h4><h5>Heading 5</h5><h6>Heading 6</h6><p class="mt-4">
+          Standard paragraph text using <code>--font-family-sans</code>. It aims
+          for high readability with proper line height (1.75 on large text
+          blocks).
+        </p><p class="text-muted">Muted text for secondary information.</p><p class="brief">Brief text with an indicator prefix.</p></div></section><section id="layout" class="section"><h2 id="layout-system">Layout System</h2><h3 id="app-shell">App Shell</h3><p>
+        The <code>.app-shell</code> provides a classic Header-Main-Footer
+        structure using CSS Grid.
+      </p><pre><code>&lt;div class="app-shell"&gt;
+  &lt;header class="site-header"&gt;...&lt;/header&gt;
+  &lt;main class="site-main"&gt;...&lt;/main&gt;
+  &lt;footer class="site-footer"&gt;...&lt;/footer&gt;
+&lt;/div&gt;</code></pre><h3 id="sidebar-layout">Sidebar Layout</h3><p>
+        The <code>.layout-with-sidebar</code> component handles responsive
+        sidebars (side-by-side on desktop, stacked on mobile).
+      </p><div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4"><div class="card bg-alt"><div class="card-title">Desktop (> 900px)</div><div class="flex gap-2 mt-2" style="height: 100px"><div
+              style="
+                width: 60px;
+                background: var(--bg-alt);
+                border-right: 1px solid var(--border);
+              "
+            ></div><div style="flex: 1; background: var(--bg-elevated)"></div></div></div><div class="card bg-alt"><div class="card-title">Mobile (< 900px)</div><div class="flex flex-col gap-2 mt-2" style="height: 100px"><div
+              style="
+                height: 30px;
+                background: var(--bg-alt);
+                border-bottom: 1px solid var(--border);
+              "
+            ></div><div style="flex: 1; background: var(--bg-elevated)"></div></div></div></div></section><section id="utilities" class="section"><h2 id="utilities">Utilities</h2><p>
+        A collection of utility classes for quick styling without writing custom
+        CSS.
+      </p><h3 id="flexbox">Flexbox</h3><pre><code>.flex, .inline-flex, .flex-col, .flex-row, .flex-wrap
+.items-center, .justify-between, .gap-2</code></pre><h3 id="grid">Grid</h3><pre><code>.grid, .grid-cols-2, .grid-gap-3
+.grid-auto-sm (180px), .grid-auto-md (240px), .grid-auto-lg (320px)</code></pre><h3 id="spacing-1">Spacing</h3><pre><code>.m-0, .mt-2, .mb-4, .p-3, .px-2, .py-2</code></pre><h3 id="typography-text">Typography & Text</h3><pre><code>.text-center, .text-muted, .text-bold, .text-smaller</code></pre></section><section id="components-buttons" class="section"><h2 id="buttons">Buttons</h2><p>
+        Buttons include smooth transitions and hover effects using design
+        tokens.
+      </p><div class="flex flex-wrap gap-2"><button class="btn">Default</button><button class="btn btn-primary">Primary</button><button class="btn btn-outline">Outline</button><button class="btn btn-ghost">Ghost</button><button class="btn btn-sm">Small</button><button class="btn btn-icon" title="Icon Only"><span>+</span></button></div><pre
+        class="mt-4"
+      ><code>&lt;button class="btn btn-primary"&gt;Primary&lt;/button&gt;
+&lt;button class="btn btn-outline btn-sm"&gt;Small Outline&lt;/button&gt;</code></pre></section><section id="components-forms" class="section"><h2 id="forms">Forms</h2><div class="card max-w-md"><label class="field-label">E‑Mail Address</label><input class="field-control mb-3" placeholder="user@example.com" /><label class="field-label">Subject</label><select class="select-control mb-3"><option>Inquiry</option><option>Support</option><option>Feedback</option></select><label class="field-label">Message</label><textarea
+          class="field-control mb-3"
+          rows="3"
+          placeholder="How can we help?"
+        ></textarea><div class="flex gap-4"><div class="form-row"><input type="checkbox" class="input-checkbox" id="chk_demo" /><label for="chk_demo">Accept terms</label></div><div class="form-row"><input type="checkbox" id="toggle_demo" class="toggle-input" /><label for="toggle_demo" class="toggle"
+              ><span class="toggle-knob"></span
+            ></label><span>Newsletter</span></div></div></div></section><section id="components-cards" class="section"><h2 id="cards">Cards</h2><p>
+        Cards are the primary container for content blocks, using
+        <code>--bg-elevated</code>.
+      </p><div class="card"><div class="card-header"><div class="card-title">Classic Card</div><div class="card-subtitle">v1.0</div></div><p>
+          This is a standard card with a header, title and subtitle. It uses
+          <code>--radius-lg</code> and a soft shadow.
+        </p></div></section><section id="components-badges" class="section"><h2 id="badges-chips">Badges & Chips</h2><div class="flex flex-wrap gap-2"><span class="badge">Default Badge</span><span class="badge soft">Soft Badge</span><span class="chip">Interactive Chip</span><span class="chip active">Active Chip</span></div></section><section id="components-tabs" class="section"><h2 id="tabs">Tabs</h2><div class="tabs"><button class="tab" data-tab-target="#content-overview">
+          Overview
+        </button><button class="tab" data-tab-target="#content-features">
+          Features
+        </button><button class="tab" data-tab-target="#content-changelog">
+          Changelog
+        </button></div><div class="tab-content mt-4"><div id="content-overview" class="tab-panel"><div class="card"><h3 id="system-overview">System Overview</h3><p>
+              gh_docs_bot ist darauf ausgelegt, Dokumentationen extrem schnell
+              zu bauen.
+            </p></div></div><div id="content-features" class="tab-panel"><div class="card"><h3 id="core-features">Core Features</h3><ul><li>C++23 Core Engine</li><li>Plugin System Architecture</li><li>Fluid UI Framework Integration</li></ul></div></div><div id="content-changelog" class="tab-panel"><div class="card"><h3 id="latest-changes">Latest Changes</h3><p><strong>v2.2.1:</strong> Support für ODT/DOCX Dateien hinzugefügt.
+            </p></div></div></div></section><section id="components-accordion" class="section"><h2 id="accordion">Accordion</h2><div class="accordion max-w-md"><div class="accordion-item is-open"><div class="accordion-header"><span>What is Fluid UI?</span><span>▾</span></div><div class="accordion-body">
+            A modern CSS framework for fast SSG sites.
+          </div></div><div class="accordion-item"><div class="accordion-header"><span>Is it responsive?</span><span>▾</span></div><div class="accordion-body">
+            Yes, it uses fluid typography and grid systems.
+          </div></div></div></section><section id="components-toasts" class="section"><h2 id="toasts-tooltips">Toasts & Tooltips</h2><div class="flex gap-4 items-center"><button
+          class="btn btn-outline"
+          onclick="showToast('Action successful!', 'success')"
+        >
+          Trigger Toast
+        </button><button class="btn tooltip">
+          Hover me
+          <span class="tooltip-content">Contextual information</span></button></div></section><section id="components-figures" class="section"><h2 id="images-gallery">Images & Gallery</h2><p>Supports lazy loading, figcaptions, and a built-in modal gallery.</p><div class="gallery-2"><figure
+          data-modal-image="https://dummyimage.com/1200x800/2563eb/fff&text=Fluid+Blue"
+        ><img
+            class="lazy-img"
+            data-src="https://dummyimage.com/600x400/2563eb/fff&text=Fluid+Blue"
+            alt="Fluid Blue Theme"
+            loading="lazy"
+          /><figcaption>
+            Figure with <code>.lazy-img</code> and
+            <code>data-modal-image</code>.
+          </figcaption></figure><figure
+          data-modal-image="https://dummyimage.com/1200x800/10b981/fff&text=Natural+Emerald"
+        ><img
+            class="lazy-img"
+            data-src="https://dummyimage.com/600x400/10b981/fff&text=Natural+Emerald"
+            alt="Emerald Theme"
+            loading="lazy"
+          /><figcaption>Interactive gallery using CSS Grid.</figcaption></figure></div></section><section id="components-tables" class="section"><h2 id="tables">Tables</h2><p>Clean, themed tables with zebra striping and hover effects.</p><table class="table"><thead><tr><th>Token</th><th>Value</th><th>Description</th></tr></thead><tbody><tr><td><code>--bg-table-odd</code></td><td><code>var(--bg-alt)</code></td><td>Background for odd rows</td></tr><tr><td><code>--bg-table-even</code></td><td><code>var(--bg-elevated)</code></td><td>Background for even rows</td></tr></tbody></table></section><section id="examples" class="section"><h2 id="status-variants-message-boxes">Status Variants & Message Boxes</h2><div class="grid grid-auto-sm grid-gap-3 mb-6"><div class="card card-ok"><div class="card-title">System OK</div><p>The service is running normally.</p></div><div class="card card-warning"><div class="card-title">Pending</div><p>A new update is available.</p></div><div class="card card-critical"><div class="card-title">Alert</div><p>Database connection lost.</p></div></div><div class="success-msg">Operation completed successfully.</div><div class="info-msg">
+        Please note that maintenance is scheduled for tonight.
+      </div><div class="warning-msg">Your subscription expires in 3 days.</div><div class="error-msg">Authentication failed. Please try again.</div></section></main></div><script>
+  // Tab-Funktionalität
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll(".tab");
+    const tabPanels = document.querySelectorAll(".tab-panel");
+
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        // Alle Tabs deaktivieren
+        tabs.forEach((t) => t.classList.remove("active"));
+        tabPanels.forEach((p) => p.classList.remove("is-active"));
+
+        // Aktuellen Tab aktivieren
+        tab.classList.add("active");
+        const target = tab.getAttribute("data-tab-target");
+        document.querySelector(target).classList.add("is-active");
+      });
+    });
+  });
+</script></main></div><button id="scrollTopBtn" class="scroll-top-btn" aria-label="Nach oben"><svg
+        width="18"
+        height="18"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ><path d="M12 19V5" /><path d="M5 12l7-7 7 7" /></svg></button><footer class="site-footer"><div class="footer-left"><a
+          href="https://github.com/Zheng-Bote/fluid_ui"
+          alt="Link to Github"
+          title="https://github.com/Zheng-Bote/fluid_ui"
+          >Build with Fluid UI</a
+        ></div><div class="footer-center"><a
+          href="https://www.robert.hase-zheng.net/"
+          alt="Homepage"
+          title="Homepage"
+          >© 2026 ZHENG Robert</a
+        ></div><div class="footer-right"><a
+          href="https://github.com/Zheng-Bote/gha_ghpages"
+          alt="Github"
+          title="Github"
+          >&lt;/&gt;</a
+        ></div></footer><div id="searchModal" class="modal-backdrop"><div class="modal" style="max-width: 600px; height: 80vh; display: flex; flex-direction: column; padding: 0;"><div class="p-4 border-b flex items-center gap-2"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-muted"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg><input type="text" id="searchInput" class="field-control" style="border:none; box-shadow: none; font-size: 1.1rem;" placeholder="Search docs... (Press /)" autocomplete="off"><button id="searchClose" class="btn btn-icon btn-ghost btn-sm">✕</button></div><div id="searchResults" style="overflow-y: auto; flex: 1; padding: 0;"></div></div></div><div id="imageModal" class="modal-backdrop"><div class="modal" style="text-align: center; max-width: 90vw; width: auto; position: relative;"><button class="modal-close" onclick="closeModal('imageModal')" style="position: absolute; top: 10px; right: 10px;">✕</button><img id="modalImage" class="modal-image" src="" alt="Gallery View" style="max-height: 80vh; max-width: 100%; object-fit: contain;" /><div id="modalCaption" class="text-muted mt-2" style="font-size: 0.9rem;"></div></div></div><script type="module" src="https://zheng-bote.github.io/gha_ghpages/assets/js/search.js"></script><script type="module" src="https://zheng-bote.github.io/gha_ghpages/assets/js/rz-fontsize.js"></script><script src="https://zheng-bote.github.io/gha_ghpages/assets/js/fluid_core.js" defer></script><script src="https://zheng-bote.github.io/gha_ghpages/assets/js/fluid_theme.js" defer></script><script src="https://zheng-bote.github.io/gha_ghpages/assets/js/fluid_gallery.js" defer></script><script src="https://zheng-bote.github.io/gha_ghpages/assets/js/fluid_share.js" defer></script></body></html>
