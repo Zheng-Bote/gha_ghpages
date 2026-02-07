@@ -847,6 +847,14 @@ figcaption {
    Adapted for Fluid Tokens & Themes
    ========================================================= */
 
+.toc {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin: 1rem 0 1rem 0;
+}
+.toc h3 {
+  padding-top: 1.5rem;
+}
 /* 1. Container-Look für die Hauptliste */
 ul.toc-level-2 {
   background: var(--bg-alt); /* Nutzt Theme-Hintergrund */
@@ -1194,6 +1202,24 @@ ul[class^="toc-level-"] a::before {
 }
 .text-medium {
   font-weight: var(--font-weight-medium);
+}
+
+blockquote {
+  background: var(--bg-alt); /* Nutzt Theme-Hintergrund */
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--color-primary); /* Theme-Akzentfarbe */
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem 1rem 1rem;
+  margin: 0.5rem 0 2rem 2rem;
+  display: inline-block;
+  min-width: 300px;
+  max-width: 100%;
+
+  /* Fluid Shadow Token */
+  box-shadow: var(--shadow-soft);
+
+  /* Optional: Glass-Effekt für Tron/Blue2 Themes */
+  backdrop-filter: blur(5px);
 }
 
 /* Containers */

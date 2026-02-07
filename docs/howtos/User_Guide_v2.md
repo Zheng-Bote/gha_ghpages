@@ -1,24 +1,22 @@
 # User Guide
 
----
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
-- [1. Prerequisites](#1-prerequisites)
-- [2. Installation / Building](#2-installation--building)
-- [3. Usage](#3-usage)
-  - [Example](#example)
-- [4. Configuration (`config.cfg`)](#4-configuration-configcfg)
-- [5. Content Features](#5-content-features)
-  - [5.1 Frontmatter / Metadata](#51-frontmatter--metadata)
-  - [5.2 Table of Contents (TOC)](#52-table-of-contents-toc)
-  - [5.3 Navigation](#53-navigation)
+- [User Guide](#user-guide)
+  - [1. Prerequisites](#1-prerequisites)
+  - [2. Installation / Building](#2-installation--building)
+  - [3. Usage](#3-usage)
+    - [Example](#example)
+  - [4. Configuration (`config.cfg`)](#4-configuration-configcfg)
+  - [5. Content Features](#5-content-features)
+    - [5.1 Frontmatter / Metadata](#51-frontmatter--metadata)
+    - [5.2 Table of Contents (TOC)](#52-table-of-contents-toc)
+    - [5.3 Navigation](#53-navigation)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
----
 
 ## 1. Prerequisites
 
@@ -58,23 +56,20 @@ The generic usage pattern is:
 The configuration file is a simple key-value pair file.
 
 ```ini
-# Path to the HTML template (required)
-template=theme/fluid/fluid.html
-
-# Where to generate the site (default: output_site)
-output=output_site
-
-# Path to static assets (css, js, images) to copy
-assets=theme/fluid/assets
-
-# Optional: Base path for links (e.g. if hosted in a subdir)
-base_path=/my-docs/
+[General]
+template=docs/theme/desktop/fluid_template.html
+assets=docs/theme/fluid/assets
+output=docs/dist
+base_path=https://zheng-bote.github.io/gha_ghpages/
+toc=true
 
 [plugins]
-# Path to the directory containing .so plugin files
-path=plugins
-# Comma-separated list of plugins to enable (matches filename suffix)
-enabled=markdown, html, toc
+path=docs/ssg/plugins
+enabled=markdown, html, toc, asciidoc, search, sitemap, mermaid, breadcrumb, reading_time, shortcode, minify, office, info, emoji
+
+[reading_time]
+threshold=200
+wpm=200
 ```
 
 ## 5. Content Features

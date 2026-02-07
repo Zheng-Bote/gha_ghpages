@@ -1,19 +1,17 @@
 # Plugin Developer Guide
 
----
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
-- [1. The `IPlugin` Interface](#1-the-iplugin-interface)
-- [2. Creating a Simple Plugin (Example)](#2-creating-a-simple-plugin-example)
-- [3. Advanced: Markdown Hooks & Host Interaction](#3-advanced-markdown-hooks--host-interaction)
-- [4. Multi-Parser Support](#4-multi-parser-support)
+- [Plugin Developer Guide](#plugin-developer-guide)
+  - [1. The `IPlugin` Interface](#1-the-iplugin-interface)
+  - [2. Creating a Simple Plugin (Example)](#2-creating-a-simple-plugin-example)
+  - [3. Advanced: Markdown Hooks \& Host Interaction](#3-advanced-markdown-hooks--host-interaction)
+  - [4. Multi-Parser Support](#4-multi-parser-support)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
----
 
 The SSG is designed to be extended via Plugins using **Shared Libraries** (`.so` on Linux). A plugin can:
 

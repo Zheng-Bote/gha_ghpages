@@ -7,8 +7,8 @@
  *
  * @file toc_plugin.cpp
  * @brief Implementation of the TOC Plugin with support for HTML and Markdown.
- * @version 0.1.2
- * @date 2026-02-06
+ * @version 0.1.3
+ * @date 2026-02-07
  *
  * @author ZHENG Robert (robert@hase-zheng.net)
  * @copyright Copyright (c) 2026 ZHENG Robert
@@ -108,27 +108,52 @@ bool TocPlugin::on_md_block_leave(MD_BLOCKTYPE type, void *detail,
 }
 
 void TocPlugin::on_after_render(model::PageContext &ctx) {
+  // Define indicators
+  std::string placeholder_start = "<!-- START doctoc generated TOC please keep "
+                                  "comment here to allow auto update -->";
+  std::string placeholder_end = "<!-- END doctoc generated TOC please keep "
+                                "comment here to allow auto update -->";
+
+  // CHECK: Should we generate a TOC?
+  // 1. Is the TOC explicitly requested via Metadata (Frontmatter)?
+  bool requested_via_meta = ctx.meta_data.contains("toc");
+
+  // 2. Is the placeholder comment present in the content?
+  bool requested_via_comment =
+      ctx.html_content.find(placeholder_start) != std::string::npos;
+
+  // If neither indicator is present, do nothing and exit.
+  if (!requested_via_meta && !requested_via_comment) {
+    return;
+  }
+
+  // ---------------------------------------------------------
+  // Logic below only runs if TOC is requested
+  // ---------------------------------------------------------
+
   // 1. If headers list is empty, it's likely a non-Markdown file or raw HTML.
   //    Scan the generated HTML content for headers.
   if (ctx.headers.empty()) {
-    std::regex header_regex(R"(<h([2-4])([^>]*)>(.*?)</h\1>)", std::regex_constants::icase);
+    std::regex header_regex(R"(<h([2-4])([^>]*)>(.*?)</h\1>)",
+                            std::regex_constants::icase);
     std::regex id_regex(R"(id=["']([^"']*)["'])", std::regex_constants::icase);
-    
+
     std::string new_html;
     new_html.reserve(ctx.html_content.size());
-    
-    auto words_begin = std::sregex_iterator(ctx.html_content.begin(), ctx.html_content.end(), header_regex);
+
+    auto words_begin = std::sregex_iterator(
+        ctx.html_content.begin(), ctx.html_content.end(), header_regex);
     auto words_end = std::sregex_iterator();
-    
+
     size_t last_pos = 0;
     for (std::sregex_iterator i = words_begin; i != words_end; ++i) {
       std::smatch match = *i;
       new_html.append(ctx.html_content, last_pos, match.position() - last_pos);
-      
+
       int level = std::stoi(match[1].str());
       std::string attrs = match[2].str();
       std::string content = match[3].str();
-      
+
       std::string id;
       std::smatch id_match;
       if (std::regex_search(attrs, id_match, id_regex)) {
@@ -140,10 +165,10 @@ void TocPlugin::on_after_render(model::PageContext &ctx) {
         // Inject ID into the tag
         attrs += std::format(" id=\"{}\"", id);
       }
-      
+
       ctx.headers.push_back({level, content, id});
       new_html += std::format("<h{}{}>{}</h{}>", level, attrs, content, level);
-      
+
       last_pos = match.position() + match.length();
     }
     new_html.append(ctx.html_content, last_pos, std::string::npos);
@@ -183,12 +208,10 @@ void TocPlugin::on_after_render(model::PageContext &ctx) {
   }
   html << "</ul>\n</div>\n";
 
+  // Assign generated TOC to metadata so templates can use {{ toc }}
   ctx.meta_data["toc"] = html.str();
 
-  // 3. Support legacy placeholder replacement
-  std::string placeholder_start = "<!-- START doctoc generated TOC";
-  std::string placeholder_end = "<!-- END doctoc generated TOC";
-
+  // 3. Support legacy placeholder replacement within the content
   size_t start = ctx.html_content.find(placeholder_start);
   size_t end = ctx.html_content.find(placeholder_end);
 

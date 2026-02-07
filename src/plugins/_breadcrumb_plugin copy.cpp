@@ -7,8 +7,8 @@
  *
  * @file breadcrumb_plugin.cpp
  * @brief Generates breadcrumb navigation based on directory structure.
- * @version 0.1.2
- * @date 2026-02-07
+ * @version 0.1.0
+ * @date 2026-02-04
  *
  * @author ZHENG Robert (robert@hase-zheng.net)
  * @copyright Copyright (c) 2026 ZHENG Robert
@@ -36,26 +36,23 @@ class BreadcrumbPlugin : public core::IPlugin {
 
 public:
   std::string name() const override { return "Breadcrumb Navigation"; }
-  std::string version() const override { return "0.1.2"; }
+  std::string version() const override { return "1.0.0"; }
   std::string description() const override {
-    return "Generates breadcrumb HTML with folder links";
+    return "Generates breadcrumb HTML";
   }
 
   void on_before_render(model::PageContext &ctx) override {
     // Path relative to source root, e.g., "docs/architecture/overview.md"
     std::filesystem::path p = ctx.relative_path;
 
-    // Count total components (folders + file)
+    // Count total components
     auto dist = std::distance(p.begin(), p.end());
-    // Depth is number of folders. e.g. docs/arch/file.md -> 3 components ->
-    // depth 2
     int depth = (dist > 0) ? (dist - 1) : 0;
 
     std::stringstream html;
     html << "<div class=\"breadcrumb mb-3\">\n";
 
     // 1. Home Link
-    // Calculate relative path back to root
     std::string home_link = "";
     for (int i = 0; i < depth; ++i)
       home_link += "../";
@@ -64,39 +61,25 @@ public:
     html << "  <a href=\"" << home_link << "\">Home</a>\n";
 
     // 2. Intermediate Folders
-    int current_idx = 0;
+    int current_depth = depth;
     for (auto it = p.begin(); it != p.end(); ++it) {
-      // Check if this is the last element (filename) -> skip loop
+      // Check if this is the last element (filename)
       auto next_it = it;
       ++next_it;
       if (next_it == p.end())
         break;
 
       std::string folder_name = capitalize(it->string());
+      current_depth--; // Go one level down
 
-      // Calculate relative link to this folder's index.html
-      // If we are at docs/arch/file.md (depth 2):
-      // - processing 'docs' (idx 0): we need "../index.html" (1 step up)
-      // - processing 'arch' (idx 1): we need "./index.html" (0 steps up)
-      int steps_up = depth - 1 - current_idx;
-
-      std::string link = "";
-      if (steps_up == 0) {
-        link = "./";
-      } else {
-        for (int k = 0; k < steps_up; ++k) {
-          link += "../";
-        }
-      }
-      link += "index.html";
+      // Link to '#' because not every folder has an index.html
+      std::string link = "#";
 
       html << "  <span class=\"breadcrumb-separator\">/</span>\n";
       html << "  <a href=\"" << link << "\">" << folder_name << "</a>\n";
-
-      current_idx++;
     }
 
-    // 3. Current Page (Active - no link)
+    // 3. Current Page (Active)
     std::string title = ctx.source_path.stem().string();
     if (ctx.meta_data.contains("title")) {
       title = ctx.meta_data["title"].get<std::string>();

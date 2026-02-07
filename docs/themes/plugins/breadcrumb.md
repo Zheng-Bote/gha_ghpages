@@ -1,15 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
-
-- [Breadcrumb Plugin](#breadcrumb-plugin)
-  - [How it works](#how-it-works)
-  - [Variables (Template)](#variables-template)
-  - [Configuration](#configuration)
-  - [Example Usage](#example-usage)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # Breadcrumb Plugin
 
 The **Breadcrumb Plugin** generates a navigation trail based on the site's directory structure.
@@ -34,7 +22,5 @@ enabled=..., breadcrumb
 ## Example Usage
 
 ```html
-<div class="header-breadcrumb">
-  [ breadcrumbs ]
-</div>
+<div class="header-breadcrumb">[ breadcrumbs ]</div>
 ```

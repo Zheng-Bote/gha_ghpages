@@ -7,8 +7,8 @@
  *
  * @file shortcode_plugin.cpp
  * @brief Replaces shortcodes like [[ name: args ]] with HTML.
- * @version 0.1.3
- * @date 2026-02-04
+ * @version 0.1.4
+ * @date 2026-02-07
  *
  * @author ZHENG Robert (robert@hase-zheng.net)
  * @copyright Copyright (c) 2026 ZHENG Robert
@@ -72,7 +72,7 @@ class ShortcodePlugin : public core::IPlugin {
 
 public:
   std::string name() const override { return "Shortcode Processor"; }
-  std::string version() const override { return "1.0.3"; }
+  std::string version() const override { return "0.1.4"; }
   std::string description() const override {
     return "Processes [[ shortcode ]] syntax";
   }

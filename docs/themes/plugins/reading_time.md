@@ -1,15 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
-
-- [Reading Time Plugin](#reading-time-plugin)
-  - [How it works](#how-it-works)
-  - [Variables (Template)](#variables-template)
-  - [Configuration](#configuration)
-  - [Example Usage](#example-usage)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # Reading Time Plugin
 
 The **Reading Time Plugin** estimates the reading time based on word count.

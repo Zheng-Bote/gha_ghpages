@@ -1,9 +1,9 @@
 <h1>GHP Static Site Generator - Architecture &amp; Design</h1>
 <p>comprehensive architecture documentation for the GHP Static Site Generator (v1.x.x). It includes high-level concepts, data flow, internal components, and diagrams using Mermaid syntax (standard for GitHub Markdown).</p>
-<hr>
+
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-<hr>
+
 <h2>Architecture Overview</h2>
 
 <ul>
@@ -164,20 +164,20 @@
 </table>
 <h2>Configuration Reference</h2>
 <pre><code class="language-ini">
-# Path to the HTML layout file
-template=/path/to/theme/desktop/fluid_template.html
-
-# Folder containing CSS/Images/JS to be copied
-assets=/path/to/theme/fluid/assets
-
-# Target directory for the website
-output=/path/to/dist
-
-# Base path for the website
+[General]
+template=docs/theme/desktop/fluid_template.html
+assets=docs/theme/fluid/assets
+output=docs/dist
 base_path=https://zheng-bote.github.io/gha_ghpages/
-
-# Enable table of contents
 toc=true
+
+[plugins]
+path=docs/ssg/plugins
+enabled=markdown, html, toc, asciidoc, search, sitemap, mermaid, breadcrumb, reading_time, shortcode, minify, office, info, emoji
+
+[reading_time]
+threshold=200
+wpm=200
 </code></pre>
 <h2>Build &amp; Deployment</h2>
 <h3>Compilation</h3>
@@ -192,7 +192,7 @@ see <code>CMakeLists.txt</code> for more details</p>
 <h3>Execution</h3>
 <p><code>Usage: build/gh_docs_bot &lt;path_to_config&gt; &lt;input_folder&gt;</code></p>
 <p><strong><em>Example</em></strong></p>
-<p><code>./gh_docs_bot /home/zb_bamboo/DEV/gh-a_cr-ghp/theme/blue/blue.cfg /home/zb_bamboo/DEV/gh-a_cr-ghp/docs</code></p>
+<p><code>./gh_docs_bot docs/themes/fluid/fluid.cfg docs/documents</code></p>
 <h4>Inputs</h4>
 <table>
 <thead>

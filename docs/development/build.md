@@ -2,23 +2,21 @@
 
 This document describes how to build the `gh_docs_bot` application from source and lists the necessary dependencies.
 
----
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
-- [Prerequisites](#prerequisites)
-- [Dependencies](#dependencies)
-- [Configuration](#configuration)
-- [Build Instructions](#build-instructions)
-- [Output](#output)
-- [Usage](#usage)
-  - [Configuration](#configuration-1)
+- [Build Process and Dependencies](#build-process-and-dependencies)
+  - [Prerequisites](#prerequisites)
+  - [Dependencies](#dependencies)
+  - [Configuration](#configuration)
+  - [Build Instructions](#build-instructions)
+  - [Output](#output)
+  - [Usage](#usage)
+    - [Configuration](#configuration-1)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
----
 
 ## Prerequisites
 
@@ -88,18 +86,18 @@ After a successful build, the executable `gh_docs_bot` will be available in the 
 **Example configuration file**
 
 ```Ini
-# Path to the HTML layout file
-template=/path/to/theme/desktop/fluid_template.html
-
-# Folder containing CSS/Images/JS to be copied
-assets=/path/to/theme/fluid/assets
-
-# Target directory for the website
-output=/path/to/dist
-
-# Base path for the website
+[General]
+template=docs/theme/desktop/fluid_template.html
+assets=docs/theme/fluid/assets
+output=docs/dist
 base_path=https://zheng-bote.github.io/gha_ghpages/
-
-# Enable table of contents
 toc=true
+
+[plugins]
+path=docs/ssg/plugins
+enabled=markdown, html, toc, asciidoc, search, sitemap, mermaid, breadcrumb, reading_time, shortcode, minify, office, info, emoji
+
+[reading_time]
+threshold=200
+wpm=200
 ```

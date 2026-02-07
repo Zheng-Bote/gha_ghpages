@@ -1,15 +1,3 @@
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-**Table of Contents**
-
-- [AsciiDoc Plugin](#asciidoc-plugin)
-  - [How it works](#how-it-works)
-  - [Requirements](#requirements)
-  - [Features](#features)
-  - [Configuration](#configuration)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 # AsciiDoc Plugin
 
 The **AsciiDoc Plugin** allows you to use `.adoc` and `.asciidoc` files as source content.

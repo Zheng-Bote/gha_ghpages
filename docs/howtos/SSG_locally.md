@@ -6,14 +6,16 @@ The gh_docs_bot is a custom C++ Static Site Generator (SSG) that allows you to b
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
-- [Usage](#usage)
-  - [Inputs](#inputs)
-- [Example](#example)
-  - [Project Structure](#project-structure)
-  - [Configuration](#configuration)
-  - [Execution](#execution)
+- [SSG manually / locally](#ssg-manually--locally)
+  - [Usage](#usage)
+    - [Inputs](#inputs)
+  - [Example](#example)
+    - [Project Structure](#project-structure)
+    - [Configuration](#configuration)
+    - [Execution](#execution)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -103,20 +105,20 @@ my_project/
 `docs/themes/fluid/stayle/config.cfg`
 
 ```ini
-# Path to the HTML layout file
-template=docs/themes/desktop/fluid_template.html
-
-# Folder containing CSS/Images/JS to be copied
-assets=docs/themes/fluid/stayle/assets
-
-# Target output directory for the website
-output=dist/website
-
-# Base path for the website
+[General]
+template=docs/theme/desktop/fluid_template.html
+assets=docs/theme/fluid/assets
+output=docs/dist
 base_path=https://zheng-bote.github.io/gha_ghpages/
-
-# Enable table of contents
 toc=true
+
+[plugins]
+path=docs/ssg/plugins
+enabled=markdown, html, toc, asciidoc, search, sitemap, mermaid, breadcrumb, reading_time, shortcode, minify, office, info, emoji
+
+[reading_time]
+threshold=200
+wpm=200
 ```
 
 ### Execution

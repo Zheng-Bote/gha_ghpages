@@ -1,24 +1,22 @@
 # Architecture & Refactoring Overview
 
----
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
-- [1. Motivation](#1-motivation)
-- [2. New Architecture: Dynamic Plugin System](#2-new-architecture-dynamic-plugin-system)
-  - [2.1 Core Components](#21-core-components)
-  - [2.2 Diagrams](#22-diagrams)
-    - [Class Diagram](#class-diagram)
-    - [High-Level Architecture](#high-level-architecture)
-    - [Build Workflow](#build-workflow)
-- [3. The "No-Regex" Approach](#3-the-no-regex-approach)
-- [4. Directory Structure](#4-directory-structure)
+- [Architecture \& Refactoring Overview](#architecture--refactoring-overview)
+  - [1. Motivation](#1-motivation)
+  - [2. New Architecture: Dynamic Plugin System](#2-new-architecture-dynamic-plugin-system)
+    - [2.1 Core Components](#21-core-components)
+    - [2.2 Diagrams](#22-diagrams)
+      - [Class Diagram](#class-diagram)
+      - [High-Level Architecture](#high-level-architecture)
+      - [Build Workflow](#build-workflow)
+  - [3. The "No-Regex" Approach](#3-the-no-regex-approach)
+  - [4. Directory Structure](#4-directory-structure)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
----
 
 ## 1. Motivation
 

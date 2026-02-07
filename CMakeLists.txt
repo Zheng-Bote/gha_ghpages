@@ -229,7 +229,16 @@ set_target_properties(plugin_info PROPERTIES
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/plugins"
 )
 
+# Emoji Plugin
+add_library(plugin_emoji SHARED src/plugins/emoji_plugin.cpp)
+target_include_directories(plugin_emoji PRIVATE include ${md4c_SOURCE_DIR}/src)
+set_target_properties(plugin_emoji PROPERTIES 
+    PREFIX ""
+    OUTPUT_NAME "plugin_emoji"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/plugins"
+)
+
 # Install rule
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
-install(TARGETS plugin_markdown plugin_html plugin_toc plugin_asciidoc plugin_search plugin_sitemap plugin_mermaid plugin_breadcrumb plugin_minify plugin_reading_time plugin_shortcode plugin_office plugin_info LIBRARY DESTINATION bin/plugins)
+install(TARGETS plugin_markdown plugin_html plugin_toc plugin_asciidoc plugin_search plugin_sitemap plugin_mermaid plugin_breadcrumb plugin_minify plugin_reading_time plugin_shortcode plugin_office plugin_info plugin_emoji LIBRARY DESTINATION bin/plugins)
 
