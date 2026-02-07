@@ -18,7 +18,7 @@
   - [📦 Usage](#-usage)
     - [Quick Start](#quick-start)
   - [📚 Documentation](#-documentation)
-    - [Screenshoots](#screenshoots)
+    - [Screenshoots of included themes](#screenshoots-of-included-themes)
 - [📄 License](#-license)
 - [🤝 Contributing](#-contributing)
 - [👤 Author](#-author)
@@ -40,6 +40,8 @@ A lightweight, high-performance Static Site Generator that converts a directory 
 - **Extensible Plugin System**: Modular architecture allowing dynamic content generation. Includes already a set of powerful built-in plugins
 - **Zero-Config Bundle**: The GitHub Action handles all dependencies, including **LLVM 21**, **CMake**, and **Ninja**.
 - **Customizable**: Uses [Inja](https://github.com/pantor/inja) for flexible HTML templating.
+- **Multi-Format Support**: Supports Markdown, HTML, AsciiDoc, ODT, and DOCX files.
+- **GH-Pages Templates**: Includes a set of beautiful and responsive templates for GitHub Pages.
 - **GitHub Pages Ready**: Optimized for deploying directly to `gh-pages`.
 - **Security Focused**: Includes built-in SBOM generation and security slices (via CDXGen/Atom integration in the repo).
 
@@ -90,7 +92,7 @@ Add the following step to your `.github/workflows/deploy.yml`:
 
 For a comprehensive guide on how to configure inputs, set up your repository structure, and a full workflow example, please read our **[How-To Guide](docs/howtos/index.md)** or the **[GitHub Pages: Documentation](https://zheng-bote.github.io/gha_ghpages/)**.
 
-### Screenshoots
+### Screenshoots of included themes
 
 ![Themes](theme/fluid/assets/img_tmp/themes_2.png)
 
