@@ -1,3 +1,16 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Emoji Shortcodes Plugin](#emoji-shortcodes-plugin)
+  - [Mechanism](#mechanism)
+  - [GitHub Alert Semantics](#github-alert-semantics)
+  - [Standard Sets](#standard-sets)
+    - [Usage Example](#usage-example)
+  - [Configuration](#configuration)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Emoji Shortcodes Plugin
 
 The **Emoji Shortcodes Plugin** enables the use of intuitive text shortcuts (like `:smile:` or `:warning:`) within your documentation. These shortcodes are automatically replaced with browser-safe HTML entities during the build process.

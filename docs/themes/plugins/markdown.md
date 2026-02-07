@@ -1,3 +1,14 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Markdown Plugin](#markdown-plugin)
+  - [How it works](#how-it-works)
+  - [Features](#features)
+  - [Configuration](#configuration)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Markdown Plugin
 
 The **Markdown Plugin** is the core renderer for `.md` and `.markdown` files.

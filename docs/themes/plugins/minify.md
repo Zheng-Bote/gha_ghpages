@@ -1,3 +1,13 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Minify Plugin](#minify-plugin)
+  - [How it works](#how-it-works)
+  - [Configuration](#configuration)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Minify Plugin
 
 The **Minify Plugin** reduces the file size of the generated site by removing unnecessary characters.

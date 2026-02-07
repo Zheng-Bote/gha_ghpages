@@ -4,6 +4,13 @@ Plugins are the way to extend the functionality of the static site generator. th
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**
+
+- [Included Plugins](#included-plugins)
+- [Syntax](#syntax)
+- [Example](#example)
+  - [Output](#output)
+
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Included Plugins
