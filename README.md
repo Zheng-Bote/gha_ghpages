@@ -1,18 +1,21 @@
 # Github Action for GitHub Pages - gh_docs_bot
 
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Platform](https://img.shields.io/badge/platform-Github_Action-lightgrey.svg)
+![Platform](https://img.shields.io/badge/platform-Github_Action_|_Linux-lightgrey.svg)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/Zheng-Bote/gha_ghpages?logo=GitHub)](https://github.com/Zheng-Bote/gha_ghpages/releases)
 
 **gh_docs_bot** is a high-performance C++ Static Site Generator (SSG) built as a reusable GitHub Action. It is designed to automatically build and deploy static documentation websites from Markdown, HTML, AsciiDoc, and Office files (ODT/DOCX) directly within your GitHub workflows.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
 **Table of Contents**
 
+- [Github Action for GitHub Pages - gh_docs_bot](#github-action-for-github-pages---gh_docs_bot)
 - [Description](#description)
   - [🚀 Features](#-features)
   - [Included Plugins](#included-plugins)
+  - [Status](#status)
   - [📦 Usage](#-usage)
     - [Quick Start](#quick-start)
   - [📚 Documentation](#-documentation)
@@ -61,6 +64,11 @@ A lightweight, high-performance Static Site Generator that converts a directory 
 | **Shortcode Processor**     | Processes `shortcode` syntax                                |
 | **Sitemap Generator**       | Generates `sitemap.xml` and folder-based `index.html` files |
 | **TOC & Auto-ID Generator** | Generates Table of Contents and auto-ID headers             |
+
+## Status
+
+[![C++ Quality & Security](https://github.com/Zheng-Bote/gha_ghpages/actions/workflows/quality_security.yml/badge.svg)](https://github.com/Zheng-Bote/gha_ghpages/actions/workflows/quality_security.yml)
+[![Release SBOM](https://github.com/Zheng-Bote/gha_ghpages/actions/workflows/sbom.yml/badge.svg)](https://github.com/Zheng-Bote/gha_ghpages/actions/workflows/sbom.yml)
 
 ## 📦 Usage
 
