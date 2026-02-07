@@ -63,7 +63,7 @@ runs:
         echo "toc=${{ inputs.toc }}" >> config.cfg
         echo "[plugins]" >> config.cfg
         echo "path=./build/plugins" >> config.cfg
-        echo "enabled=markdown, html, toc, asciidoc, search, sitemap, mermaid, breadcrumb, reading_time, shortcode, minify, office, info, emoji"
+        echo "enabled=markdown, html, toc, asciidoc, search, sitemap, mermaid, breadcrumb, reading_time, shortcode, minify, office, info, emoji" >> config.cfg
         echo "[reading_time]" >> config.cfg
         echo "threshold=200" >> config.cfg
         echo "wpm=200" >> config.cfg
