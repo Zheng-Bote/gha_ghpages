@@ -69,6 +69,8 @@ A lightweight, high-performance Static Site Generator that converts a directory 
 
 [![C++ Quality & Security](https://github.com/Zheng-Bote/gha_ghpages/actions/workflows/quality_security.yml/badge.svg)](https://github.com/Zheng-Bote/gha_ghpages/actions/workflows/quality_security.yml)
 [![Release SBOM](https://github.com/Zheng-Bote/gha_ghpages/actions/workflows/sbom.yml/badge.svg)](https://github.com/Zheng-Bote/gha_ghpages/actions/workflows/sbom.yml)
+[![Manual gh_docs_bot Build](https://github.com/Zheng-Bote/gha_ghpages/actions/workflows/gh_docs_bot.yml/badge.svg)](https://github.com/Zheng-Bote/gha_ghpages/actions/workflows/gh_docs_bot.yml)
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/Zheng-Bote/gha_ghpages?logo=GitHub)](https://github.com/Zheng-Bote/gha_ghpages/releases)
 
 ## 📦 Usage
 
