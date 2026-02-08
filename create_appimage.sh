@@ -41,7 +41,7 @@ Name=SSG_gh_docs_bot
 Comment=Static Site Generator with gh_docs_bot
 Exec=$APP_NAME
 Icon=$APP_NAME
-Categories=Office;
+Categories=Utility;
 Terminal=true
 EOF
 
