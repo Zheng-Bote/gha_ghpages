@@ -41,6 +41,12 @@ runs:
         wget https://github.com/Zheng-Bote/gha_ghpages/releases/download/v1.9.0/SSG_gh_docs_bot-x86_64.AppImage
         chmod +x SSG_gh_docs_bot-x86_64.AppImage
 
+    - name: get Plugins
+      shell: bash
+      run: |
+        wget https://github.com/Zheng-Bote/gha_ghpages/releases/download/v1.9.0/plugins.tar.gz
+        tar -xvf plugins.tar.gz
+
     - name: Create Configuration
       shell: bash
       run: |
@@ -51,7 +57,7 @@ runs:
         echo "base_path=${{ inputs.base_path }}" >> config.cfg
         echo "toc=${{ inputs.toc }}" >> config.cfg
         echo "[plugins]" >> config.cfg
-        echo "path=./build/plugins" >> config.cfg
+        echo "path=./plugins" >> config.cfg
         echo "enabled=markdown, html, toc, asciidoc, search, sitemap, mermaid, breadcrumb, reading_time, shortcode, minify, office, info, emoji" >> config.cfg
         echo "[reading_time]" >> config.cfg
         echo "threshold=200" >> config.cfg
