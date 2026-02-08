@@ -66,4 +66,7 @@ runs:
     - name: Run AppImage
       shell: bash
       run: |
-        ./SSG_gh_docs_bot-x86_64.AppImage --appimage-extract-and-run config.cfg ${{ inputs.docs }}
+        #./SSG_gh_docs_bot-x86_64.AppImage --appimage-extract-and-run config.cfg ${{ inputs.docs }}
+        ./SSG_gh_docs_bot-x86_64.AppImage --appimage-extract
+        export LD_LIBRARY_PATH=$PWD/squashfs-root/usr/lib:$LD_LIBRARY_PATH
+        ./squashfs-root/AppRun config.cfg ${{ inputs.docs }}
