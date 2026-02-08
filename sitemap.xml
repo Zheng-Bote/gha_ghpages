@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/index.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/architecture/overview.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/howtos/Github_Action.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/screenshots/themes.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/Fluid_UI.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/Web_Components.html</loc>
+  </url>
+</urlset>
