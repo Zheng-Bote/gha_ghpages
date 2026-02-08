@@ -69,18 +69,21 @@ public:
     emoji_map["x"] = "&#10060;";     // ❌
 
     // Faces
-    emoji_map["smile"] = "&#128512;";    // 😀
-    emoji_map["laugh"] = "&#128514;";    // 😂
-    emoji_map["wink"] = "&#128521;";     // 😉
-    emoji_map["cool"] = "&#128526;";     // 😎
-    emoji_map["thinking"] = "&#129300;"; // 🤔
-    emoji_map["sad"] = "&#128546;";      // 😢
+    emoji_map["smile"] = "&#128512;";      // 😀
+    emoji_map["laugh"] = "&#128514;";      // 😂
+    emoji_map["wink"] = "&#128521;";       // 😉
+    emoji_map["cool"] = "&#128526;";       // 😎
+    emoji_map["thinking"] = "&#129300;";   // 🤔
+    emoji_map["sad"] = "&#128546;";        // 😢
+    emoji_map["silhouette"] = "&#128100;"; // �
 
     // Hands
-    emoji_map["thumbsup"] = "&#128077;";   // 👍
-    emoji_map["thumbsdown"] = "&#128078;"; // 👎
-    emoji_map["ok_hand"] = "&#128076;";    // 👌
-    emoji_map["clap"] = "&#128079;";       // 👏
+    emoji_map["thumbsup"] = "&#128077;";      // 👍
+    emoji_map["thumbsdown"] = "&#128078;";    // 👎
+    emoji_map["ok_hand"] = "&#128076;";       // 👌
+    emoji_map["clap"] = "&#128079;";          // 👏
+    emoji_map["handshake"] = "&#129309;";     // 🤝
+    emoji_map["vulcan_salute"] = "&#128406;"; // 🖖
 
     // Arrows
     emoji_map["arrow_right"] = "&#10145;"; // ➡
@@ -89,10 +92,34 @@ public:
     emoji_map["arrow_down"] = "&#11015;";  // ⬇
 
     // Objects / Misc
-    emoji_map["rocket"] = "&#128640;"; // 🚀
-    emoji_map["fire"] = "&#128293;";   // 🔥
-    emoji_map["star"] = "&#11088;";    // ⭐
-    emoji_map["heart"] = "&#10084;";   // ❤
+    emoji_map["rocket"] = "&#128640;";                // 🚀
+    emoji_map["fire"] = "&#128293;";                  // 🔥
+    emoji_map["star"] = "&#11088;";                   // ⭐
+    emoji_map["heart"] = "&#10084;";                  // ❤
+    emoji_map["chilli"] = "&#127788;";                // 🌶️
+    emoji_map["beer"] = "&#127866;";                  // 🍺
+    emoji_map["coffee"] = "&#9749;";                  // ☕
+    emoji_map["book"] = "&#128218;";                  // 📖
+    emoji_map["building_construction"] = "&#127959;"; // 🚧
+    emoji_map["classical_building"] = "&#127968;";    // 🏛️
+    emoji_map["email"] = "&#9993;";                   // ✉️
+    emoji_map["phone"] = "&#128222;";                 // 📞
+    emoji_map["camera"] = "&#128247;";                // 📸
+    emoji_map["key"] = "&#128272;";                   // 🔑
+    emoji_map["lock"] = "&#128274;";                  // 🔒
+    emoji_map["unlock"] = "&#128275;";                // 🔓
+    emoji_map["wrench"] = "&#128295;";                // 🔧
+    emoji_map["pushpin"] = "&#128205;";               // 📌
+    emoji_map["round_pushpin"] = "&#128206;";         // 📍
+    emoji_map["paperclip"] = "&#128204;";             // 📎
+    emoji_map["folder"] = "&#128199;";                // 📁
+    emoji_map["open_file_folder"] = "&#128200;";      // 📂
+    emoji_map["hammer_and_pick"] = "&#9874;";         // ⛏️
+
+    // Animals
+    emoji_map["penguin"] = "&#129443;";     // 🐧
+    emoji_map["rabbit_face"] = "&#128048;"; // 🐇
+    emoji_map["panda_face"] = "&#128062;";  // 🐼
   }
 
   void on_after_render(model::PageContext &ctx) override {
