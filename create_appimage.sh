@@ -23,9 +23,18 @@ if [ -d "$APP_DIR" ]; then rm -rf "$APP_DIR"; fi
 mkdir -p "$APP_DIR"/usr/bin
 mkdir -p "$APP_DIR"/usr/share/icons/hicolor/512x512/apps/
 mkdir -p "$APP_DIR"/usr/share/applications/
+mkdir -p "$APP_DIR"/usr/lib
 
 # Binary kopieren
 cp "$BUILD_DIR/$EXECUTABLE_NAME" "$APP_DIR/usr/bin/$APP_NAME"
+
+# Libs kopieren
+# for Office Plugin
+cp "$BUILD_DIR/_deps/libzip-build/libzip.so" "$APP_DIR/usr/lib/"
+cp "$BUILD_DIR/_deps/pugixml-build/libpugixml.so.1" "$APP_DIR/usr/lib/"
+
+# for Markdown Plugin
+cp "$BUILD_DIR/_deps/md4c-build/src/libmd4c.so.0" "$APP_DIR/usr/lib/"
 
 # 3. Assets kopieren (WICHTIG!)
 # Wir kopieren den 'public' Ordner NICHT in das AppImage, da du dort reinschreiben willst (Uploads).
@@ -73,6 +82,9 @@ echo "📦 Generiere AppImage (inklusive Qt Dependencies)..."
  
 ./linuxdeploy-x86_64.AppImage \
     --appdir "$APP_DIR" \
+    --library "$APP_DIR/usr/lib/libzip.so" \
+    --library "$APP_DIR/usr/lib/libpugixml.so.1" \
+    --library "$APP_DIR/usr/lib/libmd4c.so.0" \
     --executable "$APP_DIR/usr/bin/$APP_NAME" \
     --desktop-file "$APP_DIR/usr/share/applications/$APP_NAME.desktop" \
     --icon-file "$APP_DIR/$APP_NAME.png" \
