@@ -33,7 +33,7 @@ runs:
       shell: bash
       run: |
         sudo apt-get update || true
-        sudo apt-get install -y libmd4c-dev libmd4c-html0 libmd4c-html0-dev libmd4c0 libzip4 libzip-dev libpugixml1v5
+        sudo apt-get install -y libmd4c-dev libmd4c-html0 libmd4c-html0-dev libmd4c0 libzip5 libpugixml1v5
 
     - name: get AppImage
       shell: bash
