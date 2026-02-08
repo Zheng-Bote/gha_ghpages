@@ -7,7 +7,22 @@
     <loc>https://zheng-bote.github.io/gha_ghpages/architecture/overview.html</loc>
   </url>
   <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/architecture/update_v2.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/development/Plugin_dev_guide.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/development/build.html</loc>
+  </url>
+  <url>
     <loc>https://zheng-bote.github.io/gha_ghpages/howtos/Github_Action.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/howtos/SSG_locally.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/howtos/User_Guide_v2.html</loc>
   </url>
   <url>
     <loc>https://zheng-bote.github.io/gha_ghpages/screenshots/themes.html</loc>
@@ -17,5 +32,50 @@
   </url>
   <url>
     <loc>https://zheng-bote.github.io/gha_ghpages/themes/Web_Components.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/asciidoc.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/breadcrumb.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/emoji.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/html.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/info.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/markdown.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/mermaid.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/minify.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/office.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/overview.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/reading_time.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/search.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/shortcode.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/sitemap.html</loc>
+  </url>
+  <url>
+    <loc>https://zheng-bote.github.io/gha_ghpages/themes/plugins/toc.html</loc>
   </url>
 </urlset>
