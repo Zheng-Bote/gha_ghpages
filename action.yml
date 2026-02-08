@@ -38,7 +38,7 @@ runs:
     - name: get AppImage
       shell: bash
       run: |
-        wget https://github.com/Zheng-Bote/gha_ghpages/releases/download/v1.0/SSG_gh_docs_bot-x86_64.AppImage
+        wget https://github.com/Zheng-Bote/gha_ghpages/releases/download/v1.9.0/SSG_gh_docs_bot-x86_64.AppImage
         chmod +x SSG_gh_docs_bot-x86_64.AppImage
 
     - name: Create Configuration
