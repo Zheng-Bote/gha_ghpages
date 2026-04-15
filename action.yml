@@ -38,13 +38,13 @@ runs:
     - name: get AppImage
       shell: bash
       run: |
-        wget https://github.com/Zheng-Bote/gha_ghpages/releases/download/v1.9.0/SSG_gh_docs_bot-x86_64.AppImage
+        wget https://github.com/Zheng-Bote/gha_ghpages/releases/download/v2.1.0/SSG_gh_docs_bot-x86_64.AppImage
         chmod +x SSG_gh_docs_bot-x86_64.AppImage
 
     - name: get Plugins
       shell: bash
       run: |
-        wget https://github.com/Zheng-Bote/gha_ghpages/releases/download/v1.9.0/plugins.tar.gz
+        wget https://github.com/Zheng-Bote/gha_ghpages/releases/download/v2.1.0/plugins.tar.gz
         tar -xvf plugins.tar.gz
 
     - name: Create Configuration
